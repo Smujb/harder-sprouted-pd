@@ -45,8 +45,10 @@ public class ScrollOfMagicalInfusion extends InventoryScroll {
 		ScrollOfRemoveCurse.uncurse(Dungeon.hero, item);
 		if (item instanceof Weapon)
 			((Weapon) item).upgrade(true);
-		else
+		else if (item instanceof Armor)
 			((Armor) item).upgrade(true);
+		else
+			item.upgrade();
 
 		GLog.p(TXT_INFUSE, item.name());
 

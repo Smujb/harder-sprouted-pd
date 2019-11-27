@@ -67,7 +67,7 @@ public class DM300 extends Mob implements Callback {
 		name = "DM-300";
 		spriteClass = DM300Sprite.class;
 
-		HP = HT = 500;
+		HP = HT = 1000;
 		EXP = 30;
 		defenseSkill = 40;
 
@@ -92,6 +92,14 @@ public class DM300 extends Mob implements Callback {
 	@Override
 	public int dr() {
 		return 10+(4*towerAlive);
+	}
+
+	@Override
+	public void damage(int dmg, Object src) {
+		if (dmg >= 50){
+			dmg = 49 + (int)(Math.sqrt(8*(dmg - 20) + 1) - 1)/2;
+		}
+		super.damage(dmg, src);
 	}
 
 	@Override

@@ -53,17 +53,17 @@ public class FlyingProtector extends Mob implements Callback {
 		flying = true;
 		
 		HP = HT = 15 + Dungeon.depth * 4;
-		defenseSkill = 4 + Dungeon.depth * 1;
+		defenseSkill = 4 + Dungeon.depth * 2;
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 30);
+		return Random.NormalIntRange(40, 70);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return (int) ((9 + Dungeon.depth));
+		return defaultAccuracy(target);
 	}
 
 	@Override

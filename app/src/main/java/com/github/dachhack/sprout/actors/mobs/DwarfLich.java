@@ -53,12 +53,12 @@ public class DwarfLich extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 32);
+		return Random.NormalIntRange(40, 60);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 36+ adjustForDepth(1);
+		return defaultAccuracy(target);
 	}
 
 	@Override

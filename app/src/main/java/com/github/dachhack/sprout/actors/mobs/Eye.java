@@ -51,7 +51,7 @@ public class Eye extends Mob {
 		name = "evil eye";
 		spriteClass = EyeSprite.class;
 
-		HP = HT = 100+(adjustForDepth(0)*Random.NormalIntRange(4, 7));
+		HP = HT = 300;
 		defenseSkill = 20+ adjustForDepth(1);
 		viewDistance = Light.DISTANCE;
 

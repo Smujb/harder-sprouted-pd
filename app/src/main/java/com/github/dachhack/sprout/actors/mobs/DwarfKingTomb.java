@@ -35,7 +35,7 @@ public class DwarfKingTomb extends Mob  {
 		name = "dwarf king tomb";
 		spriteClass = DwarfKingTombSprite.class;
 
-		HP = HT = 600;
+		HP = HT = 800;
 		defenseSkill = 5;
 
 		EXP = 10;

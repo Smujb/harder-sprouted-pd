@@ -23,8 +23,10 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.CorruptGas;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
+import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.StoneOre;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
+import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -38,7 +40,7 @@ public class Kupua extends Mob {
 		name = "kupua";
 		spriteClass = KupuaSprite.class;
 
-		HP = HT = 550+(adjustForDepth(0)*Random.NormalIntRange(3, 7));
+		HP = HT = 4000;
 		defenseSkill = 15+ adjustForDepth(1);
 		baseSpeed = 2f;
 
@@ -66,17 +68,22 @@ public class Kupua extends Mob {
 
 	@Override
 	public void damage(int dmg, Object src) {
-		
+		int actualdmg = dmg;
 		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWraith)){
 			int max = Math.round(dmg*.5f);
-			dmg = Random.Int(1,max);
+			actualdmg = Random.Int(1,max);
+		}
+		if (src instanceof Item) {
+			if (((Item)src).reinforced) {
+				actualdmg = dmg;
+			}
 		}
 		
-		if (dmg > HT/8){
+		if (actualdmg > HT/8){
 		GameScene.add(Blob.seed(pos, 30, CorruptGas.class));
 		}
 		
-		super.damage(dmg, src);
+		super.damage(actualdmg, src);
 	}
 	
 	@Override

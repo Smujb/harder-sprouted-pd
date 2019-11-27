@@ -38,7 +38,7 @@ public class Elemental extends Mob {
 		name = "fire elemental";
 		spriteClass = ElementalSprite.class;
 
-		HP = HT = 65+(adjustForDepth(0)*Random.NormalIntRange(4, 7));
+		HP = HT = 150;
 		defenseSkill = 20+ adjustForDepth(0);
 
 		EXP = 10;
@@ -55,7 +55,7 @@ public class Elemental extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(16, 20+ adjustForDepth(1));
+		return Random.NormalIntRange(30, 80);
 	}
 
 	@Override

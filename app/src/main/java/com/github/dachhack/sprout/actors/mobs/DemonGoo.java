@@ -54,7 +54,7 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 
 	{
 		name = "demon goo";
-		HP = HT = 200+(adjustForDepth(0)*Random.NormalIntRange(4, 7));
+		HP = HT = 400;
 		EXP = 10;
 		defenseSkill = 10+ adjustForDepth(1);
 		//10
@@ -86,12 +86,12 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 		
 	@Override
 	public int damageRoll() {
-			return Random.NormalIntRange(30+ adjustForDepth(1), 60+ adjustForDepth(1));
+			return Random.NormalIntRange(60, 120);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 35+ adjustForDepth(1);
+		return defaultAccuracy(target);
 	}
 
 	@Override

@@ -51,7 +51,7 @@ public class FishProtector extends Mob implements Callback {
 		flying = true;
 		
 		HP = HT = 75;
-		defenseSkill = 25;
+		defenseSkill = 50;
 		
 		loot = new VioletDewdrop();
 		lootChance = 1f;
@@ -59,12 +59,12 @@ public class FishProtector extends Mob implements Callback {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(12, 20);
+		return Random.NormalIntRange(30, 90);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return 25;
+		return defaultAccuracy(target);
 	}
 
 	@Override
