@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/matthewporritt/AndroidStudioProjects/SproutedPixelDungeon-Gradle/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b85c4e6f9c68fae1c18968536e2055229d8db667">
+        <dex dex="/Users/matthewporritt/AndroidStudioProjects/SproutedPixelDungeon-Gradle/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_adbbb89a748bbb3de7d1727718ade7715fb01ea0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/matthewporritt/AndroidStudioProjects/SproutedPixelDungeon-Gradle/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="/Users/matthewporritt/AndroidStudioProjects/SproutedPixelDungeon-Gradle/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_22952442ac60ead39f6854f165e2e4fdf5d9b4a9/classes.dex" />
+    </item>
+
+</items>
