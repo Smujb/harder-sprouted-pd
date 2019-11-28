@@ -30,8 +30,7 @@ public class Gnoll extends Mob {
 		name = "gnoll scout";
 		spriteClass = GnollSprite.class;
 
-		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 4+(Math.round((Dungeon.depth)/2));
+		HP = HT = 18;
 
 		EXP = 2;
 		maxLvl = 8;
@@ -45,12 +44,7 @@ public class Gnoll extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(2, 5+(Dungeon.depth));
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 11+(Dungeon.depth);
+		return Random.NormalIntRange(2,8);
 	}
 
 	@Override

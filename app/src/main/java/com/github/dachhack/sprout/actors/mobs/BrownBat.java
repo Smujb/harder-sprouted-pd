@@ -34,7 +34,6 @@ public class BrownBat extends Mob {
 		spriteClass = BrownBatSprite.class;
 
 		HP = HT = 4;
-		defenseSkill = 1;
 		baseSpeed = 2f;
 
 		EXP = 1;
@@ -46,24 +45,24 @@ public class BrownBat extends Mob {
 		lootChance = 0.5f; // by default, see die()
 		
 		lootOther = Generator.Category.BERRY;
-		lootChanceOther = 0.05f; // by default, see die()
+		lootChanceOther = 0.25f; // by default, see die()
 		
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(1, 4);
+		return Random.NormalIntRange(1, 10);
 	}
 
 	@Override
-	public int attackSkill(Char target) {
-		return defaultAccuracy(target);
+	public int defenseSkill(Char enemy) {
+		return (int) (super.defenseSkill(enemy)*1.5);
 	}
 
 	@Override
 	public int attackProc(Char enemy, int damage) {
 		if (Random.Int(10) == 0) {
-			Buff.prolong(enemy, Blindness.class, Random.Int(3, 10));
+			Buff.prolong(enemy, Blindness.class, Random.Int(10, 20));
 			GLog.n("The brown bat scratches your eyes!");
 			Dungeon.observe();
 			state = FLEEING;

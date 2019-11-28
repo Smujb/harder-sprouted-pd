@@ -35,8 +35,7 @@ public class Rat extends Mob {
 		name = "marsupial rat";
 		spriteClass = RatSprite.class;
 
-		HP = HT = 8+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 3+(Math.round((Dungeon.depth)/2));
+		HP = HT = 16;
 		
 		loot = new Meat();
 		lootChance = 0.5f;
@@ -47,12 +46,7 @@ public class Rat extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(1, 5+Dungeon.depth);
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 5+Dungeon.depth;
+		return Random.NormalIntRange(2, 7);
 	}
 
 	@Override

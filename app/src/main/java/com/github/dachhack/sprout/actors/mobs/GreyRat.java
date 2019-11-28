@@ -48,8 +48,7 @@ public class GreyRat extends Mob {
 		name = "grey rat";
 		spriteClass = GreyRatSprite.class;
 
-		HP = HT = 9+(Dungeon.depth*Random.NormalIntRange(1, 3));
-		defenseSkill = 3+(Math.round((Dungeon.depth)/2));
+		HP = HT = 20;
 		
 		loot = new Meat();
 		lootChance = 0.5f;
@@ -64,11 +63,6 @@ public class GreyRat extends Mob {
 	@Override
 	public int damageRoll() {
 		return Random.NormalIntRange(2, 5+Dungeon.depth);
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 5+Dungeon.depth;
 	}
 
 	@Override

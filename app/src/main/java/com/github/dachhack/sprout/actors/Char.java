@@ -149,7 +149,7 @@ public abstract class Char extends Actor {
 			// FIXME
 			int dr = this instanceof Hero && ((Hero) this).rangedWeapon != null
 					&& ((Hero) this).subClass == HeroSubClass.SNIPER ? 0
-					: Random.IntRange(0, enemy.dr());
+					: Random.IntRange(enemy.dr()/2, enemy.dr());
 
 			int dmg = damageRoll();
 			int effectiveDamage = Math.max(dmg - dr, 0);
@@ -172,7 +172,7 @@ public abstract class Char extends Actor {
 			// TODO: consider revisiting this and shaking in more cases.
 			float shake = 0f;
 			if (enemy == Dungeon.hero)
-				shake = effectiveDamage / (enemy.HT / 4);
+				shake = effectiveDamage / (enemy.HP / 4);
 
 			if (shake > 1f)
 				Camera.main.shake(GameMath.gate(1, shake, 5), 0.3f);

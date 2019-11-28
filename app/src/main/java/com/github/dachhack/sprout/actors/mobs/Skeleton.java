@@ -41,7 +41,7 @@ public class Skeleton extends Mob {
 		name = "skeleton";
 		spriteClass = SkeletonSprite.class;
 
-		HP = HT = 25+(adjustForDepth(0)*Random.NormalIntRange(3, 7));
+		HP = HT = 50;
 		defenseSkill = 9+ adjustForDepth(1);
 
 		EXP = 5;
@@ -53,7 +53,7 @@ public class Skeleton extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(10+ adjustForDepth(0), 20+ adjustForDepth(0));
+		return Random.NormalIntRange(10, 30);
 	}
 
 		

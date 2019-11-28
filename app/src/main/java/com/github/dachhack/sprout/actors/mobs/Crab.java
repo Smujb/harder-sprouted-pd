@@ -28,8 +28,7 @@ public class Crab extends Mob {
 		name = "sewer crab";
 		spriteClass = CrabSprite.class;
 
-		HP = HT = 15+(adjustForDepth(0)*Random.NormalIntRange(1, 3));
-		defenseSkill = 5+ adjustForDepth(1);
+		HP = HT = 25;
 		baseSpeed = 2f;
 
 		EXP = 3;
@@ -41,12 +40,7 @@ public class Crab extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(3, 6+ adjustForDepth(0));
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return defaultAccuracy(target);
+		return Random.NormalIntRange(3, 10);
 	}
 
 	@Override

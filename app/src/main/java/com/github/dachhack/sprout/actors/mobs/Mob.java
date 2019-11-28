@@ -68,6 +68,8 @@ public abstract class Mob extends Char {
 	public AiState PASSIVE = new Passive();
 	public AiState state = SLEEPING;
 
+	public boolean scalesWithHeroLevel = false;
+
 	public Class<? extends CharSprite> spriteClass;
 
 	protected int target = -1;
@@ -154,6 +156,11 @@ public abstract class Mob extends Char {
 		} catch (Exception e) {
 		}
 		return sprite;
+	}
+
+	@Override
+	public int attackSkill(Char target) {
+		return defaultAccuracy(target);
 	}
 
 	@Override
@@ -366,7 +373,7 @@ public abstract class Mob extends Char {
 	@Override
 	public int defenseSkill(Char enemy) {
 		if (enemySeen && !paralysed) {
-			int defenseSkill = this.defenseSkill;
+			int defenseSkill = this.defaultEvasion(enemy);
 			int penalty = 0;
 			for (Buff buff : enemy.buffs(RingOfAccuracy.Accuracy.class)) {
 				penalty += ((RingOfAccuracy.Accuracy) buff).level;
@@ -422,11 +429,23 @@ public abstract class Mob extends Char {
 	}
 
 	public int defaultAccuracy(Char enemy) {
-		return (int) (enemy.defenseSkill(this)*1.5f);
+		int scaleFactor;
+		if (enemy instanceof Hero & scalesWithHeroLevel) {
+			scaleFactor = ((Hero)enemy).lvl;
+		} else {
+			scaleFactor = Dungeon.depth*2;
+		}
+		return 10 + scaleFactor;
 	}
 
 	public int defaultEvasion(Char enemy) {
-		return (int) (enemy.attackSkill(this)*0.75f);
+		int scaleFactor;
+		if (enemy instanceof Hero & scalesWithHeroLevel) {
+			scaleFactor = ((Hero)enemy).lvl;
+		} else {
+			scaleFactor = Dungeon.depth*2;
+		}
+		return 4 + scaleFactor;
 	}
 
 	@Override

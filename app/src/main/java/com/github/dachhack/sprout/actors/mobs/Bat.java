@@ -53,12 +53,7 @@ public class Bat extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(30, 44+ adjustForDepth(0));
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return defaultAccuracy(target);
+		return Random.NormalIntRange(20, 40);
 	}
 
 	@Override
