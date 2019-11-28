@@ -374,7 +374,7 @@ public class WndBag extends WndTabbed {
 					enable(false);
 				} else {
 					
-					 int levelLimit = Math.max(5, 5+Math.round(Statistics.deepestFloor/3));
+					 int levelLimit = Math.min(14, 3+Math.round(Statistics.deepestFloor/2));
 				     if (Dungeon.hero.heroClass == HeroClass.MAGE){levelLimit++;}
 					
 					enable(mode == Mode.FOR_SALE

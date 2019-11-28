@@ -321,7 +321,7 @@ public class DewVial extends Item {
 				GLog.i(TXT_NOT_PROCCED);
 			}
 													
-			volume = volume - 50;	
+			volume -= 50;
 			
 		} else if (action.equals(AC_BLESS) && Dungeon.dewDraw) {	
 
