@@ -106,8 +106,8 @@ public class HighGrass {
 				}
 				
 				// Dew
-				if (Random.Int(3 - naturalismLevel) == 0) {
-					if (Random.Int(30 - naturalismLevel) == 0 && naturalismLevel>0) {
+				if (Random.Int(2 - naturalismLevel) == 0) {
+					if (Random.Int(30 - naturalismLevel) == 0) {
 						level.drop(new YellowDewdrop(), pos).sprite.drop();
 					} else if (Random.Int(50 - naturalismLevel) == 0 && naturalismLevel>2) {
 						level.drop(new RedDewdrop(), pos).sprite.drop();

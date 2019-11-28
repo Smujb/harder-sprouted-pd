@@ -43,19 +43,21 @@ public class Dewdrop extends Item {
 		DewVial vial = hero.belongings.getItem(DewVial.class);
 
 		if (vial == null || vial.isFull()) {
+			if (!(hero.HP >= hero.HT)) {
+				int value = 1 + (Dungeon.depth - 1) / 5;
+				if (hero.heroClass == HeroClass.HUNTRESS) {
+					value++;
+				}
 
-			int value = 1 + (Dungeon.depth - 1) / 5;
-			if (hero.heroClass == HeroClass.HUNTRESS) {
-				value++;
+				int effect = Math.min(hero.HT - hero.HP, value * quantity);
+				if (effect > 0) {
+					hero.HP += effect;
+					hero.sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
+					hero.sprite.showStatus(CharSprite.POSITIVE, TXT_VALUE, effect);
+				}
+			} else {
+				return false;
 			}
-
-			int effect = Math.min(hero.HT - hero.HP, value * quantity);
-			if (effect > 0) {
-				hero.HP += effect;
-				hero.sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
-				hero.sprite.showStatus(CharSprite.POSITIVE, TXT_VALUE, effect);
-			}
-
 		} else if (vial != null) {
 
 			vial.collectDew(this);

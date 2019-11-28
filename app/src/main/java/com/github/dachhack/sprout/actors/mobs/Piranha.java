@@ -87,8 +87,13 @@ public class Piranha extends Mob {
 	}
 
 	@Override
+	public int defenseSkill(Char enemy) {
+		return super.defenseSkill(enemy)*2;
+	}
+
+	@Override
 	public int attackSkill(Char target) {
-		return 20 + Dungeon.depth * 2;
+		return super.attackSkill(target)*2;
 	}
 
 	@Override

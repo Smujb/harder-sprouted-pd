@@ -615,7 +615,7 @@ public class Ghost extends NPC {
 			name = "gnoll archer";
 			spriteClass = GnollArcherSprite.class;
 
-			HP = HT = 20;
+			HP = HT = 50;
 			defenseSkill = 5;
 
 			EXP = 1;
@@ -623,6 +623,8 @@ public class Ghost extends NPC {
 			baseSpeed = (1.5f-(Dungeon.depth/27));
 
 			state = WANDERING;
+
+			viewDistance = super.viewDistance - 3;
 
 			loot = Gold.class;
 			lootChance = 0.01f;
