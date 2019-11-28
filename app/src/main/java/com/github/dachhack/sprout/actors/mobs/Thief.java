@@ -47,7 +47,6 @@ public class Thief extends Mob {
 		spriteClass = ThiefSprite.class;
 
 		HP = HT = 20+(adjustForDepth(0)*Random.NormalIntRange(3, 5));
-		defenseSkill = 8+ adjustForDepth(0);
 
 		EXP = 5;
 		
@@ -104,8 +103,8 @@ public class Thief extends Mob {
 	}
 
 	@Override
-	public int attackSkill(Char target) {
-		return 12;
+	public int defenseSkill(Char enemy) {
+		return (int) (super.defenseSkill(enemy)*1.5f);
 	}
 
 	@Override

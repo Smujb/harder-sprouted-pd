@@ -33,83 +33,33 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
-public class FossilSkeleton extends Mob {
-
-	private static final String TXT_HERO_KILLED = "You were killed by the explosion of bones...";
+public class FossilSkeleton extends Skeleton {
 
 	{
 		name = "fossil skeleton";
 		spriteClass = FossilSkeletonSprite.class;
 
-		HP = HT = 25+(adjustForDepth(0)*Random.NormalIntRange(3, 7));
-		defenseSkill = 9+ adjustForDepth(1);
-
-		EXP = 5;
-		maxLvl = 10;
-
-		loot = Generator.Category.WEAPON;
-		lootChance = 0.2f;
+		HP = HT = 40;
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(12+ adjustForDepth(0), 20+ adjustForDepth(3));
+		return Random.NormalIntRange(15, 40);
 	}
 
 	@Override
 	protected float attackDelay() {
-		return 1.2f;
-	}
-	
-	@Override
-	public void die(Object cause) {
-
-		super.die(cause);
-
-		boolean heroKilled = false;
-		for (int i = 0; i < Level.NEIGHBOURS8.length; i++) {
-			Char ch = findChar(pos + Level.NEIGHBOURS8[i]);
-			if (ch != null && ch.isAlive()) {
-				int damage = Math.max(0,
-						Random.NormalIntRange(3, 8) - Random.IntRange(0, ch.dr() / 2));
-				ch.damage(damage, this);
-				if (ch == Dungeon.hero && !ch.isAlive()) {
-					heroKilled = true;
-				}
-			}
-		}
-
-		if (Dungeon.visible[pos]) {
-			Sample.INSTANCE.play(Assets.SND_BONES);
-		}
-
-		if (heroKilled) {
-			Dungeon.fail(Utils.format(ResultDescriptions.MOB,
-					Utils.indefinite(name)));
-			GLog.n(TXT_HERO_KILLED);
-		}
+		return 1.5f;
 	}
 
 	@Override
-	protected Item createLoot() {
-		Item loot = Generator.random(Generator.Category.WEAPON);
-		for (int i = 0; i < 2; i++) {
-			Item l = Generator.random(Generator.Category.WEAPON);
-			if (l.level < loot.level) {
-				loot = l;
-			}
-		}
-		return loot;
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 12+ adjustForDepth(0);
+	public int defenseSkill(Char enemy) {
+		return (int) (super.defenseSkill(enemy)*0.5f);
 	}
 
 	@Override
 	public int dr() {
-		return 5+ adjustForDepth(0);
+		return 10;
 	}
 
 	@Override
