@@ -39,7 +39,7 @@ import com.watabou.utils.Random;
 
 public class NeptuneShock extends Weapon.Enchantment {
 
-	private static final String TXT_SHOCKING = "Grand Shocking %s";
+	private static final String TXT_SHOCKING = "%s of Voltage";
 	private int[] points = new int[10];
 	private int cost = 10;
 

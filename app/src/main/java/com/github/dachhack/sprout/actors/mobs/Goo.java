@@ -58,7 +58,6 @@ public class Goo extends Mob {
 		name = "Goo";
 		HP = HT = 200; //200
 		EXP = 10;
-		defenseSkill = 12;
 		spriteClass = GooSprite.class;
 
 		loot = new ActiveMrDestructo();
@@ -92,12 +91,13 @@ public class Goo extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return (pumpedUp > 0) ? 30 : 15;
+		int defaultamount = super.attackSkill(target);
+		return (pumpedUp > 0) ? defaultamount*3 : defaultamount;
 	}
 
 	@Override
 	public int dr() {
-		return 2;
+		return 2 + Dungeon.hero.lvl/2;
 	}
 
 	@Override
@@ -250,8 +250,8 @@ public class Goo extends Mob {
 		super.notice();
 		yell("GLURP-GLURP!");
 		if (!spawnedMini){
-	    PoisonGoo.spawnAround(pos);
-	    spawnedMini = true;
+			PoisonGoo.spawnAround(pos);
+	    	spawnedMini = true;
 		}
 	  }
 

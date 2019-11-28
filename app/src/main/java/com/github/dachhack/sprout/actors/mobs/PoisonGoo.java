@@ -61,12 +61,10 @@ private int goosAlive = 0;
 private static final String GOOGENERATION = "gooGeneration";
 
 	{
-		name = "Goo";
+		name = "Spawn of Goo";
 		HP = HT = 50;
 		EXP = 10;
-		defenseSkill = 12;
 		spriteClass = PoisonGooSprite.class;
-		baseSpeed = 2f;
 
 		loot = new PotionOfMending();
 		lootChance = 1f;
@@ -96,9 +94,9 @@ private static final String GOOGENERATION = "gooGeneration";
 
 	@Override
 	public int attackProc(Char enemy, int damage) {
-		if (Random.Int(1) == 0) {
+		if (Random.Int(3) == 0) {
 			Buff.affect(enemy, Poison.class).set(
-					Random.Int(7, 10) * Poison.durationFactor(enemy));
+					Random.Int(3, 5) * Poison.durationFactor(enemy));
 			state = FLEEING;
 		}
 
@@ -120,7 +118,7 @@ private static final String GOOGENERATION = "gooGeneration";
 
 	@Override
 	public int attackSkill(Char target) {
-		return 5;
+		return super.attackSkill(target);
 	}
 
 	@Override

@@ -433,7 +433,7 @@ public abstract class Mob extends Char {
 		if (enemy instanceof Hero & scalesWithHeroLevel) {
 			scaleFactor = ((Hero)enemy).lvl;
 		} else {
-			scaleFactor = Dungeon.depth*2;
+			scaleFactor = (Dungeon.depth-1)*2;
 		}
 		return 10 + scaleFactor;
 	}
@@ -443,7 +443,7 @@ public abstract class Mob extends Char {
 		if (enemy instanceof Hero & scalesWithHeroLevel) {
 			scaleFactor = ((Hero)enemy).lvl;
 		} else {
-			scaleFactor = Dungeon.depth*2;
+			scaleFactor = (Dungeon.depth-1)*2;
 		}
 		return 4 + scaleFactor;
 	}

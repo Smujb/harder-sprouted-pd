@@ -42,7 +42,6 @@ public class Skeleton extends Mob {
 		spriteClass = SkeletonSprite.class;
 
 		HP = HT = 50;
-		defenseSkill = 9+ adjustForDepth(1);
 
 		EXP = 5;
 		maxLvl = 10;

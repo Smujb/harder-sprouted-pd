@@ -51,7 +51,7 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 
 	
 	{
-		name = "Neptunus Trident";
+		name = "Neptune's Trident";
 		image = ItemSpriteSheet.TRIDENT;
 
 		level = 0;
