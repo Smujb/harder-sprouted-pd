@@ -340,7 +340,7 @@ public class DewVial extends Item {
 	public static boolean uncurse(Hero hero, Item... items) {
 		
 		
-        int levelLimit = Math.max(5, 5+Math.round(Statistics.deepestFloor/3));
+        int levelLimit = Math.min(14, 3+Math.round(Statistics.deepestFloor/2));
         if (hero.heroClass == HeroClass.MAGE){levelLimit++;}
         
         float lvlchance = 0.33f;
