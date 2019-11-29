@@ -27,6 +27,7 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
+import com.github.dachhack.sprout.actors.buffs.Weakness;
 import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
@@ -233,6 +234,12 @@ public class King extends Mob {
 	}
 
 	@Override
+	public int attackProc(Char enemy, int damage) {
+		Buff.affect(enemy, Weakness.class,10f);
+		return super.attackProc(enemy, damage);
+	}
+
+	@Override
 	public String description() {
 		return "The last king of dwarves was known for his deep understanding of processes of life and death. "
 				+ "He has persuaded members of his court to participate in a ritual, that should have granted them "
@@ -294,7 +301,7 @@ public class King extends Mob {
 
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange(12, 16);
+			return Random.NormalIntRange(12, 16*count);
 		}
 
 		@Override

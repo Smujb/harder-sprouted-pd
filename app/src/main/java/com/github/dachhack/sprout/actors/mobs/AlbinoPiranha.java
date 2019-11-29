@@ -37,7 +37,7 @@ import com.github.dachhack.sprout.sprites.AlbinoPiranhaSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
-public class AlbinoPiranha extends Mob {
+public class AlbinoPiranha extends Piranha {
 	
 	private static final String TXT_KILLCOUNT = "Albino Piranha Kill Count: %s";
 
@@ -51,6 +51,7 @@ public class AlbinoPiranha extends Mob {
 		
 		loot = new Meat();
 		lootChance = 0.1f;
+		scalesWithHeroLevel = true;
 		
 	}
 
@@ -58,7 +59,6 @@ public class AlbinoPiranha extends Mob {
 		super();
 
 		HP = HT = 20 + Dungeon.depth * 5;
-		defenseSkill = 20 + Dungeon.depth * 4;
 	}
 
 	protected boolean checkwater(int cell){
@@ -119,7 +119,7 @@ public class AlbinoPiranha extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 20 + Dungeon.depth * 4;
+		return super.attackSkill(target)*4;
 	}
 
 	@Override

@@ -50,6 +50,21 @@ public class WandOfFirebolt extends Wand {
 		name = "Wand of Firebolt";
 	}
 
+	public int min(int lvl){
+		return (1+lvl) * chargesPerCast();
+	}
+
+	//1x/2x/3x damage
+	public int max(int lvl){
+		return (6+2*lvl) * chargesPerCast();
+	}
+
+	@Override
+	protected int chargesPerCast() {
+		//consumes all charges, up to 3
+		return Math.max(1,Math.min(3,curCharges));
+	}
+
 	@Override
 	protected void onZap(int cell) {
 
@@ -67,7 +82,7 @@ public class WandOfFirebolt extends Wand {
 		Char ch = Actor.findChar(cell);
 		if (ch != null) {
 
-			int damage= Random.Int(1, 8 + level * level);
+			int damage= damageRoll();
 	        if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 			ch.damage(damage, this);
 			
@@ -166,6 +181,7 @@ public class WandOfFirebolt extends Wand {
 	public String desc() {
 		return "This wand unleashes bursts of magical fire. It will ignite "
 				+ "flammable terrain, and will damage and burn a creature it hits."
-				+ "It is very unstable at higher levels. Use with caution.";
+				+ "It is very unstable at higher levels. Use with caution." +
+				"\n\n" + statsDesc(levelKnown);
 	}
 }

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.R;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -44,7 +45,7 @@ public class GoldThief extends Mob {
 		name = "crazy gold thief";
 		spriteClass = GoldThiefSprite.class;
 
-		HP = HT = 30+Statistics.goldThievesKilled;
+		HP = HT = 70+Statistics.goldThievesKilled*2;
 		defenseSkill = 26;
 
 		EXP = 1;
@@ -76,12 +77,12 @@ public class GoldThief extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(30, 50);
+		return Random.Int(1,Statistics.goldThievesKilled + 40);
 	}
 
 	@Override
 	protected float attackDelay() {
-		return 0.5f;
+		return 0.25f;
 	}
 
 	@Override
@@ -151,7 +152,7 @@ public class GoldThief extends Mob {
 
 							
 			Gold gold = new Gold(Random.Int(100, 500));
-			if (gold.quantity() > 0) {
+			if (gold.quantity() > 0 & Random.Int(2) == 0) {
 				goldtodrop = Math.min((gold.quantity()+100),Dungeon.gold);
 				Dungeon.gold -= goldtodrop;
 				GLog.w(TXT_STOLE, this.name, gold.quantity());

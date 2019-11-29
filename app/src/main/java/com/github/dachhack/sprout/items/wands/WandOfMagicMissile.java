@@ -70,13 +70,23 @@ public class WandOfMagicMissile extends Wand {
 	}
 
 	@Override
+	public int max(int lvl) {
+		return 6 + lvl*3;
+	}
+
+	@Override
+	public int min(int lvl) {
+		return 2 + lvl*2;
+	}
+
+	@Override
 	protected void onZap(int cell) {
 
 		Char ch = Actor.findChar(cell);
 		if (ch != null) {
 
 			int level = level();
-            int damage= Random.Int(level+2, 6 + level * 2);
+            int damage= damageRoll();
             if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 			ch.damage(damage, this);
 
@@ -129,7 +139,8 @@ public class WandOfMagicMissile extends Wand {
 
 	@Override
 	public String desc() {
-		return "This wand launches missiles of pure magical energy, dealing moderate damage to a target creature.";
+		return "This wand launches missiles of pure magical energy, dealing moderate damage to a target creature." +
+				"\n\n" + statsDesc(levelKnown);
 	}
 
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {

@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Bestiary;
+import com.github.dachhack.sprout.actors.mobs.BrokenRobot;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.Tower;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -233,30 +234,23 @@ public class CavesBossLevel extends Level {
 			} while (!passable[boss.pos] || !outsideEntraceRoom(boss.pos)
 					|| Dungeon.visible[boss.pos]);
 			GameScene.add(boss);
-			
-			Tower a = new Tower();  
-	    	
-			do {
-				a.pos = Random.Int(getLength());
-			} while (!passable[a.pos] || !outsideEntraceRoom(a.pos)
-					|| Dungeon.visible[a.pos]);
-			a.state = a.PASSIVE;
-			GameScene.add(a);
+
+			for (int i = 0; i < 5; i++) {
+				BrokenRobot a = new BrokenRobot();
+
+				do {
+					a.pos = Random.Int(getLength());
+				} while (!passable[a.pos] || !outsideEntraceRoom(a.pos)
+						|| Dungeon.visible[a.pos]);
+				a.state = a.PASSIVE;
+				GameScene.add(a);
+			}
 			
 			//for (int n : NEIGHBOURS8) {
 			//	if (map[a.pos + n] == Terrain.EMPTY) {
 			//		map[a.pos + n] = Terrain.SECRET_ALARM_TRAP;
 			//	    }
 			//}
-			
-            Tower b = new Tower();  
-	    	
-            do {
-				b.pos = Random.Int(getLength());
-			} while (!passable[b.pos] || !outsideEntraceRoom(b.pos)
-					|| Dungeon.visible[b.pos]);
-			b.state = b.PASSIVE;
-			GameScene.add(b);
 			
 			//for (int n : NEIGHBOURS8) {
 			//	if (map[b.pos + n] == Terrain.EMPTY) {

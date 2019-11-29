@@ -47,8 +47,7 @@ public class Succubus extends Mob {
 		name = "succubus";
 		spriteClass = SuccubusSprite.class;
 
-		HP = HT = 80+(adjustForDepth(0)*Random.NormalIntRange(5, 7));
-		defenseSkill = 25+ adjustForDepth(1);
+		HP = HT = 300;
 		viewDistance = Light.DISTANCE;
 
 		EXP = 12;
@@ -63,7 +62,7 @@ public class Succubus extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(15, 25+ adjustForDepth(0));
+		return Random.NormalIntRange(30, 90);
 	}
 
 	@Override

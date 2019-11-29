@@ -52,7 +52,6 @@ public class Eye extends Mob {
 		spriteClass = EyeSprite.class;
 
 		HP = HT = 300;
-		defenseSkill = 20+ adjustForDepth(1);
 		viewDistance = Light.DISTANCE;
 
 		EXP = 13;
@@ -69,7 +68,7 @@ public class Eye extends Mob {
 
 	@Override
 	public int dr() {
-		return 20+ adjustForDepth(1);
+		return 40;
 	}
 
 	private int hitCell;
@@ -89,12 +88,12 @@ public class Eye extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 30+ adjustForDepth(0);
+		return super.attackSkill(target)*2;
 	}
 
 	@Override
 	protected float attackDelay() {
-		return 1.6f;
+		return 2f;
 	}
 
 	@Override

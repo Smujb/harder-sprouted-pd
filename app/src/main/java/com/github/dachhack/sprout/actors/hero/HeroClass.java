@@ -85,6 +85,7 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRemoveCurse;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.items.wands.Wand;
+import com.github.dachhack.sprout.items.wands.WandOfAvalanche;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.wands.WandOfFirebolt;
@@ -225,11 +226,15 @@ public enum HeroClass {
 	}
 
 	private static void initMage(Hero hero) {
-		(hero.belongings.weapon = new Knuckles()).upgrade(3).identify();
+
 
 		WandOfMagicMissile wand = new WandOfMagicMissile();
-		wand.identify().collect();
-		
+		wand.identify().upgrade(3).collect();
+		hero.belongings.weapon = wand;
+		new WandOfDisintegration().identify().collect();
+		new WandOfFirebolt().identify().collect();
+		new WandOfLightning().identify().collect();
+		new WandOfAvalanche().identify().collect();
 		KeyRing keyring = new KeyRing(); keyring.collect();
 		
 		Dungeon.quickslot.setSlot(0, wand);
@@ -263,13 +268,11 @@ public enum HeroClass {
 
 		//hero.HP = (hero.HT -= 5);
 
-		(hero.belongings.weapon = new Dagger()).upgrade(3).identify();
-		Boomerang boomerang = new Boomerang();
-		boomerang.identify().collect();
+		(hero.belongings.weapon = new Boomerang()).upgrade(3).identify();
 		
 		KeyRing keyring = new KeyRing(); keyring.collect();
 
-		Dungeon.quickslot.setSlot(0, boomerang);
+		Dungeon.quickslot.setSlot(0, hero.belongings.weapon);
 
 		new PotionOfMindVision().setKnown();
 	}

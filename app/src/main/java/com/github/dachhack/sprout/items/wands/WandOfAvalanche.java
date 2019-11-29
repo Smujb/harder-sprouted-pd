@@ -43,7 +43,16 @@ public class WandOfAvalanche extends Wand {
 
 	{
 		name = "Wand of Avalanche";
-		hitChars = false;
+	}
+
+	@Override
+	public int max(int lvl) {
+		return 10 + 6*lvl;
+	}
+
+	@Override
+	public int min(int lvl) {
+		return 6 + 3*lvl;
 	}
 
 	@Override
@@ -55,7 +64,7 @@ public class WandOfAvalanche extends Wand {
 
 		Ballistica.distance = Math.min(Ballistica.distance, 8 + level);
 
-		int size = 1 + level / 3;
+		int size = 3;
 		PathFinder.buildDistanceMap(cell, BArray.not(Level.solid, null), size);
 
 		for (int i = 0; i < Level.getLength(); i++) {
@@ -69,7 +78,8 @@ public class WandOfAvalanche extends Wand {
 
 					ch.sprite.flash();
 					
-					 int damage= Random.Int(2, 6 + (size - d) * 2);
+					 int damage = damageRoll();
+					 damage = Math.max(damageRoll(0),damage - Ballistica.distance*(level+1)*2);
 			         if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 					 ch.damage(damage, this);
 	
@@ -100,6 +110,8 @@ public class WandOfAvalanche extends Wand {
 	@Override
 	public String desc() {
 		return "When a discharge of this wand hits a wall (or any other solid obstacle) it causes "
-				+ "an avalanche of stones, damaging and stunning all creatures in the affected area.";
+				+ "an avalanche of stones, damaging and stunning all creatures in the affected area." +
+				"It will deal reduced damage at distance, but may harm the player when close up." +
+				"\n\n" + statsDesc(levelKnown);
 	}
 }

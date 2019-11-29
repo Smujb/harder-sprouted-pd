@@ -233,7 +233,7 @@ public class Wandmaker extends NPC {
 
 				given = false;
 
-				switch (Random.Int(5)) {
+				switch (Random.Int(4)) {
 				case 0:
 					wand1 = new WandOfAvalanche();
 					break;
@@ -246,13 +246,10 @@ public class Wandmaker extends NPC {
 				case 3:
 					wand1 = new WandOfLightning();
 					break;
-				case 4:
-					wand1 = new WandOfPoison();
-					break;
 				}
 				wand1.random().upgrade();
 
-				switch (Random.Int(5)) {
+				switch (Random.Int(6)) {
 				case 0:
 					wand2 = new WandOfAmok();
 					break;
@@ -267,6 +264,9 @@ public class Wandmaker extends NPC {
 					break;
 				case 4:
 					wand2 = new WandOfTelekinesis();
+					break;
+				case 5:
+					wand2 = new WandOfPoison();
 					break;
 				}
 				wand2.random().upgrade();

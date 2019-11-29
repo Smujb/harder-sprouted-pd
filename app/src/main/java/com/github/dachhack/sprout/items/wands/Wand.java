@@ -304,6 +304,36 @@ public abstract class Wand extends KindOfWeapon {
 		return this;
 	}
 
+	public int max(int lvl) {
+		return 0;
+	}
+	public int min(int lvl) {
+		return 0;
+	}
+
+	public int max() {
+		return max(level());
+	}
+	public int min() {
+		return min(level());
+	}
+
+	public int damageRoll() {
+		return damageRoll(level);
+	}
+
+	public int damageRoll(int lvl) {
+		return Random.NormalIntRange(min(lvl),max(lvl));
+	}
+
+	public String statsDesc(boolean Identified) {
+		if (Identified) {
+			return "This Wand will typically deal _" + min(0) + "-" + max(0) + "_ damage.";
+		} else {
+			return "This Wand deals  _" + min() + "-" + max() + "_ damage.";
+		}
+	}
+
 	@Override
 	public Item degrade() {
 		super.degrade();
@@ -325,6 +355,10 @@ public abstract class Wand extends KindOfWeapon {
 		return 2;
 	}
 
+	protected int chargesPerCast() {
+		return 1;
+	}
+
 	private void calculateDamage() {
 		int tier = 1 + level / 3;
 		MIN = tier;
@@ -338,7 +372,7 @@ public abstract class Wand extends KindOfWeapon {
 	}
 
 	protected void wandUsed() {
-		curCharges--;
+		curCharges -= chargesPerCast();
 		if (!isIdentified() && --usagesToKnow <= 0) {
 			identify();
 			GLog.w(TXT_IDENTIFY, name());

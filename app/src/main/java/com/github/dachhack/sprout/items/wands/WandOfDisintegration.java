@@ -43,6 +43,16 @@ public class WandOfDisintegration extends Wand {
 	}
 
 	@Override
+	public int max(int lvl) {
+		return 10 + 6*lvl;
+	}
+
+	@Override
+	public int min(int lvl) {
+		return 1;
+	}
+
+	@Override
 	protected void onZap(int cell) {
 
 		boolean terrainAffected = false;
@@ -86,12 +96,10 @@ public class WandOfDisintegration extends Wand {
 			Dungeon.observe();
 		}
 
-		int lvl = level + chars.size();
-		int dmgMin = lvl;
-		int dmgMax = 8 + lvl * lvl / 3;
-		if (Dungeon.hero.buff(Strength.class) != null){ dmgMin *= (int) 4f; dmgMax *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
+		int dmg = damageRoll();
+		if (Dungeon.hero.buff(Strength.class) != null){ dmg *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 		for (Char ch : chars) {
-			ch.damage(Random.NormalIntRange(dmgMin, dmgMax), this);
+			ch.damage(dmg, this);
 			ch.sprite.centerEmitter().burst(PurpleParticle.BURST,
 					Random.IntRange(1, 2));
 			ch.sprite.flash();
@@ -114,6 +122,7 @@ public class WandOfDisintegration extends Wand {
 	@Override
 	public String desc() {
 		return "This wand emits a beam of destructive energy, which pierces all creatures in its way. "
-				+ "The more targets it hits, the more damage it inflicts to each of them.";
+				+ "The more targets it hits, the more damage it inflicts to each of them." +
+				"\n\n" + statsDesc(levelKnown);
 	}
 }
