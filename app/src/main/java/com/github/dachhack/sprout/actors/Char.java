@@ -22,6 +22,7 @@ import java.util.HashSet;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
+import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -172,10 +173,11 @@ public abstract class Char extends Actor {
 			// TODO: consider revisiting this and shaking in more cases.
 			float shake = 0f;
 			if (enemy == Dungeon.hero)
-				shake = effectiveDamage / (enemy.HP / 4);
+				shake = effectiveDamage / Math.max(1,(enemy.HP / 4));
 
-			if (shake > 1f)
+			if (shake > 1f) {
 				Camera.main.shake(GameMath.gate(1, shake, 5), 0.3f);
+			}
 
 			enemy.damage(effectiveDamage, this);
 

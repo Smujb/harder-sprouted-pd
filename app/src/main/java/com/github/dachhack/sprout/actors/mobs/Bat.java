@@ -35,8 +35,7 @@ public class Bat extends Mob {
 		name = "vampire bat";
 		spriteClass = BatSprite.class;
 
-		HP = HT = 80+(adjustForDepth(0)*Random.NormalIntRange(2, 5));
-		defenseSkill = 30+ adjustForDepth(0);
+		HP = HT = 80;
 		baseSpeed = 2f;
 
 		EXP = 7;
@@ -53,12 +52,12 @@ public class Bat extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 40);
+		return Random.NormalIntRange(20, 45);
 	}
 
 	@Override
 	public int dr() {
-		return 4+ adjustForDepth(0);
+		return 8;
 	}
 
 	@Override
