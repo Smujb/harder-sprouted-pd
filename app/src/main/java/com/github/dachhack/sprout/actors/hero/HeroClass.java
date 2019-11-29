@@ -229,12 +229,12 @@ public enum HeroClass {
 
 
 		WandOfMagicMissile wand = new WandOfMagicMissile();
-		wand.identify().upgrade(3).collect();
+		wand.identify().upgrade(3);
 		hero.belongings.weapon = wand;
-		new WandOfDisintegration().identify().collect();
-		new WandOfFirebolt().identify().collect();
-		new WandOfLightning().identify().collect();
-		new WandOfAvalanche().identify().collect();
+		//new WandOfDisintegration().identify().collect();
+		//new WandOfFirebolt().identify().collect();
+		//new WandOfLightning().identify().collect();
+		//new WandOfAvalanche().identify().collect();
 		KeyRing keyring = new KeyRing(); keyring.collect();
 		
 		Dungeon.quickslot.setSlot(0, wand);

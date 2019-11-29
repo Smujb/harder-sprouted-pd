@@ -40,13 +40,13 @@ public class Assassin extends Mob {
 		spriteClass = AssassinSprite.class;
 		baseSpeed = 2f;
 
-		HP = HT = 20;
+		HP = HT = 30;
 		EXP = 10;
 	}
 
 	@Override
 	public int defenseSkill(Char enemy) {
-		return (int) (super.defenseSkill(enemy)*1.5f);
+		return (int) (super.defenseSkill(enemy)*2f);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class Assassin extends Mob {
 
 	@Override
 	public int dr() {
-		return 5;
+		return 7;
 	}
 	@Override
 	protected float attackDelay() {

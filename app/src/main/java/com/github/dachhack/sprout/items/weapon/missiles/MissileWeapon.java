@@ -61,10 +61,7 @@ public class MissileWeapon extends Weapon {
 	protected void onThrow(int cell) {
 		Char enemy = Actor.findChar(cell);
 		if (enemy == null || enemy == curUser) {
-			if (this instanceof Boomerang || this instanceof JupitersWraith)
-				super.onThrow(cell);
-			else
-				miss(cell);
+			miss(cell);
 		} else {
 			if (!curUser.shoot(enemy, this)) {
 				miss(cell);

@@ -327,10 +327,10 @@ public abstract class Wand extends KindOfWeapon {
 	}
 
 	public String statsDesc(boolean Identified) {
-		if (Identified) {
-			return "This Wand will typically deal _" + min(0) + "-" + max(0) + "_ damage.";
+		if (!Identified) {
+			return "This Wand will typically deal " + min(0) + "-" + max(0) + " damage.";
 		} else {
-			return "This Wand deals  _" + min() + "-" + max() + "_ damage.";
+			return "This Wand deals  " + min() + "-" + max() + " damage.";
 		}
 	}
 
