@@ -387,7 +387,7 @@ public class WndBag extends WndTabbed {
 							&& ((item.isUpgradable() && item.level<15 && !item.isReinforced())
 									||  item.isUpgradable() && item.isReinforced())		
 							|| mode == Mode.UPGRADEDEW
-							&& (item.isUpgradable() && item.level < levelLimit)
+							&& (item.isUpgradable() && item.level <= levelLimit)
 							|| mode == Mode.UPGRADEABLESIMPLE
 							&& item.isUpgradable()			
 							|| mode == Mode.ADAMANT
