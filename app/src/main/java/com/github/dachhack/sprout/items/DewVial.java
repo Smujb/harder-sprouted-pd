@@ -443,10 +443,10 @@ public class DewVial extends Item {
 		return volume >= MAX_VOLUME();
 	}
 
-	public void collectDew(Dewdrop dew) {
+	public void collectDew(Dewdrop dew, int amountToFill) {
 
 		GLog.i(TXT_COLLECTED);
-		volume += dew.quantity;
+		volume += dew.quantity*amountToFill;
 		if (volume >= MAX_VOLUME()) {
 			volume = MAX_VOLUME();
 			GLog.p(TXT_FULL);
@@ -455,7 +455,7 @@ public class DewVial extends Item {
 		updateQuickslot();
 	}
 
-	public void collectDew(RedDewdrop dew) {
+	/*public void collectDew(RedDewdrop dew) {
 
 		GLog.i(TXT_COLLECTED);
 		volume += (dew.quantity*5);
@@ -489,15 +489,12 @@ public class DewVial extends Item {
 		}
 
 		updateQuickslot();
-	}
+	}*/
 	
 	
 	public void fill() {
-		volume = volume + 50;
-		if (volume >= MAX_VOLUME()) {
-			volume = MAX_VOLUME();
-			GLog.p(TXT_FULL);
-		}
+		volume = MAX_VOLUME();
+		GLog.p(TXT_FULL);
 		updateQuickslot();
 	}
 

@@ -24,11 +24,13 @@ import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 
 public class Dewdrop extends Item {
 
 	private static final String TXT_VALUE = "%+dHP";
+	public int amountToFill = 1;
 
 	{
 		name = "dewdrop";
@@ -56,11 +58,16 @@ public class Dewdrop extends Item {
 					hero.sprite.showStatus(CharSprite.POSITIVE, TXT_VALUE, effect);
 				}
 			} else {
+				if (vial == null) {
+					GLog.i("You already have full health");
+				} else {
+					GLog.i("Your dew vial is already full and you already have full health.");
+				}
 				return false;
 			}
 		} else if (vial != null) {
 
-			vial.collectDew(this);
+			vial.collectDew(this, amountToFill);
 
 		}
 
