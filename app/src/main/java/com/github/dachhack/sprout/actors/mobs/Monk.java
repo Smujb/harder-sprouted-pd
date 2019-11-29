@@ -41,7 +41,7 @@ public class Monk extends Mob {
 		name = "dwarf monk";
 		spriteClass = MonkSprite.class;
 
-		HP = HT = 100+(adjustForDepth(0)*Random.NormalIntRange(3, 5));
+		HP = HT = 150;
 		defenseSkill = 30+ adjustForDepth(1);
 
 		EXP = 11;
@@ -56,12 +56,7 @@ public class Monk extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(22, 36+ adjustForDepth(0));
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 30+ adjustForDepth(01);
+		return Random.NormalIntRange(25, 60);
 	}
 
 	@Override

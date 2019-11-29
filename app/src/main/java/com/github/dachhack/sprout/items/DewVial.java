@@ -101,6 +101,13 @@ public class DewVial extends Item {
 	public void setVol (int vol) {
 		volume=vol;		
 	}
+
+	public int upgradeLimit() {
+		int levelLimit = 2+(int)(Statistics.deepestFloor/2f);
+		if (Dungeon.hero.heroClass == HeroClass.MAGE){levelLimit++;}
+		levelLimit = Math.min(15,levelLimit);
+		return levelLimit;
+	}
 	
 	private static final String VOLUME = "volume";
 
@@ -338,10 +345,12 @@ public class DewVial extends Item {
 	}
 
 	public static boolean uncurse(Hero hero, Item... items) {
-		
-		
-        int levelLimit = Math.min(14, 3+Math.round(Statistics.deepestFloor/2));
-        if (hero.heroClass == HeroClass.MAGE){levelLimit++;}
+
+
+		int levelLimit = 0;
+		if (Dungeon.dewVial != null) {
+			levelLimit = Dungeon.dewVial.upgradeLimit();
+		}
         
         float lvlchance = 0.33f;
         if (hero.heroClass == HeroClass.MAGE){lvlchance = 0.38f;}
@@ -353,7 +362,7 @@ public class DewVial extends Item {
 			if (item != null && item.cursed) {
 				item.uncurse();
 				if(item.level<0){item.upgrade(-item.level);} //upgrade to even
-				if (item.cursed==false) {procced = true;}
+				if (!item.cursed) {procced = true;}
 				hero.sprite.emitter().start(ShadowParticle.UP, 0.05f, 10);
 			}
 			
@@ -370,7 +379,7 @@ public class DewVial extends Item {
                    if (bagItem != null && bagItem.cursed) {
                 	   bagItem.uncurse();
                 	   if(bagItem.level<0){bagItem.upgrade(-bagItem.level);}
-                	   if (bagItem.cursed==false) {procced = true;}
+                	   if (!bagItem.cursed) {procced = true;}
                    }
                    
                    if (bagItem != null && Random.Float()<lvlchance && bagItem.isUpgradable() && bagItem.level < levelLimit){
@@ -437,7 +446,12 @@ public class DewVial extends Item {
 	public boolean isFullBless() {
 		return volume >= BLESS_VOLUME;
 	}
-	
+
+	@Override
+	public boolean collect() {
+		Dungeon.dewVial = this;
+		return super.collect();
+	}
 
 	public boolean isFull() {
 		return volume >= MAX_VOLUME();
@@ -454,42 +468,6 @@ public class DewVial extends Item {
 
 		updateQuickslot();
 	}
-
-	/*public void collectDew(RedDewdrop dew) {
-
-		GLog.i(TXT_COLLECTED);
-		volume += (dew.quantity*5);
-		if (volume >= MAX_VOLUME()) {
-			volume = MAX_VOLUME();
-			GLog.p(TXT_FULL);
-		}
-
-		updateQuickslot();
-	}
-	
-	public void collectDew(YellowDewdrop dew) {
-
-		GLog.i(TXT_COLLECTED);
-		volume += (dew.quantity*2);
-		if (volume >= MAX_VOLUME()) {
-			volume = MAX_VOLUME();
-			GLog.p(TXT_FULL);
-		}
-
-		updateQuickslot();
-	}
-
-	public void collectDew(VioletDewdrop dew) {
-
-		GLog.i(TXT_COLLECTED);
-		volume += (dew.quantity*50);
-		if (volume >= MAX_VOLUME()) {
-			volume = MAX_VOLUME();
-			GLog.p(TXT_FULL);
-		}
-
-		updateQuickslot();
-	}*/
 	
 	
 	public void fill() {

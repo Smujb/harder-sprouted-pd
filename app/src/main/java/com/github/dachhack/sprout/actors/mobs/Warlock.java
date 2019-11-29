@@ -48,8 +48,7 @@ public class Warlock extends Mob implements Callback {
 		name = "dwarf warlock";
 		spriteClass = WarlockSprite.class;
 
-		HP = HT = 70+(adjustForDepth(0)*Random.NormalIntRange(5, 7));
-		defenseSkill = 18+ adjustForDepth(0);
+		HP = HT = 100;
 
 		EXP = 11;
 		maxLvl = 21;
@@ -63,17 +62,12 @@ public class Warlock extends Mob implements Callback {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(12, 25+ adjustForDepth(0));
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 25+ adjustForDepth(0);
+		return Random.NormalIntRange(15, 40);
 	}
 
 	@Override
 	public int dr() {
-		return 8+ adjustForDepth(1);
+		return 12;
 	}
 
 	@Override

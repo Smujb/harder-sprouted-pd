@@ -58,6 +58,8 @@ public class MossySkeleton extends Mob {
 			
 		lootThird= new RedDewdrop();
 		lootChanceThird = 0.1f; // by default, see die()
+
+		scalesWithHeroLevel = true;
 	}
 
 	@Override
@@ -126,7 +128,7 @@ public class MossySkeleton extends Mob {
 
 	@Override
 	public int attackSkill(Char target) {
-		return 28;
+		return super.attackSkill(target)*3;
 	}
 
 	@Override
@@ -137,6 +139,11 @@ public class MossySkeleton extends Mob {
 	@Override
 	public String defenseVerb() {
 		return "blocked";
+	}
+
+	@Override
+	public int defenseSkill(Char enemy) {
+		return (int)(super.defenseSkill(enemy)/2f);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ import com.watabou.utils.Random;
 
 public class JupitersHorror extends Weapon.Enchantment {
 
-	private static final String TXT_ELDRITCH = "Horrifying %s";
+	private static final String TXT_ELDRITCH = "Horrific %s";
 
 	private static ItemSprite.Glowing GREY = new ItemSprite.Glowing(0x222222);
 

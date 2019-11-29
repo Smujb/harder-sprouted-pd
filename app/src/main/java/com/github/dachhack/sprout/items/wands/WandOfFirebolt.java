@@ -27,6 +27,7 @@ import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Strength;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.particles.BlastParticle;
@@ -135,7 +136,11 @@ public class WandOfFirebolt extends Wand {
 					int dmg = Random.NormalIntRange(minDamage, maxDamage)
 							- Random.Int(ch.dr());
 					if (dmg > 0) {
-						ch.damage(dmg, this);
+						if (!(ch instanceof Hero)) {
+							ch.damage(dmg, this);
+						} else {
+							ch.damage(ch.HP-1,this);
+						}
 					}
 
 					if (ch == Dungeon.hero && !ch.isAlive())

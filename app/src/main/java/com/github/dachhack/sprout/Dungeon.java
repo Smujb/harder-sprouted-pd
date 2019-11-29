@@ -40,6 +40,7 @@ import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
 import com.github.dachhack.sprout.actors.mobs.npcs.Wandmaker;
 import com.github.dachhack.sprout.items.Ankh;
+import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.potions.Potion;
@@ -170,6 +171,7 @@ public class Dungeon {
 	public static boolean sporkAvail = false;
 
 	public static Hero hero;
+	public static DewVial dewVial;
 	public static Level level;
 
 	public static QuickSlot quickslot = new QuickSlot();
@@ -231,6 +233,7 @@ public class Dungeon {
 
 		hero = new Hero();
 		hero.live();
+		dewVial = hero.belongings.getItem(DewVial.class);
 
 		Badges.reset();
 
@@ -1181,6 +1184,7 @@ public static Level newJournalLevel(int page, Boolean first){
 
 		hero = null;
 		hero = (Hero) bundle.get(HERO);
+		dewVial = hero.belongings.getItem(DewVial.class);
 
 		gold = bundle.getInt(GOLD);
 		depth = bundle.getInt(DEPTH);
