@@ -200,11 +200,6 @@ public class MineSentinel extends Mob {
 		if (state == PASSIVE) {
 			state = HUNTING;
 		}
-		
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
-			int max = Math.round(dmg*.25f);
-			dmg = Random.Int(1,max);
-		}
 
 		super.damage(dmg, src);
 	}

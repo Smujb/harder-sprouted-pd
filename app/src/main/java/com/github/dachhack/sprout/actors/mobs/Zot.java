@@ -234,7 +234,7 @@ public class Zot extends Mob {
 		boolean check = false;
 		int phases = 0;
 		for (Mob mob : Dungeon.level.mobs) {
-			if (mob != null && mob instanceof MagicEye) {
+			if (mob instanceof MagicEye) {
 				phases++;
 				if (Dungeon.hero.heroClass!=HeroClass.HUNTRESS && phases>20){
 				check=true;
@@ -248,11 +248,10 @@ public class Zot extends Mob {
 	
 	@Override
 	public void damage(int dmg, Object src) {
-		
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
-			int max = Math.round(dmg*.25f);
-			dmg = Random.Int(1,max);
-		}
+
+		int max = Math.round(dmg*.5f);
+		dmg = Random.Int(1,max);
+
 		
 		if(Dungeon.hero.heroClass==HeroClass.HUNTRESS && !checkPhases()){
 			ArrayList<Integer> spawnPoints = new ArrayList<Integer>();

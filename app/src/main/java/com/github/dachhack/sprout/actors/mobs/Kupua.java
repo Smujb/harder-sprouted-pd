@@ -61,22 +61,11 @@ public class Kupua extends Mob {
 
 	@Override
 	public void damage(int dmg, Object src) {
-		int actualdmg = dmg;
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
-			int max = Math.round(dmg*.5f);
-			actualdmg = Random.Int(1,max);
-		}
-		if (src instanceof Item) {
-			if (((Item)src).reinforced) {
-				actualdmg = dmg;
-			}
+		if (dmg > HT/8){
+			GameScene.add(Blob.seed(pos, 30, CorruptGas.class));
 		}
 		
-		if (actualdmg > HT/8){
-		GameScene.add(Blob.seed(pos, 30, CorruptGas.class));
-		}
-		
-		super.damage(actualdmg, src);
+		super.damage(dmg, src);
 	}
 	
 	@Override

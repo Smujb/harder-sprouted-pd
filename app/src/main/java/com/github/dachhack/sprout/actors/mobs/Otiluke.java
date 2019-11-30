@@ -57,8 +57,7 @@ public class Otiluke extends Mob implements Callback {
 		name = "stone golem Otiluke";
 		spriteClass = OtilukeSprite.class;
 
-		HP = HT = 7000+(adjustForDepth(0)*Random.NormalIntRange(5, 7));
-		defenseSkill = 50+ adjustForDepth(0);
+		HP = HT = 10000;
 		
 		state=PASSIVE;
 
@@ -66,22 +65,19 @@ public class Otiluke extends Mob implements Callback {
 		
 		loot = Generator.Category.POTION;
 		lootChance = 0.83f;
+
+		scalesWithHeroLevel = true;
 		
 	}	
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(250, 250+ adjustForDepth(0));
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 250+ adjustForDepth(0);
+		return Random.NormalIntRange(250, 500);
 	}
 
 	@Override
 	public int dr() {
-		return 8+ adjustForDepth(1);
+		return 100;
 	}
 	
 	@Override
@@ -100,7 +96,7 @@ public class Otiluke extends Mob implements Callback {
 		if(state==HUNTING){
 			
 			for (Mob mob : Dungeon.level.mobs) {
-				if (mob != null && mob instanceof MineSentinel &&  Random.Int(20)<2) {
+				if (mob instanceof MineSentinel && Random.Int(20) < 2) {
 					if (mob.state==PASSIVE){
 						mob.damage(1, this);
 						mob.state = HUNTING;
@@ -108,11 +104,6 @@ public class Otiluke extends Mob implements Callback {
 					break;
 			}			
 		  }
-		}
-		
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
-			int max = Math.round(dmg*.25f);
-			dmg = Random.Int(1,max);
 		}
 
 		super.damage(dmg, src);
