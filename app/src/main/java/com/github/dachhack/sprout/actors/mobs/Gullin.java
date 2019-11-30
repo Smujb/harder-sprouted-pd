@@ -29,7 +29,7 @@ import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.StoneOre;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.GullinSprite;
 import com.watabou.utils.Random;
@@ -91,7 +91,7 @@ public class Gullin extends Mob {
 	@Override
 	public void damage(int dmg, Object src) {
 		
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWraith)){
+		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
 			int max = Math.round(dmg*.25f);
 			dmg = Random.Int(1,max);
 		}

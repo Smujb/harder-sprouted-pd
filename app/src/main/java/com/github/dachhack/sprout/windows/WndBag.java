@@ -22,10 +22,8 @@ import android.graphics.RectF;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
-import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Belongings;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.items.AdamantArmor;
 import com.github.dachhack.sprout.items.AdamantRing;
 import com.github.dachhack.sprout.items.AdamantWand;
@@ -48,7 +46,7 @@ import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.plants.Plant.Seed;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
@@ -401,7 +399,7 @@ public class WndBag extends WndTabbed {
 							|| mode == Mode.QUICKSLOT
 							&& (item.defaultAction != null)
 							|| mode == Mode.WEAPON
-							&& (item instanceof MeleeWeapon || item instanceof Boomerang || item instanceof JupitersWraith)
+							&& (item instanceof MeleeWeapon || item instanceof Boomerang || item instanceof JupitersWrath)
 							|| mode == Mode.ARMOR
 							&& (item instanceof Armor)
 							|| mode == Mode.ENCHANTABLE

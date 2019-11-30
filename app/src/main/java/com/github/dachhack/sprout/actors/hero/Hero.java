@@ -89,7 +89,6 @@ import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.potions.PotionOfMight;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
-import com.github.dachhack.sprout.items.quest.DarkGold;
 import com.github.dachhack.sprout.items.rings.RingOfElements;
 import com.github.dachhack.sprout.items.rings.RingOfEvasion;
 import com.github.dachhack.sprout.items.rings.RingOfForce;
@@ -104,7 +103,8 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
+import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
@@ -336,6 +336,14 @@ public class Hero extends Char {
 
 		KindOfWeapon wep = rangedWeapon != null ? rangedWeapon
 				: belongings.weapon;
+
+		if (wep instanceof MissileWeapon | wep instanceof Boomerang | wep instanceof JupitersWrath){
+			if (Level.adjacent( pos, target.pos )) {
+				accuracy *= 0.5f;
+			} else {
+				accuracy *= 1.5f;
+			}
+		}
 		if (wep != null) {
 			return (int) (attackSkill * accuracy * wep.acuracyFactor(this));
 		} else {

@@ -28,7 +28,6 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;

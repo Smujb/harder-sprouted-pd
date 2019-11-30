@@ -31,17 +31,19 @@ import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.items.weapon.missiles.MissileWeapon;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.CellSelector;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
+import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.sprites.MissileSprite;
 import com.github.dachhack.sprout.ui.QuickSlotButton;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
@@ -184,7 +186,7 @@ public class Item implements Bundlable {
 			}
 
 			items.add(this);
-			if (stackable || this instanceof Boomerang || this instanceof JupitersWraith)
+			if (stackable || this instanceof Boomerang || this instanceof JupitersWrath)
 				Dungeon.quickslot.replaceSimilar(this);
 			updateQuickslot();
 			Collections.sort(items, itemComparator);
@@ -210,7 +212,7 @@ public class Item implements Bundlable {
 
 		} else if (quantity == 1) {
 
-			if (stackable || this instanceof Boomerang || this instanceof JupitersWraith) {
+			if (stackable || this instanceof Boomerang || this instanceof JupitersWrath) {
 				Dungeon.quickslot.convertToPlaceholder(this);
 			}
 
@@ -246,7 +248,7 @@ public class Item implements Bundlable {
 
 		} else if (quantity == 1) {
 
-			if (stackable || this instanceof Boomerang || this instanceof JupitersWraith) {
+			if (stackable || this instanceof Boomerang || this instanceof JupitersWrath) {
 				Dungeon.quickslot.convertToPlaceholder(this);
 			}
 

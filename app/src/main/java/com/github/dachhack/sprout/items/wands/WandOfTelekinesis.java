@@ -59,6 +59,16 @@ public class WandOfTelekinesis extends Wand {
 	private static final String TXT_PREVENTING = "Something scrambles the telekinesis magic! ";
 
 	@Override
+	public int max(int lvl) {
+		return 7 + 5*lvl;
+	}
+
+	@Override
+	public int min(int lvl) {
+		return 2 + lvl;
+	}
+
+	@Override
 	protected void onZap(int cell) {
 
 		boolean mapUpdated = false;
@@ -77,9 +87,10 @@ public class WandOfTelekinesis extends Wand {
 
 			if ((ch = Actor.findChar(c)) != null) {
 
+				ch.damage(damageRoll(), this);
+
 				if (i == Ballistica.distance - 1) {
 
-					ch.damage(maxDistance - 1 - i, this);
 
 				} else {
 
@@ -128,8 +139,7 @@ public class WandOfTelekinesis extends Wand {
 							Dungeon.level.press(ch.pos, ch);
 						}
 
-					} else {					
-						ch.damage(maxDistance - 1 - i, this);
+					} else {
 
 					}
 				}
@@ -215,6 +225,7 @@ public class WandOfTelekinesis extends Wand {
 	@Override
 	public String desc() {
 		return "Waves of magic force from this wand will affect all cells on their way triggering traps, trampling high vegetation, "
-				+ "opening closed doors and closing open ones. They also push back monsters.";
+				+ "opening closed doors and closing open ones. They also push back monsters.\n\n"+
+				statsDesc(levelKnown);
 	}
 }

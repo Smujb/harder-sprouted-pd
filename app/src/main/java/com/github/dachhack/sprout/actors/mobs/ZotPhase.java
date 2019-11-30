@@ -25,7 +25,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
@@ -133,7 +133,7 @@ public class ZotPhase extends Mob implements Callback{
 	@Override
 	public void damage(int dmg, Object src) {
 		
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWraith)){
+		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
 			int max = Math.round(dmg*.25f);
 			dmg = Random.Int(1,max);
 		}

@@ -26,9 +26,8 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.StoneOre;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
-import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.KupuaSprite;
 import com.watabou.utils.Random;
@@ -69,7 +68,7 @@ public class Kupua extends Mob {
 	@Override
 	public void damage(int dmg, Object src) {
 		int actualdmg = dmg;
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWraith)){
+		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
 			int max = Math.round(dmg*.5f);
 			actualdmg = Random.Int(1,max);
 		}

@@ -56,7 +56,7 @@ public class WandOfFirebolt extends Wand {
 
 	//1x/2x/3x damage
 	public int max(int lvl){
-		return (6+2*lvl) * chargesPerCast();
+		return (6+4*lvl) * chargesPerCast();
 	}
 
 	@Override
@@ -85,16 +85,7 @@ public class WandOfFirebolt extends Wand {
 			int damage= damageRoll();
 	        if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 			ch.damage(damage, this);
-			
-			if (damage>255){
-				GLog.n("Your wand of Firebolt is burning your hands!");
-			}
-			
-			float backfireChance = Math.max(((damage-255)/10000),0);
-			
-			if (Random.Float() < backfireChance){
-				backfire(damage);
-			}
+
 	
 			Buff.affect(ch, Burning.class).reignite(ch);
 

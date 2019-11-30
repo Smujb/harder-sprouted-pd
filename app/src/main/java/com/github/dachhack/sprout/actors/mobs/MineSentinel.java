@@ -43,7 +43,7 @@ import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.SentinelSprite;
 import com.watabou.utils.Bundle;
@@ -201,7 +201,7 @@ public class MineSentinel extends Mob {
 			state = HUNTING;
 		}
 		
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWraith)){
+		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
 			int max = Math.round(dmg*.25f);
 			dmg = Random.Int(1,max);
 		}

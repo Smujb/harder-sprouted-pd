@@ -191,6 +191,15 @@ public class Blob extends Actor {
 		return null;
 	}
 
+	public static int volumeAt( int cell, Class<? extends Blob> type){
+		Blob gas = Dungeon.level.blobs.get( type );
+		if (gas == null || gas.volume == 0) {
+			return 0;
+		} else {
+			return gas.cur[cell];
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <T extends Blob> T seed(int cell, int amount, Class<T> type) {
 		try {

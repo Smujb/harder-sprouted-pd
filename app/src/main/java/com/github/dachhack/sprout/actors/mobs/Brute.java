@@ -60,7 +60,7 @@ public class Brute extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return enraged ? Random.NormalIntRange(60, 140) : Random.NormalIntRange(30, 50);
+		return enraged ? Random.NormalIntRange(60, 90) : Random.NormalIntRange(20, 45);
 	}
 
 	@Override
@@ -68,10 +68,6 @@ public class Brute extends Mob {
 		return defaultAccuracy(target)*2;
 	}
 
-	@Override
-	protected float attackDelay() {
-		return 1.2f;
-	}
 	@Override
 	public int dr() {
 		return 10+ adjustForDepth(0);

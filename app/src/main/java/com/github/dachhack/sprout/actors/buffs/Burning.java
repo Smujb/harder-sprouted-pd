@@ -32,12 +32,15 @@ import com.github.dachhack.sprout.items.food.ChargrilledMeat;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.items.rings.RingOfElements.Resistance;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
 
 public class Burning extends Buff implements Hero.Doom {
 
@@ -48,18 +51,24 @@ public class Burning extends Buff implements Hero.Doom {
 
 	private float left;
 
-	private static final String LEFT = "left";
+	//for tracking burning of hero items
+	private int burnIncrement = 0;
+
+	private static final String LEFT	= "left";
+	private static final String BURN	= "burnIncrement";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
 		bundle.put(LEFT, left);
+		bundle.put(BURN, burnIncrement);
 	}
 
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
 		left = bundle.getFloat(LEFT);
+		burnIncrement = bundle.getInt(BURN);
 	}
 
 	@Override
@@ -67,57 +76,76 @@ public class Burning extends Buff implements Hero.Doom {
 
 		if (target.isAlive()) {
 
-			if (target instanceof Hero) {
-				Buff.prolong(target, Light.class, TICK * 1.01f);
-			}
-
-			target.damage(Random.Int(1, 5), this);
+			int damage = Random.NormalIntRange( 1, 3 + Dungeon.depth/4 );
+			Buff.detach( target, Slow.class);
 
 			if (target instanceof Hero) {
 
-				Hero hero = (Hero) target;
-				Item item = hero.belongings.randomUnequipped();
-				if (item instanceof Scroll) {
+				Hero hero = (Hero)target;
 
-					item = item.detach(hero.belongings.backpack);
-					GLog.w(TXT_BURNS_UP, item.toString());
+				hero.damage( damage, this );
+				burnIncrement++;
 
-					Heap.burnFX(hero.pos);
+				//at 4+ turns, there is a (turns-3)/3 chance an item burns
+				if (Random.Int(3) < (burnIncrement - 3)){
+					burnIncrement = 0;
 
-				} else if (item instanceof MysteryMeat) {
-
-					item = item.detach(hero.belongings.backpack);
-					ChargrilledMeat steak = new ChargrilledMeat();
-					if (!steak.collect(hero.belongings.backpack)) {
-						Dungeon.level.drop(steak, hero.pos).sprite.drop();
+					ArrayList<Item> burnable = new ArrayList<>();
+					//does not reach inside of containers
+					for (Item i : hero.belongings.backpack.items){
+						if ((i instanceof Scroll && !(i instanceof ScrollOfUpgrade))
+								|| i instanceof MysteryMeat){
+							burnable.add(i);
+						}
 					}
-					GLog.w(TXT_BURNS_UP, item.toString());
 
-					Heap.burnFX(hero.pos);
-
+					if (!burnable.isEmpty()){
+						Item toBurn = Random.element(burnable).detach(hero.belongings.backpack);
+						assert toBurn != null;
+						GLog.w(String.format(TXT_BURNS_UP, toBurn.name()));
+						if (toBurn instanceof MysteryMeat){
+							ChargrilledMeat steak = new ChargrilledMeat();
+							if (!steak.collect( hero.belongings.backpack )) {
+								Dungeon.level.drop( steak, hero.pos ).sprite.drop();
+							}
+						}
+						Heap.burnFX( hero.pos );
+					}
 				}
 
-			} else if (target instanceof Thief
-					&& ((Thief) target).item instanceof Scroll) {
+			} else {
+				target.damage( damage, this );
+			}
 
-				((Thief) target).item = null;
-				target.sprite.emitter().burst(ElmoParticle.FACTORY, 6);
+			if (target instanceof Thief) {
+
+				Item item = ((Thief) target).item;
+
+				if (item instanceof Scroll &&
+						!(item instanceof ScrollOfUpgrade)) {
+					target.sprite.emitter().burst( ElmoParticle.FACTORY, 6 );
+					((Thief)target).item = null;
+				} else if (item instanceof MysteryMeat) {
+					target.sprite.emitter().burst( ElmoParticle.FACTORY, 6 );
+					((Thief)target).item = new ChargrilledMeat();
+				}
+
 			}
 
 		} else {
+
 			detach();
 		}
 
-		if (Level.flamable[target.pos]) {
-			GameScene.add(Blob.seed(target.pos, 4, Fire.class));
+		if (Dungeon.level.flamable[target.pos] && Blob.volumeAt(target.pos, Fire.class) == 0) {
+			GameScene.add( Blob.seed( target.pos, 4, Fire.class ) );
 		}
 
-		spend(TICK);
+		spend( TICK );
 		left -= TICK;
 
-		if (left <= 0
-				|| Random.Float() > (2 + (float) target.HP / target.HT) / 3
-				|| (Level.water[target.pos] && !target.flying)) {
+		if (left <= 0 ||
+				(Dungeon.level.water[target.pos] && !target.flying)) {
 
 			detach();
 		}

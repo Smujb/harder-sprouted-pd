@@ -44,12 +44,12 @@ public class WandOfDisintegration extends Wand {
 
 	@Override
 	public int max(int lvl) {
-		return 10 + 6*lvl;
+		return 10 + 7*lvl;
 	}
 
 	@Override
 	public int min(int lvl) {
-		return 1;
+		return 1 + (int)(0.5f*lvl);
 	}
 
 	@Override

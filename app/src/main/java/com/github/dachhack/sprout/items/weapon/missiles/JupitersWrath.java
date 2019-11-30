@@ -52,7 +52,7 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
-public class JupitersWraith extends MissileWeapon {
+public class JupitersWrath extends MissileWeapon {
 	
 	protected Buff passiveBuff;
 	protected Buff activeBuff;

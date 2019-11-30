@@ -620,7 +620,7 @@ public class Ghost extends NPC {
 
 			EXP = 1;
 			
-			baseSpeed = (1.5f-(Dungeon.depth/27));
+			baseSpeed = (1.5f-(Dungeon.depth/27f));
 
 			state = WANDERING;
 
@@ -630,7 +630,9 @@ public class Ghost extends NPC {
 			lootChance = 0.01f;
 			
 			lootOther = Gold.class;
-			lootChanceOther = 0.01f; 
+			lootChanceOther = 0.01f;
+
+			scalesWithHeroLevel = true;
 			
 		}
 

@@ -52,12 +52,11 @@ import com.github.dachhack.sprout.items.potions.PotionOfExperience;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.weapon.Weapon;
-import com.github.dachhack.sprout.items.weapon.melee.ShortSword;
 import com.github.dachhack.sprout.items.weapon.melee.relic.AresSword;
 import com.github.dachhack.sprout.items.weapon.melee.relic.CromCruachAxe;
 import com.github.dachhack.sprout.items.weapon.melee.relic.LokisFlail;
 import com.github.dachhack.sprout.items.weapon.melee.relic.NeptunusTrident;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWraith;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.plants.Plant.Seed;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -731,7 +730,7 @@ public class Heap implements Bundlable {
 			destroy(); 
 			
 				switch (type) {
-	            case 1:  weapon = new JupitersWraith(); weapon.enchantJupiter();
+	            case 1:  weapon = new JupitersWrath(); weapon.enchantJupiter();
 	                     break;
 	            case 2:  weapon = new AresSword(); weapon.enchantAres();
                          break;

@@ -47,7 +47,7 @@ public class WandOfAvalanche extends Wand {
 
 	@Override
 	public int max(int lvl) {
-		return 10 + 6*lvl;
+		return 10 + 8*lvl;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class WandOfAvalanche extends Wand {
 
 		Ballistica.distance = Math.min(Ballistica.distance, 8 + level);
 
-		int size = 3;
+		int size = 2;
 		PathFinder.buildDistanceMap(cell, BArray.not(Level.solid, null), size);
 
 		for (int i = 0; i < Level.getLength(); i++) {
@@ -79,7 +79,6 @@ public class WandOfAvalanche extends Wand {
 					ch.sprite.flash();
 					
 					 int damage = damageRoll();
-					 damage = Math.max(damageRoll(0),damage - Ballistica.distance*(level+1)*2);
 			         if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 					 ch.damage(damage, this);
 	
