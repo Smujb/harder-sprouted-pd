@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.actors;
 
+import android.widget.GridLayout;
+
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Assets;
@@ -62,6 +64,7 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.GameMath;
@@ -283,6 +286,7 @@ public abstract class Char extends Actor {
 		if (HP <= 0) {
 			return;
 		}
+
 		if (this.buff(Frost.class) != null) {
 			Buff.detach(this, Frost.class);
 			if (Level.water[this.pos]) {
@@ -308,15 +312,17 @@ public abstract class Char extends Actor {
 				}
 			}
 		}
-
-		HP -= dmg;
-		if (dmg > 0 || src instanceof Char) {
-			sprite.showStatus(HP > HT / 2 ? CharSprite.WARNING
-					: CharSprite.NEGATIVE, Integer.toString(dmg));
+		if (dmg <= 0) {
+			sprite.showStatus(CharSprite.NEUTRAL, "blocked");
+			return;
 		}
+		HP -= dmg;
+		sprite.showStatus(HP > HT / 2 ? CharSprite.WARNING
+				: CharSprite.NEGATIVE, Integer.toString(dmg));
 		if (HP <= 0) {
 			die(src);
 		}
+
 	}
 
 	public void destroy() {

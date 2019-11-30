@@ -33,36 +33,30 @@ import com.github.dachhack.sprout.sprites.KupuaSprite;
 import com.watabou.utils.Random;
 
 public class Kupua extends Mob {
-  //Gullin
 	
 	{
 		name = "kupua";
 		spriteClass = KupuaSprite.class;
 
-		HP = HT = 4000;
-		defenseSkill = 15+ adjustForDepth(1);
-		baseSpeed = 2f;
+		HP = HT = 1800;
 
 		EXP = 10;
 		maxLvl = 999;
 
 		loot = new StoneOre();
 		lootChance = 0.9f;
+
+		scalesWithHeroLevel = true;
 	}
 
 	@Override
 	public int damageRoll() {
 		return Random.NormalIntRange(70+ adjustForDepth(0), 160+ adjustForDepth(0));
 	}
-		
-	@Override
-	public int attackSkill(Char target) {
-		return 120+ adjustForDepth(0);
-	}
 
 	@Override
 	public int dr() {
-		return 50+ adjustForDepth(0);
+		return 50;
 	}
 
 	@Override

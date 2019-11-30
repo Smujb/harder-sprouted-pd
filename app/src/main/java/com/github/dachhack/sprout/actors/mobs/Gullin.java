@@ -34,41 +34,20 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.GullinSprite;
 import com.watabou.utils.Random;
 
-public class Gullin extends Mob {
-  //Gullin
+public class Gullin extends Kupua {
 	
 	{
 		name = "gullin";
 		spriteClass = GullinSprite.class;
 
-		HP = HT = 750+(adjustForDepth(0)*Random.NormalIntRange(8, 12));
-		defenseSkill = 20+ adjustForDepth(1);
+		HP = HT = 2500;
 
 		EXP = 20;
-		maxLvl = 99;
-
-		loot = new StoneOre();
-		lootChance = 0.8f;
 	}
 
 	@Override
 	public int damageRoll() {
 		return Random.NormalIntRange(100+ adjustForDepth(0), 200+ adjustForDepth(0));
-	}
-		
-	@Override
-	public int attackSkill(Char target) {
-		return 72+ adjustForDepth(0);
-	}
-
-	@Override
-	public int dr() {
-		return 145+ adjustForDepth(0);
-	}
-
-	@Override
-	public String defenseVerb() {
-		return "blocked";
 	}
 	
 	@Override
@@ -86,22 +65,6 @@ public class Gullin extends Mob {
 		}		
 			
 		super.die(cause);					
-	}
-	
-	@Override
-	public void damage(int dmg, Object src) {
-		
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
-			int max = Math.round(dmg*.25f);
-			dmg = Random.Int(1,max);
-		}
-		
-		if (dmg > HT/8){
-			GameScene.add(Blob.seed(pos, 30, CorruptGas.class));
-			}
-			
-		
-		super.damage(dmg, src);
 	}
 	
 	@Override

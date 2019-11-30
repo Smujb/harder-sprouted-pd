@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.CheckBox;
@@ -46,6 +47,8 @@ public class WndSettings extends Window {
 
 	private static final String TXT_SWITCH_PORT = "Switch to portrait";
 	private static final String TXT_SWITCH_LAND = "Switch to landscape";
+
+	private static final String TXT_TEST_MODE = "Test Mode";
 
 	private static final int WIDTH = 112;
 	private static final int BTN_HEIGHT = 20;
@@ -183,7 +186,31 @@ public class WndSettings extends Window {
 			btnQuickSlot.checked(ShatteredPixelDungeon.quickSlots() == 2);
 			add(btnQuickSlot);
 
-			resize(WIDTH, (int) btnQuickSlot.bottom());
+			btnBrightness.checked(ShatteredPixelDungeon.brightness());
+			add(btnBrightness);
+			if (Dungeon.testingAvailable) {
+				CheckBox btnTesting = new CheckBox(TXT_TEST_MODE) {
+					@Override
+					protected void onClick() {
+						super.onClick();
+						boolean isCurrentlyTesting = Dungeon.testing;
+						if (!isCurrentlyTesting) {
+							Dungeon.testing = true;
+						} else {
+							Dungeon.testing = false;
+						}
+
+					}
+				};
+				btnTesting.setRect(0, btnQuickSlot.bottom() + GAP, WIDTH,
+						BTN_HEIGHT);
+				btnTesting.checked(Dungeon.testing);
+				add(btnTesting);
+
+				resize(WIDTH, (int) btnTesting.bottom());
+			} else {
+				resize(WIDTH,(int) btnQuickSlot.bottom());
+			}
 
 		}
 	}

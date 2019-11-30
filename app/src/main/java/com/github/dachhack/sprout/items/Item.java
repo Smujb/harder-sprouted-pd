@@ -155,6 +155,10 @@ public class Item implements Bundlable {
 		}
 	}
 
+	public Item setTesting() {
+		return this.upgrade(250);
+	}
+
 	public boolean collect(Bag container) {
 
 		ArrayList<Item> items = container.items;

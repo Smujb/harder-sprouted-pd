@@ -160,6 +160,8 @@ public class Dungeon {
 	public static boolean dewDraw = false;
 	public static boolean dewWater = false;
 	public static boolean wings = false;
+	public static boolean testingAvailable = true;
+	public static boolean testing = false;
 	//public static boolean secondQuest = false;
 
 	public static int challenges;
