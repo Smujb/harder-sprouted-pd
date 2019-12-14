@@ -135,6 +135,8 @@ public class Dungeon {
 			return count != 0;
 		}
 
+		public void recall() { count = 0; }
+
 		public void drop() {
 			count = 1;
 		}
@@ -160,7 +162,7 @@ public class Dungeon {
 	public static boolean dewDraw = false;
 	public static boolean dewWater = false;
 	public static boolean wings = false;
-	public static boolean testingAvailable = true;
+	public static boolean testingAvailable = false;
 	public static boolean testing = false;
 	//public static boolean secondQuest = false;
 

@@ -44,6 +44,7 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
 
 public class DewVial extends Item {
@@ -215,37 +216,33 @@ public class DewVial extends Item {
 
 			if (volume > 0) {
 
-				int value = 1 + (Dungeon.depth - 1) / 5;
-				if (hero.heroClass == HeroClass.HUNTRESS) {
-					value++;
-				}
-				value *= volume;
-				value = (int) Math.max(volume * volume * .01 * hero.HT, value);
-				int effect = Math.min(hero.HT - hero.HP, value);
+				float missingHealthPercent = 1f - (hero.HP / (float)hero.HT);
+
+				//trimming off 0.01 drops helps with floating point errors
+				int dropsNeeded = (int)Math.ceil((missingHealthPercent / 0.05f) - 0.01f);
+				dropsNeeded = (int) GameMath.gate(1, dropsNeeded, volume);
+
+				//20 drops for a full heal normally
+				int heal = Math.round( hero.HT * 0.05f * dropsNeeded );
+
+				int effect = Math.min( hero.HT - hero.HP, heal );
 				if (effect > 0) {
 					hero.HP += effect;
-					hero.sprite.emitter().burst(Speck.factory(Speck.HEALING),
-							volume > 5 ? 2 : 1);
-					hero.sprite.showStatus(CharSprite.POSITIVE, TXT_VALUE,
-							effect);
+					hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 + dropsNeeded/5 );
+					hero.sprite.showStatus( CharSprite.POSITIVE, "+" + effect + "HP" );
 				}
 
-				if (volume < 10) {
+				volume -= dropsNeeded;
 
-					volume = 0;
-
-				} else {
-
-					volume = volume - 10;
-				}
-
-				hero.spend(TIME_TO_DRINK);
+				hero.spend( TIME_TO_DRINK );
 				hero.busy();
 
-				Sample.INSTANCE.play(Assets.SND_DRINK);
-				hero.sprite.operate(hero.pos);
+				Sample.INSTANCE.play( Assets.SND_DRINK );
+				hero.sprite.operate( hero.pos );
 
 				updateQuickslot();
+
+
 
 			} else {
 				GLog.w(TXT_EMPTY);

@@ -116,7 +116,7 @@ public enum HeroClass {
 			"Scrolls of Magic Mapping are identified from the beginning." };
 
 	public static final String[] HUN_PERKS = {
-			"Huntresses start with 20 points of Health.",
+			"TBA",
 			"Huntresses start with a unique upgradeable boomerang.",
 			"Huntresses are proficient with missile weapons, getting bonus damage from excess strength.",
 			"Huntresses are able to recover a single used missile weapon from each enemy.",
@@ -151,7 +151,8 @@ public enum HeroClass {
 		if (Badges.isUnlocked(masteryBadge())) {
 			new TomeOfMastery().collect();
 		}
-		
+		OtilukesJournal jn = new OtilukesJournal();
+		jn.identify().collect();
 			//new OtilukesJournal().collect();
 			//Dungeon.limitedDrops.journal.drop();
 		
@@ -301,8 +302,6 @@ public enum HeroClass {
 			//ConchShell conch = new ConchShell(); conch.collect();
 			//AncientCoin coin = new AncientCoin(); coin.collect();
 			//TenguKey key = new TenguKey(); key.collect();
-			OtilukesJournal jn = new OtilukesJournal();
-			jn.collect();
 			JournalPage sk1 = new Sokoban1();
 			sk1.collect();
 			JournalPage sk2 = new Sokoban2();

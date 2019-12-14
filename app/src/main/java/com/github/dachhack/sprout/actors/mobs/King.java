@@ -26,6 +26,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.buffs.Weakness;
 import com.github.dachhack.sprout.effects.Flare;
@@ -61,7 +62,6 @@ public class King extends Mob {
 
 		HP = HT = 500;
 		EXP = 40;
-		defenseSkill = 25; //25
 
 		Undead.count = 0;
 	}
@@ -84,7 +84,7 @@ public class King extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 38);
+		return Random.NormalIntRange(20, 45 + 5*Undead.count);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class King extends Mob {
 
 	@Override
 	public int dr() {
-		return 14; //14
+		return 28; //14
 	}
 
 	@Override
@@ -280,7 +280,6 @@ public class King extends Mob {
 			spriteClass = UndeadSprite.class;
 
 			HP = HT = 50;
-			defenseSkill = 15;
 
 			EXP = 0;
 
@@ -305,14 +304,9 @@ public class King extends Mob {
 		}
 
 		@Override
-		public int attackSkill(Char target) {
-			return 16;
-		}
-
-		@Override
 		public int attackProc(Char enemy, int damage) {
 			if (Random.Int(MAX_ARMY_SIZE) == 0) {
-				Buff.prolong(enemy, Paralysis.class, 1);
+				Buff.prolong(enemy, Slow.class, 5);
 			}
 
 			return damage;

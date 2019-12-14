@@ -287,6 +287,12 @@ public abstract class Char extends Actor {
 			return;
 		}
 
+		if (this.resistances().contains(src)) {
+			GLog.i("It's not very effective.");
+		} else if (this.immunities().contains(src)) {
+			GLog.w("It doesn't affect " + name + ".");
+		}
+
 		if (this.buff(Frost.class) != null) {
 			Buff.detach(this, Frost.class);
 			if (Level.water[this.pos]) {

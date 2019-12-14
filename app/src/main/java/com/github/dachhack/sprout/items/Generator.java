@@ -134,11 +134,17 @@ import com.github.dachhack.sprout.items.weapon.melee.Spear;
 import com.github.dachhack.sprout.items.weapon.melee.Spork;
 import com.github.dachhack.sprout.items.weapon.melee.Sword;
 import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
+import com.github.dachhack.sprout.items.weapon.melee.relic.AresSword;
+import com.github.dachhack.sprout.items.weapon.melee.relic.CromCruachAxe;
+import com.github.dachhack.sprout.items.weapon.melee.relic.LokisFlail;
+import com.github.dachhack.sprout.items.weapon.melee.relic.NeptunusTrident;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.CurareDart;
 import com.github.dachhack.sprout.items.weapon.missiles.Dart;
 import com.github.dachhack.sprout.items.weapon.missiles.IncendiaryDart;
 import com.github.dachhack.sprout.items.weapon.missiles.Javelin;
+import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.items.weapon.missiles.Shuriken;
 import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
 import com.github.dachhack.sprout.plants.BlandfruitBush;
@@ -167,7 +173,7 @@ public class Generator {
 				15, Ring.class), ARTIFACT(20, Artifact.class), SEED(0,
 				Plant.Seed.class), SEED2(0,	Plant.Seed.class), SEEDRICH(0,	Plant.Seed.class),
 				FOOD(0, Food.class), GOLD(500, Gold.class), BERRY(50, Food.class), MUSHROOM(0, Food.class),
-				NORNSTONE(0,NornStone.class), NORNSTONE2(0,NornStone.class);
+				NORNSTONE(0,NornStone.class), NORNSTONE2(0,NornStone.class), RELIC_WEAPON (0, RelicMeleeWeapon.class);
 
 		public Class<?>[] classes;
 		public float[] probs;
@@ -240,6 +246,10 @@ public class Generator {
 				Boomerang.class, Tamahawk.class, Spork.class };
 		Category.WEAPON.probs = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
 				0, 1, 1, 1, 1, 0, 1, 0 };
+
+		Category.RELIC_WEAPON.classes = new Class<?>[] {
+				NeptunusTrident.class, AresSword.class, CromCruachAxe.class, LokisFlail.class };
+		Category.RELIC_WEAPON.probs = new float[] { 1, 1, 1, 1 };
 
 		Category.ARMOR.classes = new Class<?>[] { ClothArmor.class,
 				LeatherArmor.class, MailArmor.class, ScaleArmor.class,
@@ -411,6 +421,32 @@ public class Generator {
 
 			return Math.abs(targetStr - w1.STR) < Math.abs(targetStr - w2.STR) ? w1
 					: w2;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public static RelicMeleeWeapon randomRelicWeapon() {
+
+		try {
+			Category cat = Category.RELIC_WEAPON;
+
+			RelicMeleeWeapon w1 = (RelicMeleeWeapon) cat.classes[Random.chances(cat.probs)]
+					.newInstance();
+
+			w1.random();
+
+			if (w1 instanceof NeptunusTrident) {
+				w1.enchantNeptune();
+			} else if (w1 instanceof CromCruachAxe) {
+				w1.enchantLuck();
+			} else if (w1 instanceof AresSword) {
+				w1.enchantAres();
+			} else {
+				w1.enchantLoki();
+			}
+
+			return w1;
 		} catch (Exception e) {
 			return null;
 		}

@@ -51,7 +51,7 @@ public class Eye extends Mob {
 		name = "evil eye";
 		spriteClass = EyeSprite.class;
 
-		HP = HT = 300;
+		HP = HT = 200;
 		viewDistance = Light.DISTANCE;
 
 		EXP = 13;

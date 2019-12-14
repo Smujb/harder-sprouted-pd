@@ -44,7 +44,7 @@ public class Statue extends Mob {
 		state = PASSIVE;
 	}
 
-	private Weapon weapon;
+	public Weapon weapon;
 
 	public Statue() {
 		super();

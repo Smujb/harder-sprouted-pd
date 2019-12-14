@@ -2,6 +2,7 @@ package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,19 @@ public class MegaExperiencePotion extends Item {
     {
         name = "Mega Potion of Experience";
 
-        bones = true;
+        bones = false;
+
+        image = ItemSpriteSheet.POTION_AQUA;
+    }
+
+    @Override
+    public boolean isIdentified() {
+        return true;
+    }
+
+    @Override
+    public boolean isUpgradable() {
+        return false;
     }
 
     public static final String AC_DRINK = "DRINK";

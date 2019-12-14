@@ -21,6 +21,8 @@ import java.util.HashSet;
 
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Blindness;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.items.food.Blackberry;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
@@ -39,8 +41,7 @@ public class DwarfLich extends Mob {
 		name = "dwarf lich";
 		spriteClass = DwarfLichSprite.class;
 
-		HP = HT = 100+(adjustForDepth(0)*Random.NormalIntRange(7, 5));
-		defenseSkill = 24+ adjustForDepth(1);
+		HP = HT = 200;
 	
 		EXP = 14;
 		
@@ -57,13 +58,14 @@ public class DwarfLich extends Mob {
 	}
 
 	@Override
-	public int attackSkill(Char target) {
-		return defaultAccuracy(target);
+	public int dr() {
+		return 16;
 	}
 
 	@Override
-	public int dr() {
-		return 16+ adjustForDepth(0);
+	public int defenseProc(Char enemy, int damage) {
+		Buff.affect(enemy, Blindness.class, 4f);
+		return super.defenseProc(enemy, damage);
 	}
 
 	@Override

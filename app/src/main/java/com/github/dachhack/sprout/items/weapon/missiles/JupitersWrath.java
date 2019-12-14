@@ -77,7 +77,7 @@ public class JupitersWrath extends MissileWeapon {
 
 
 	{
-		name = "jupiter's wrath";
+		name = "Jupiter's Wrath";
 		image = ItemSpriteSheet.JUPITERSWRAITH;
 
 		STR = 10;

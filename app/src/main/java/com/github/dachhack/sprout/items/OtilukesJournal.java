@@ -147,7 +147,7 @@ public class OtilukesJournal extends Item {
 	@Override
 	public void execute(Hero hero, String action) {
 
-		if (action == AC_PORT) {
+		if (action.equals(AC_PORT)) {
 
 			if (Dungeon.bossLevel()) {
 				hero.spend(TIME_TO_USE);
@@ -158,13 +158,13 @@ public class OtilukesJournal extends Item {
 			
 		}
 
-		if (action == AC_PORT) {
+		if (action.equals(AC_PORT)) {
 				
 			GameScene.show(new WndOtiluke(rooms, this));
 			
 		}
               
-       if (action == AC_RETURN) {
+       if (action.equals(AC_RETURN)) {
     	   
     	   hero.spend(TIME_TO_USE);
     	   

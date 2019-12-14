@@ -119,9 +119,9 @@ public class Tower extends Mob implements Callback {
 		}
 		break;
 		case 2:
-			if (Dungeon.level.mobs.size()<10){
-		 BrokenRobot.spawnAt(pos);
-		 GLog.n("Proc: Print.Robots; Run;");
+			if (Dungeon.level.mobs.size()<5){
+		 		BrokenRobot.spawnAt(pos+1);
+		 		GLog.n("Proc: Print.Robots; Run;");
 			}
 		break;
 		}

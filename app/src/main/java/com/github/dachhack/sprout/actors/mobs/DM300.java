@@ -72,16 +72,15 @@ public class DM300 extends Mob implements Callback {
 		defenseSkill = 40;
 
 		loot = new CapeOfThorns().identify();
-		lootChance = 0.333f;
+		lootChance = 1f;
 	}
 
 	private int bossAlive = 0;
-	private int towerAlive = 1;
-	
+
 	@Override
 	public int damageRoll() {
 		
-		return Random.NormalIntRange(18, 24)*towerAlive;
+		return Random.NormalIntRange(18, 80);
 	}
 
 	@Override
@@ -91,26 +90,19 @@ public class DM300 extends Mob implements Callback {
 
 	@Override
 	public int dr() {
-		return 10+(4*towerAlive);
+		return 30;
 	}
 
 	@Override
 	public void damage(int dmg, Object src) {
 		if (dmg >= 50){
-			dmg = 49 + (int)(Math.sqrt(8*(dmg - 20) + 1) - 1)/2;
+			dmg = 49 + (int)(Math.sqrt((dmg - 50)) - 1);
 		}
 		super.damage(dmg, src);
 	}
 
 	@Override
 	public boolean act() {
-		towerAlive = 1;
-        for (Mob mob : Dungeon.level.mobs) {
-			
-			if (mob instanceof Tower){
-				   towerAlive++;
-				 }
-			}
         
 		GameScene.add(Blob.seed(pos, 30, ToxicGas.class));
 
@@ -141,7 +133,7 @@ public class DM300 extends Mob implements Callback {
 			spend(TIME_TO_ZAP);
 
 			if (hit(this, enemy, true)) {
-				int dmg = Random.Int(10, 22);
+				int dmg = Random.Int(5, 22);
 				if (Level.water[enemy.pos] && !enemy.flying) {
 					dmg *= 1.5f;
 				}

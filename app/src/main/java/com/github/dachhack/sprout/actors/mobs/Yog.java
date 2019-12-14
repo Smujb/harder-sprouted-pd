@@ -35,6 +35,7 @@ import com.github.dachhack.sprout.actors.buffs.Ooze;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
+import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -66,11 +67,12 @@ public class Yog extends Mob {
 		name = "Yog-Dzewa";
 		spriteClass = YogSprite.class;
 
-		HP = HT = 2000;
+		HP = HT = 2500;
 
 		EXP = 50;
 
 		state = PASSIVE;
+		Larva.count = 0;
 	}
 	
 	private static final int REGENERATION = 200;
@@ -144,48 +146,36 @@ public class Yog extends Mob {
 			}		
 					
 			if (Dungeon.level.mobs.size()<5){
-			Eye.spawnAroundChance(newPos);
+				Eye.spawnAroundChance(newPos);
 			}
-			
-			if (fistsCount==0){
-				spawnFists();
-				sprite.emitter().burst(ShadowParticle.UP, 2);
-				HP += REGENERATION;
+
+			ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
+
+			for (int i = 0; i < Level.NEIGHBOURS8.length; i++) {
+				int p = pos + Level.NEIGHBOURS8[i];
+				if (Actor.findChar(p) == null
+						&& (Level.passable[p] || Level.avoid[p])) {
+					spawnPoints.add(p);
+				}
+			}
+
+			if (spawnPoints.size() > 0) {
+				Larva larva = new Larva();
+				larva.pos = Random.element(spawnPoints);
+
+				GameScene.add(larva);
+				Actor.addDelayed(new Pushing(larva, pos, larva.pos), -1);
+			}
+
+			for (Mob mob : Dungeon.level.mobs) {
+				if (mob instanceof BurningFist || mob instanceof RottingFist || mob instanceof InfectingFist || mob instanceof PinningFist
+						|| mob instanceof Larva) {
+					mob.aggro(enemy);
+				}
 			}
 		}
 
 		super.damage(dmg, src);
-	}
-
-	@Override
-	public int defenseProc(Char enemy, int damage) {
-
-		ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
-
-		for (int i = 0; i < Level.NEIGHBOURS8.length; i++) {
-			int p = pos + Level.NEIGHBOURS8[i];
-			if (Actor.findChar(p) == null
-					&& (Level.passable[p] || Level.avoid[p])) {
-				spawnPoints.add(p);
-			}
-		}
-
-		if (spawnPoints.size() > 0) {
-			Larva larva = new Larva();
-			larva.pos = Random.element(spawnPoints);
-
-			GameScene.add(larva);
-			Actor.addDelayed(new Pushing(larva, pos, larva.pos), -1);
-		}
-
-		for (Mob mob : Dungeon.level.mobs) {
-			if (mob instanceof BurningFist || mob instanceof RottingFist || mob instanceof InfectingFist || mob instanceof PinningFist
-					|| mob instanceof Larva) {
-				mob.aggro(enemy);
-			}
-		}
-
-		return super.defenseProc(enemy, damage);
 	}
 
 	@Override
@@ -202,14 +192,14 @@ public class Yog extends Mob {
 			}
 		}
 		
-		if (!Dungeon.limitedDrops.journal.dropped()){ 
-			  Dungeon.level.drop(new OtilukesJournal(), pos).sprite.drop();
-			  Dungeon.limitedDrops.journal.drop();
-			}
+		if (!Dungeon.limitedDrops.journal.dropped()) {
+			Dungeon.level.drop(new OtilukesJournal(), pos).sprite.drop();
+			Dungeon.limitedDrops.journal.drop();
+		}
 
 		GameScene.bossSlain();
 		Dungeon.level.drop(new SkeletonKey(Dungeon.depth), pos).sprite.drop();
-		//Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
+		Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
 		super.die(cause);
 
 		yell("Back to the shadow...");
@@ -626,8 +616,8 @@ public class Yog extends Mob {
 					int dmg = damageRoll();
 					enemy.damage(dmg, this);
 					
-					if(Random.Int(10)==0){
-						Buff.prolong(enemy, Roots.class, 20);
+					if(Random.Int(2)==0){
+						Buff.prolong(enemy, Slow.class, 20);
 			  		}
 
 					enemy.sprite.bloodBurstA(sprite.center(), dmg);
@@ -686,13 +676,13 @@ public class Yog extends Mob {
 	}
 
 	public static class Larva extends Mob {
+		public static int count = 0;
 
 		{
 			name = "god's larva";
 			spriteClass = LarvaSprite.class;
 
-			HP = HT = 25;
-			defenseSkill = 20;
+			HP = HT = 100;
 
 			EXP = 0;
 
@@ -700,13 +690,20 @@ public class Yog extends Mob {
 		}
 
 		@Override
-		public int attackSkill(Char target) {
-			return 30;
+		protected void onAdd() {
+			count++;
+			super.onAdd();
+		}
+
+		@Override
+		protected void onRemove() {
+			count--;
+			super.onRemove();
 		}
 
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange(15, 20);
+			return Random.NormalIntRange(15, 20*count);
 		}
 
 		@Override

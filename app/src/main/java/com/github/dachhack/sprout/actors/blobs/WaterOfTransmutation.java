@@ -58,6 +58,7 @@ import com.github.dachhack.sprout.items.weapon.melee.Quarterstaff;
 import com.github.dachhack.sprout.items.weapon.melee.Spear;
 import com.github.dachhack.sprout.items.weapon.melee.Sword;
 import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.plants.Plant;
 
 public class WaterOfTransmutation extends WellWater {
@@ -65,7 +66,7 @@ public class WaterOfTransmutation extends WellWater {
 	@Override
 	protected Item affectItem(Item item) {
 
-		if (item instanceof MeleeWeapon) {
+		if (item instanceof MeleeWeapon & !(item instanceof RelicMeleeWeapon)) {
 			item = changeWeapon((MeleeWeapon) item);
 		} else if (item instanceof Scroll) {
 			item = changeScroll((Scroll) item);
@@ -93,6 +94,8 @@ public class WaterOfTransmutation extends WellWater {
 			item = changeHoneypot((Honeypot) item);
 		} else if (item instanceof Ankh) {
 			item = changeAnkh((Ankh) item);
+		} else if (item instanceof RelicMeleeWeapon) {
+			item = changeRelicWeapon(((RelicMeleeWeapon)item));
 		} else {
 			item = null;
 		}
@@ -100,6 +103,8 @@ public class WaterOfTransmutation extends WellWater {
 		if (item != null) {
 			Journal.remove(Feature.WELL_OF_TRANSMUTATION);
 		}
+
+
 
 		return item;
 
@@ -109,6 +114,28 @@ public class WaterOfTransmutation extends WellWater {
 	public void use(BlobEmitter emitter) {
 		super.use(emitter);
 		emitter.start(Speck.factory(Speck.CHANGE), 0.2f, 0);
+	}
+
+	private RelicMeleeWeapon changeRelicWeapon(RelicMeleeWeapon weapon) {
+		RelicMeleeWeapon n;
+		n = Generator.randomRelicWeapon();
+		if (n != null) {
+
+			int level = weapon.level;
+			if (level > 0) {
+				n.upgrade(level);
+			} else if (level < 0) {
+				n.degrade(-level);
+			}
+
+			n.levelKnown = weapon.levelKnown;
+			n.cursedKnown = weapon.cursedKnown;
+			n.cursed = weapon.cursed;
+
+			return n;
+		} else {
+			return null;
+		}
 	}
 
 	private MeleeWeapon changeWeapon(MeleeWeapon w) {

@@ -64,49 +64,31 @@ public class NeptuneShock extends Weapon.Enchantment {
 		
 		int level = Math.max(0, weapon.level);
 		boolean procced = false;
-		int distance = 1 + level*2;			
+		int distance = 5 + level;
 		
 		for (Mob mob : Dungeon.level.mobs) {
-			
-			boolean visible = Level.fieldOfView[mob.pos];
-		
-		if (Level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() && !mob.isPassive() && Random.Int(10)<5){
-								
-			// int dmg = 20;
-			     	points[0] = attacker.pos;
-					points[1] = mob.pos;
-					attacker.sprite.parent.add(new Lightning(points, 2, null));				
-					  
+
+			if (Level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() &&  Random.Int(10) < 5) {
+
+				// int dmg = 20;
+				points[0] = attacker.pos;
+				points[1] = mob.pos;
+				attacker.sprite.parent.add(new Lightning(points, 2, null));
+
 				mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
 				mob.sprite.flash();
-				
-				if (Level.water[mob.pos] && !mob.flying) {
-					damage *= 2;
+
+				if (mob.isAlive() | mob != defender) {
+					mob.damage( Level.water[mob.pos] ? damage/2 : damage/4, weapon);
 				}
-				
-				if (mob.isAlive()){
-				  if(damage<mob.HP){	
-				     mob.damage(damage, weapon);
-				  }	else {
-					  mob.damage(mob.HP-2, weapon); 
-					  Buff.prolong(	mob,com.github.dachhack.sprout.actors.buffs.Paralysis.class,Random.Float(1, 1.5f + level));
-				  }
-				}
-			 
-              Camera.main.shake(2, 0.3f);
-			  procced = true;
+
+				Camera.main.shake(2, 0.3f);
+				procced = true;
 			}
-	     }
+		}
 	     
 		
 		return procced;
-	}
-	
-	private void hit(Mob ch, int mobdamage) {
-		if (mobdamage < 1 || !ch.isAlive()) {
-			return;
-		}
-		ch.damage(Level.water[ch.pos] && !ch.flying ? (int) (mobdamage * 2): mobdamage, LightningTrap.LIGHTNING);		
 	}
 	
 

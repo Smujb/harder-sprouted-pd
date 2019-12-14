@@ -141,7 +141,7 @@ public class WndOtiluke extends Window {
 		InterlevelScene.returnDepth = Dungeon.depth;
 		InterlevelScene.returnPos = Dungeon.hero.pos;
 		InterlevelScene.journalpage = room;
-		InterlevelScene.first = first;
+		InterlevelScene.first = true;
 		Game.switchScene(InterlevelScene.class);
 		
 		

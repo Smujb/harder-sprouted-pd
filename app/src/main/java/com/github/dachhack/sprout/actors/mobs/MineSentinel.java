@@ -49,7 +49,7 @@ import com.github.dachhack.sprout.sprites.SentinelSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
-public class MineSentinel extends Mob {
+public class MineSentinel extends Statue {
 	
 
 	{
@@ -61,8 +61,6 @@ public class MineSentinel extends Mob {
 	}
 	private static final int REGENERATION = 100;
 
-	private Weapon weapon;
-
 	public MineSentinel() {
 		super();
 
@@ -71,8 +69,8 @@ public class MineSentinel extends Mob {
 		} while (!(weapon instanceof MeleeWeapon) || weapon.level < 0);
 
 		weapon.identify();
-		weapon.enchant(Enchantment.randomLow());
-		weapon.upgrade(10);
+		weapon.enchant(Enchantment.random());
+		weapon.upgrade(Random.Int(150));
 		
 
 		HP = HT = 500 + Dungeon.depth * 20;
@@ -138,7 +136,7 @@ public class MineSentinel extends Mob {
 			
 		} else {
 		
-		 if (HP<(HT/4) && Random.Float() < 0.50f && state!=PASSIVE){
+		 if ( Random.Float() < 1f - ((float)HP/(float)HT) && state!=PASSIVE){
 			int newPos = -1;
 				for (int i = 0; i < 20; i++) {
 				newPos = Dungeon.level.randomRespawnCellMob();
@@ -175,12 +173,12 @@ public class MineSentinel extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(weapon.MIN*2, weapon.MAX*2);
+		return Random.NormalIntRange(weapon.MIN, weapon.MAX);
 	}
 
 	@Override
 	public int attackSkill(Char target) {
-		return (int) ((30 + Dungeon.depth*2) * weapon.ACU);
+		return (int) (super.attackSkill(target) * weapon.ACU);
 	}
 
 	@Override
@@ -231,13 +229,6 @@ public class MineSentinel extends Mob {
 	public boolean reset() {
 		state = PASSIVE;
 		return true;
-	}
-
-	@Override
-	public String description() {
-		return "You would think that it's just another one of this dungeon's ugly statues, but its red glowing eyes give it away."
-				+ "\n\nWhile the statue itself is made of stone, the _"
-				+ weapon.name() + "_, it's wielding, looks real.";
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

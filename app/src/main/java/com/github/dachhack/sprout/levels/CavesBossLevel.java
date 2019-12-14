@@ -235,23 +235,30 @@ public class CavesBossLevel extends Level {
 					|| Dungeon.visible[boss.pos]);
 			GameScene.add(boss);
 
-			for (int i = 0; i < 5; i++) {
-				BrokenRobot a = new BrokenRobot();
+			Tower a = new Tower();
 
-				do {
-					a.pos = Random.Int(getLength());
-				} while (!passable[a.pos] || !outsideEntraceRoom(a.pos)
-						|| Dungeon.visible[a.pos]);
-				a.state = a.PASSIVE;
-				GameScene.add(a);
-			}
-			
+			do {
+				a.pos = Random.Int(getLength());
+			} while (!passable[a.pos] || !outsideEntraceRoom(a.pos)
+					|| Dungeon.visible[a.pos]);
+			a.state = a.PASSIVE;
+			GameScene.add(a);
+
 			//for (int n : NEIGHBOURS8) {
 			//	if (map[a.pos + n] == Terrain.EMPTY) {
 			//		map[a.pos + n] = Terrain.SECRET_ALARM_TRAP;
 			//	    }
 			//}
-			
+
+			Tower b = new Tower();
+
+			do {
+				b.pos = Random.Int(getLength());
+			} while (!passable[b.pos] || !outsideEntraceRoom(b.pos)
+					|| Dungeon.visible[b.pos]);
+			b.state = b.PASSIVE;
+			GameScene.add(b);
+
 			//for (int n : NEIGHBOURS8) {
 			//	if (map[b.pos + n] == Terrain.EMPTY) {
 			//		map[b.pos + n] = Terrain.SECRET_ALARM_TRAP;
