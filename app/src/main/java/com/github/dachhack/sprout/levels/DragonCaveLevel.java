@@ -132,8 +132,8 @@ public class DragonCaveLevel extends Level {
 		bundle.put(TELEPORTASSIGN, teleportassign);
 		bundle.put(PRIZENO, prizeNo);
 	}
-	
-	
+
+
 	
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
@@ -581,12 +581,12 @@ public class DragonCaveLevel extends Level {
 
 	@Override
 	public String tilesTex() {
-		return Assets.TILES_PRISON;
+		return Assets.TILES_CAVES;
 	}
 
 	@Override
 	public String waterTex() {
-		return Assets.WATER_PRISON;
+		return Assets.WATER_CAVES;
 	}
 
 	@Override

@@ -47,7 +47,7 @@ public class MineLevel extends RegularLevel {
 
 	@Override
 	public String tilesTex() {
-		return Assets.TILES_CAVES;
+		return Assets.TILES_SEAL;
 	}
 
 	@Override

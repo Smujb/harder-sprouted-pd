@@ -45,20 +45,20 @@ public class CorruptGas extends Blob implements Hero.Doom {
 		for (int i = 0; i < LENGTH; i++) {
 			if (cur[i] > 0 && (ch = Actor.findChar(i)) != null) {
 				
-				if (!ch.immunities().contains(ConfusionGas.class)){
+				if (!ch.immunities().contains(ConfusionGas.class)) {
 					Buff.prolong(ch, Vertigo.class, 2);
-			      }
+				}
 				
-			    if (!ch.immunities().contains(this.getClass())){
-				  Buff.affect(ch, Bleeding.class).set(bleedDamage);
-				  Buff.prolong(ch, Cripple.class, Cripple.DURATION);
+			    if (!ch.immunities().contains(this.getClass())) {
+					Buff.affect(ch, Bleeding.class).set(bleedDamage);
+					Buff.prolong(ch, Cripple.class, Cripple.DURATION);
 
-				  int damage = (ch.HT + levelDamage) / 40;
-				  if (Random.Int(40) < (ch.HT + levelDamage) % 40) {
-					  damage++;
-				    }
+					int damage = (ch.HT + levelDamage) / 40;
+					if (Random.Int(40) < (ch.HT + levelDamage) % 40) {
+						damage++;
+					}
 
-				   ch.damage(damage, this);
+					ch.damage(damage, this);
 				}
 			}
 		}

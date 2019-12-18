@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.items.Bomb;
+import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.EasterEgg;
 import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.OtilukesJournal;
@@ -69,6 +70,7 @@ import com.github.dachhack.sprout.items.wands.WandOfFlock;
 import com.github.dachhack.sprout.items.wands.WandOfLightning;
 import com.github.dachhack.sprout.items.wands.WandOfMagicMissile;
 import com.github.dachhack.sprout.items.wands.WandOfTelekinesis;
+import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
 import com.github.dachhack.sprout.items.weapon.melee.Dagger;
 import com.github.dachhack.sprout.items.weapon.melee.ShortSword;
 import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
@@ -170,6 +172,10 @@ public enum HeroClass {
 		if (Dungeon.testing) {
 			playtest(hero);
 		}
+		//new Chainsaw().enchantBuzz().identify().collect();
+		//DewVial vial = new DewVial();
+		//vial.collect();
+		//vial.fill();
 	}
 
 	public Badges.Badge masteryBadge() {

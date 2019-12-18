@@ -1762,12 +1762,16 @@ public class Hero extends Char {
 		super.onMotionComplete();
 	}
 
-	@Override
-	public void onAttackComplete() {
-
+	public void actuallyAttack(Char enemy) {
 		AttackIndicator.target(enemy);
 
 		attack(enemy);
+	}
+
+	@Override
+	public void onAttackComplete() {
+		actuallyAttack(enemy);
+
 		curAction = null;
 
 		Invisibility.dispel();

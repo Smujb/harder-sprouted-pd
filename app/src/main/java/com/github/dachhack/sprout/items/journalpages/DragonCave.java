@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.journalpages;
 
+import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
@@ -45,4 +46,5 @@ public class DragonCave extends JournalPage {
 	public String info() {
 		return "A loose journal page";
 	}
+
 }

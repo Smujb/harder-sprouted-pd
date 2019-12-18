@@ -231,7 +231,6 @@ public class DewVial extends Item {
 					hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 + dropsNeeded/5 );
 					hero.sprite.showStatus( CharSprite.POSITIVE, "+" + effect + "HP" );
 				}
-
 				volume -= dropsNeeded;
 
 				hero.spend( TIME_TO_DRINK );

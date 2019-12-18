@@ -596,14 +596,9 @@ public abstract class Level implements Bundlable {
 					mob.pos = randomRespawnCell();
 					if (Dungeon.hero.isAlive() && mob.pos != -1) {
 						GameScene.add(mob);
-						if (Statistics.amuletObtained) {
-							mob.beckon(Dungeon.hero.pos);
-						}
 					}
 				}
-				spend(Dungeon.level.feeling == Feeling.DARK
-						|| Statistics.amuletObtained ? TIME_TO_RESPAWN / 2
-						: TIME_TO_RESPAWN);
+				spend(Dungeon.level.feeling == Feeling.DARK ? TIME_TO_RESPAWN / 2 : TIME_TO_RESPAWN);
 				return true;
 			}
 		};
