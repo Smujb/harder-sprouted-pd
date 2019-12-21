@@ -93,7 +93,7 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 				int t = Terrain.WATER_TILES;
 				for (int j = 0; j < Level.NEIGHBOURS4.length; j++) {
 					if ((Terrain.flags[Dungeon.level.map[n + Level.NEIGHBOURS4[j]]] & Terrain.UNSTITCHABLE) != 0) {
-						t += 1 << j;	
+						t += 1 << j;
 						
 					}
 				}

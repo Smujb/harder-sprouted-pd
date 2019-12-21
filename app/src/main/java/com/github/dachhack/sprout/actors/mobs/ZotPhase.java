@@ -48,7 +48,6 @@ public class ZotPhase extends Mob implements Callback{
 		spriteClass = ZotPhaseSprite.class;
 
 		HP = HT = 1000;
-		defenseSkill = 40+ adjustForDepth(1);
 		baseSpeed = 2f;
 
 		EXP = 36;		
@@ -60,17 +59,7 @@ public class ZotPhase extends Mob implements Callback{
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(115, 160+ adjustForDepth(1));
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 100+ adjustForDepth(0);
-	}
-	
-	@Override
-	protected float attackDelay() {
-		return 0.5f;
+		return Random.NormalIntRange(115, 200);
 	}
 
 

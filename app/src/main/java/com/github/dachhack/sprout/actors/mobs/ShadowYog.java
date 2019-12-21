@@ -68,11 +68,6 @@ public class ShadowYog extends Mob  {
 		return Random.NormalIntRange(45, 125);
 	}
 
-	@Override
-	public int attackSkill(Char target) {
-		return 50;
-	}
-
 	public ShadowYog() {
 		super();
 	}
@@ -103,7 +98,7 @@ public class ShadowYog extends Mob  {
 			
 			if (HP<(HT/8) && Random.Float() < 0.5f){
 				int newPos = -1;
-					for (int i = 0; i < 20; i++) {
+				for (int i = 0; i < 20; i++) {
 					newPos = Dungeon.level.randomRespawnCellMob();
 					if (newPos != -1) {
 						break;
@@ -116,9 +111,9 @@ public class ShadowYog extends Mob  {
 					sprite.place(pos);
 					sprite.visible = Dungeon.visible[pos];
 					GLog.n("Shadow Yog vanishes!");
-				}		
+				}
 				if (Dungeon.level.mobs.size()<Dungeon.hero.lvl*2){
-				SpectralRat.spawnAroundChance(newPos);
+					SpectralRat.spawnAroundChance(newPos);
 				}
 			}
 			

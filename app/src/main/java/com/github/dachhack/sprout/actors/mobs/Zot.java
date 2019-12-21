@@ -59,9 +59,8 @@ public class Zot extends Mob {
 		spriteClass = ZotSprite.class;
 		baseSpeed = 2f;
 
-		HP = HT = Dungeon.playtest ? 1000 : 10000;
+		HP = HT = 10000;
 		EXP = 20;
-		defenseSkill = 70;
 	}
 
 	private int timeToJump = JUMP_DELAY;
@@ -70,11 +69,6 @@ public class Zot extends Mob {
 	@Override
 	public int damageRoll() {
 		return Random.NormalIntRange(300, 400);
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 350;
 	}
 
 	@Override
@@ -132,7 +126,7 @@ public class Zot extends Mob {
 	public void die(Object cause) {
 		
 		Dungeon.level.locked=false;
-		GameScene.bossSlain();		
+		GameScene.bossSlain();
 		
 		for (Mob mob : (Iterable<Mob>) Dungeon.level.mobs.clone()) {
 			if (mob instanceof ZotPhase || mob instanceof MagicEye) {
@@ -144,7 +138,7 @@ public class Zot extends Mob {
 		
 		super.die(cause);
 		yell("...");
-		OtilukeNPC.spawnAt(pos);					
+		OtilukeNPC.spawnAt(pos);
 	}
 
 	@Override
@@ -218,7 +212,7 @@ public class Zot extends Mob {
 		boolean check = false;
 		int phases = 0;
 		for (Mob mob : Dungeon.level.mobs) {
-			if (mob != null && mob instanceof ZotPhase) {
+			if (mob instanceof ZotPhase) {
 				phases++;
 				if (Dungeon.hero.heroClass!=HeroClass.HUNTRESS && phases>6){
 				check=true;

@@ -365,7 +365,6 @@ public abstract class Level implements Bundlable {
 				addItemToSpawn(new StoneOre());
 				addItemToSpawn(new StoneOre());
 				addItemToSpawn(new StoneOre());
-				viewDistance = (int) Math.ceil(viewDistance / 3f);
 			}else if (Dungeon.depth==32) {
 				feeling = Feeling.WATER;
 			} else if (Dungeon.depth==33) {
