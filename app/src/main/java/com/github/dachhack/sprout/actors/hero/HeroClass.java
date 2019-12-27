@@ -274,6 +274,8 @@ public enum HeroClass {
 			new WandOfTelekinesis().identify().reinforce().upgrade(15).collect();
 			new WandHolster().collect();
 
+			new PotionBandolier().collect();
+
 			new DewVial().collect();
 
 			new BookOfDead().collect();
@@ -395,10 +397,10 @@ public enum HeroClass {
 
 
 			for (int i = 0; i < 250; i++) {
-				Scroll scroll = new ScrollOfMagicalInfusion();
-				scroll.identify().collect();
-				Scroll scroll2 = new ScrollOfUpgrade();
-				scroll2.identify().collect();
+				//Scroll scroll = new ScrollOfMagicalInfusion();
+				//scroll.identify().collect();
+				//Scroll scroll2 = new ScrollOfUpgrade();
+				//scroll2.identify().collect();
 
 				Scroll scroll3 = new ScrollOfIdentify();
 				scroll3.identify().collect();

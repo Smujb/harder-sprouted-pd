@@ -7,6 +7,7 @@ import com.github.dachhack.sprout.items.food.Earthstar;
 import com.github.dachhack.sprout.items.food.GoldenJelly;
 import com.github.dachhack.sprout.items.food.JackOLantern;
 import com.github.dachhack.sprout.items.food.PixieParasol;
+import com.github.dachhack.sprout.items.potions.MegaExperiencePotion;
 import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
@@ -30,7 +31,8 @@ public class PotionBandolier extends Bag {
 				|| item instanceof Earthstar
 				|| item instanceof GoldenJelly
 				|| item instanceof JackOLantern
-				|| item instanceof PixieParasol;
+				|| item instanceof PixieParasol
+				|| item instanceof MegaExperiencePotion;
 	}
 
 	@Override

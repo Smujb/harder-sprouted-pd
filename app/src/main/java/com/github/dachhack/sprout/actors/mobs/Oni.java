@@ -33,7 +33,7 @@ public class Oni extends Mob {
 		spriteClass = OniSprite.class;
 		state = SLEEPING;
 
-		HP = HT = 200+(Dungeon.depth*10);
+		HP = HT = Dungeon.sanchikarahdeath ? 500 : 150;
 
 		scalesWithHeroLevel = true;
 
