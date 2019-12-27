@@ -21,6 +21,8 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
+import java.util.ArrayList;
+
 public class SanChikarahDeath extends Item {
 
 	{
@@ -29,6 +31,7 @@ public class SanChikarahDeath extends Item {
 
 		stackable = false;
 		unique = true;
+		bones = false;
 	}
 	
 	@Override
@@ -39,6 +42,11 @@ public class SanChikarahDeath extends Item {
 	@Override
 	public boolean isIdentified() {
 		return true;
+	}
+
+	@Override
+	public ArrayList<String> actions(Hero hero) {//No dropping or throwing
+		return new ArrayList<>();
 	}
 
 	@Override
@@ -53,11 +61,6 @@ public class SanChikarahDeath extends Item {
 		} else {
 			return false;
 		}
-	}
-	
-	@Override
-	public int price() {
-		return 10 * quantity;
 	}
 
 	@Override

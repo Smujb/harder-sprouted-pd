@@ -1023,7 +1023,7 @@ public class Hero extends Char {
 			
 			if (Dungeon.depth == 1) {
 
-				if (belongings.getItem(Amulet.class) == null) {
+				if (belongings.getItem(Amulet.class) == null | !Badges.checkOtilukeRescued()) {
 					GameScene.show(new WndMessage(TXT_LEAVE));
 					ready();
 							

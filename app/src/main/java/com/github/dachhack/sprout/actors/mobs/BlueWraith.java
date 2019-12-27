@@ -38,11 +38,12 @@ public class BlueWraith extends Wraith  {
 		HP = HT = 195;
 		defenseSkill = 24;
 		baseSpeed = 4f;
+		scalesWithHeroLevel = true;
 
 		EXP = 11;
 		
 		loot = new RedDewdrop();
-		lootChance = 1.0f; // by default, see die()
+		lootChance = 0.5f;
 		
 	}
 	
@@ -70,7 +71,7 @@ public class BlueWraith extends Wraith  {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(20, 90);
+		return Random.NormalIntRange(50, 120);
 	}
 
 	@Override
@@ -101,6 +102,8 @@ public class BlueWraith extends Wraith  {
 		
 	}
 	
+	//So huh, these were ranged
+	//All I can say is why didn't they stay that way?
 
 	/*private int level;
 				

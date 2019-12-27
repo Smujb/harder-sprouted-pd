@@ -42,13 +42,15 @@ public class Amulet extends Item {
 	@Override
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
-		actions.add(AC_END);
+		if (Badges.checkOtilukeRescued()) {//Only allow to end the game if Otiluke rescued.
+			actions.add(AC_END);
+		}
 		return actions;
 	}
 
 	@Override
 	public void execute(Hero hero, String action) {
-		if (action == AC_END) {
+		if (action.equals(AC_END)) {
 
 			showAmuletScene(false);
 
@@ -66,8 +68,9 @@ public class Amulet extends Item {
 			if (!Statistics.amuletObtained) {
 				Statistics.amuletObtained = true;
 				Badges.validateVictory();
-
-				showAmuletScene(true);
+				if (!Badges.checkOtilukeRescued()) {
+					showAmuletScene(true);
+				}
 			}
 
 			return true;

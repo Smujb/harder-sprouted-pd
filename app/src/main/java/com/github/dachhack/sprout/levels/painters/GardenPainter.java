@@ -21,6 +21,7 @@ import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.blobs.Foliage;
 import com.github.dachhack.sprout.items.Ankh;
+import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.EasterEgg;
 import com.github.dachhack.sprout.items.Honeypot;
 import com.github.dachhack.sprout.items.SteelHoneypot;
@@ -67,14 +68,14 @@ public class GardenPainter extends Painter {
 			Dungeon.limitedDrops.ankhChain.drop();
 		}
 		
-		if (Random.Int(100)==0){
+		if (Random.Int(50)==0){
 			int pos;
 			do {pos = room.random();}
 			while (level.heaps.get(pos) != null);
 			level.drop(new SteelHoneypot(), pos);
 		}
 		
-		if (Random.Int(100)==0 && (Dungeon.getMonth()==4 || Dungeon.getMonth()==5)){
+		if (Random.Int(20)==0 && (Dungeon.getMonth()==4 || Dungeon.getMonth()==5)){
 			int pos;
 			do {pos = room.random();}
 			while (level.heaps.get(pos) != null);
@@ -96,11 +97,13 @@ public class GardenPainter extends Painter {
 			level.drop(new Honeypot(), pos);
 		}
 		
-		if (Dungeon.depth==32 && Random.Float() < 0.75f){
+		if (Dungeon.depth==32 && Random.Float() < 0.90f){
 			int pos;
 			do {pos = room.random();}
 			while (level.heaps.get(pos) != null);
-			level.drop(new Ankh(), pos);		
+			level.drop(new Bomb(), pos);
+			//Giving the hero hundreds of Ankhs is kinda OP...
+			//level.drop(new Ankh(), pos);
 		}
 
 		Foliage light = (Foliage) level.blobs.get(Foliage.class);

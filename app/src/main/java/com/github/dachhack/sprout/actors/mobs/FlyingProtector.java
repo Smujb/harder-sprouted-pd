@@ -51,29 +51,25 @@ public class FlyingProtector extends Mob implements Callback {
 		EXP = 18;
 		state = HUNTING;
 		flying = true;
+
+		scalesWithHeroLevel = true;
 		
-		HP = HT = 15 + Dungeon.depth * 4;
-		defenseSkill = 4 + Dungeon.depth * 2;
+		HP = HT = 15 + Dungeon.depth * 7;
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(40, 70);
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return defaultAccuracy(target);
+		return Random.NormalIntRange(10 + Dungeon.depth*2, 30 + Dungeon.depth * 5);
 	}
 
 	@Override
 	public int dr() {
-		return Dungeon.depth;
+		return Dungeon.depth*2;
 	}
 
 	@Override
 	protected boolean canAttack(Char enemy) {
-		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
+		return Ballistica.cast(pos, enemy.pos, true, true) == enemy.pos;
 	}
 
 	@Override
@@ -94,7 +90,7 @@ public class FlyingProtector extends Mob implements Callback {
 			spend(TIME_TO_ZAP);
 
 			if (hit(this, enemy, true)) {
-				int dmg = Random.Int(25, 40);
+				int dmg = Random.Int(25, 60);
 				if (Level.water[enemy.pos] && !enemy.flying) {
 					dmg *= 1.5f;
 				}

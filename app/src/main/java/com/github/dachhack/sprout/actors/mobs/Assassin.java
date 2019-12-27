@@ -22,7 +22,9 @@ import java.util.HashSet;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
@@ -68,7 +70,14 @@ public class Assassin extends Mob {
 		return 0.75f;
 	}
 
-	
+	@Override
+	public int attackProc(Char enemy, int damage) {
+		if(Random.Int(5)==0){
+			Buff.affect(enemy, Slow.class, Slow.duration(enemy));
+		}
+		return super.attackProc(enemy, damage);
+	}
+
 	@Override
 	protected boolean canAttack(Char enemy) {
 		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;

@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.Generator;
+import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.levels.Level;
@@ -65,12 +66,12 @@ public class ZotPhase extends Mob implements Callback{
 
 	@Override
 	public int dr() {
-		return 4;
+		return 40;
 	}
 
 	@Override
 	protected boolean canAttack(Char enemy) {
-		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
+		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos & Level.distance(pos,enemy.pos) < 5;
 	}
 
 	@Override
@@ -121,12 +122,12 @@ public class ZotPhase extends Mob implements Callback{
 	
 	@Override
 	public void damage(int dmg, Object src) {
-		
-		if(!(src instanceof RelicMeleeWeapon || src instanceof JupitersWrath)){
-			int max = Math.round(dmg*.25f);
+
+		if(src instanceof Item){
+			int max = Math.round(dmg*.5f);
 			dmg = Random.Int(1,max);
 		}
-		
+
 		super.damage(dmg, src);
 	}
 

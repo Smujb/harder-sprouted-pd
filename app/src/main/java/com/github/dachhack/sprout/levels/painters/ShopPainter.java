@@ -30,6 +30,7 @@ import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.BookOfDead;
 import com.github.dachhack.sprout.items.BookOfLife;
 import com.github.dachhack.sprout.items.BookOfTranscendence;
+import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Honeypot;
@@ -54,6 +55,7 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRemoveCurse;
 import com.github.dachhack.sprout.items.wands.Wand;
+import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.weapon.melee.BattleAxe;
 import com.github.dachhack.sprout.items.weapon.melee.Glaive;
 import com.github.dachhack.sprout.items.weapon.melee.Longsword;
@@ -126,38 +128,38 @@ public class ShopPainter extends Painter {
 		switch (Dungeon.depth) {
 		case 6:
 			itemsToSpawn.add((Random.Int(2) == 0 ? new Quarterstaff()
-					: new Spear()).identify().upgrade(Math.max(15,Dungeon.depth)));
+					: new Spear()).identify().upgrade(Math.min(15,Dungeon.depth)));
 			itemsToSpawn.add(Random.Int(2) == 0 ? new IncendiaryDart()
 					.quantity(Random.NormalIntRange(2, 4)) : new CurareDart()
 					.quantity(Random.NormalIntRange(1, 3)));
-			itemsToSpawn.add(new LeatherArmor().identify().upgrade(Math.max(15,Dungeon.depth)));
+			itemsToSpawn.add(new LeatherArmor().identify().upgrade(Math.min(15,Dungeon.depth)));
 			break;
 
 		case 11:
 			itemsToSpawn.add((Random.Int(2) == 0 ? new Sword() : new Mace())
-					.identify().upgrade(Math.max(15,Dungeon.depth)));
+					.identify().upgrade(Math.min(15,Dungeon.depth)));
 			itemsToSpawn.add(Random.Int(2) == 0 ? new CurareDart()
 					.quantity(Random.NormalIntRange(2, 5)) : new Shuriken()
 					.quantity(Random.NormalIntRange(3, 6)));
-			itemsToSpawn.add(new MailArmor().identify().upgrade(Math.max(15,Dungeon.depth)));
+			itemsToSpawn.add(new MailArmor().identify().upgrade(Math.min(15,Dungeon.depth)));
 			break;
 
 		case 16:
 			itemsToSpawn.add((Random.Int(2) == 0 ? new Longsword()
-					: new BattleAxe()).identify().upgrade(Math.max(15,Dungeon.depth)));
+					: new BattleAxe()).identify().upgrade(Math.min(15,Dungeon.depth)));
 			itemsToSpawn.add(Random.Int(2) == 0 ? new Shuriken()
 					.quantity(Random.NormalIntRange(4, 7)) : new Javelin()
 					.quantity(Random.NormalIntRange(3, 6)));
-			itemsToSpawn.add(new ScaleArmor().identify().upgrade(Math.max(15,Dungeon.depth)));
+			itemsToSpawn.add(new ScaleArmor().identify().upgrade(Math.min(15,Dungeon.depth)));
 			break;
 
 		case 21:
-			itemsToSpawn.add(Random.Int(2) == 0 ? new Glaive().identify().upgrade(Math.max(15,Dungeon.depth))
-				: new WarHammer().identify().upgrade(Math.max(15,Dungeon.depth)));
+			itemsToSpawn.add(Random.Int(2) == 0 ? new Glaive().identify().upgrade(Math.min(15,Dungeon.depth))
+				: new WarHammer().identify().upgrade(Math.min(15,Dungeon.depth)));
 			//itemsToSpawn.add(Random.Int(2) == 0 ? new Javelin().quantity(Random
 			//		.NormalIntRange(4, 7)) : new Tamahawk().quantity(Random
 			//		.NormalIntRange(4, 7)));
-			itemsToSpawn.add(new PlateArmor().identify().upgrade(Math.max(15,Dungeon.depth)));
+			itemsToSpawn.add(new PlateArmor().identify().upgrade(Math.min(15,Dungeon.depth)));
 			itemsToSpawn.add(new Torch());
 			itemsToSpawn.add(new Torch());
 			itemsToSpawn.add(new Torch());
@@ -197,13 +199,9 @@ public class ShopPainter extends Painter {
 			break;
 		}
 
-		if (Dungeon.depth == 6) {
-			itemsToSpawn.add(new Ankh());
-			itemsToSpawn.add(new Weightstone());
-		} else {
-			itemsToSpawn.add(Random.Int(2) == 0 ? new Ankh()
-					: new Weightstone());
-		}
+		itemsToSpawn.add(new Ankh());
+		itemsToSpawn.add(new Weightstone());
+
 
 		TimekeepersHourglass hourglass = Dungeon.hero.belongings
 				.getItem(TimekeepersHourglass.class);
@@ -235,20 +233,24 @@ public class ShopPainter extends Painter {
 		}
 
 		Item rare;
-		switch (Random.Int(10)) {
-		case 0:
-			rare = Generator.random(Generator.Category.WAND);
-			rare.level = 0;
-			break;
-		case 1:
-			rare = Generator.random(Generator.Category.RING);
-			rare.level = 1;
-			break;
-		case 2:
-			rare = Generator.random(Generator.Category.ARTIFACT).identify();
-			break;
-		default:
-			rare = new Stylus();
+		try {
+			switch (Random.Int(10)) {
+				case 0:
+					rare = Generator.random(Generator.Category.WAND).identify();
+					rare.level = Math.min(15, Dungeon.depth);
+					break;
+				case 1:
+					rare = Generator.random(Generator.Category.RING).identify();
+					rare.level = Math.min(15, Dungeon.depth);
+					break;
+				case 2:
+					rare = Generator.random(Generator.Category.ARTIFACT).identify();
+					break;
+				default:
+					rare = new Stylus();
+			}
+		} catch (Exception e) {
+			rare = new WandOfDisintegration().identify().upgrade(Math.min(15,Dungeon.depth));
 		}
 		rare.cursed = rare.cursedKnown = false;
 		itemsToSpawn.add(rare);

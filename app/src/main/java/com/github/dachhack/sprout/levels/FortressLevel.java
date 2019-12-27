@@ -39,8 +39,6 @@ public class FortressLevel extends RegularLevel {
 		cleared=true;
 	}
 
-	protected static final int REGROW_TIMER = 4;
-	
 	@Override
 	public String tilesTex() {
 		return Assets.TILES_CITY;

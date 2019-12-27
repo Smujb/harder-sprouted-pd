@@ -57,6 +57,14 @@ public class ImpShopkeeper extends Shopkeeper {
 	}
 
 	@Override
+	public void die(Object cause) {
+	}
+
+	@Override
+	public void damage(int dmg, Object src) {
+	}
+
+	@Override
 	public void flee() {
 		for (Heap heap : Dungeon.level.heaps.values()) {
 			if (heap.type == Heap.Type.FOR_SALE) {

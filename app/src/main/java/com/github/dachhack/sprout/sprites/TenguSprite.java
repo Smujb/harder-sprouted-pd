@@ -34,7 +34,6 @@ import com.watabou.utils.Random;
 
 public class TenguSprite extends MobSprite {
 
-	private static final float DURATION = 2f;
 	private Animation cast;
 
 	public TenguSprite() {
@@ -89,18 +88,6 @@ public class TenguSprite extends MobSprite {
 							ch.onAttackComplete();
 						}
 				});
-		 	  
-		  		if(Random.Int(5)==0){
-		  				Buff.affect(enemy, Burning.class).reignite(enemy);
-		  				enemy.sprite.emitter().burst(FlameParticle.FACTORY, 5);
-		  			}
-		  		if(Random.Int(10)==0){
-		  			Buff.affect(enemy, Slow.class, Slow.duration(enemy) / 2);
-		  		}
-		  				  		
-		  		if(Random.Int(20)==0){
-		  		       Buff.prolong(enemy, Paralysis.class, DURATION);
-		  		}
 		  		
 			play(cast);
 			turnTo(ch.pos, cell);

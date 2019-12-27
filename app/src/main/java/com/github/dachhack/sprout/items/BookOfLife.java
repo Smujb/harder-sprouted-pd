@@ -87,7 +87,7 @@ public class BookOfLife extends Item {
 	@Override
 	public void execute(Hero hero, String action) {
 
-		if (action == AC_PORT) {
+		if (action.equals(AC_PORT)) {//3 different if-statements that could be a single one... just... why?
 
 			if (Dungeon.bossLevel() || hero.petfollow) {
 				hero.spend(TIME_TO_USE);

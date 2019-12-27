@@ -26,9 +26,14 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Burning;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.OtilukesJournal;
@@ -123,6 +128,22 @@ public class Tengu extends Mob {
 		yell("Time to flee");
 		TenguEscape.spawnAt(pos);
 					
+	}
+
+	@Override
+	public int attackProc(Char enemy, int damage) {
+		if(Random.Int(5)==0){
+			Buff.affect(enemy, Burning.class).reignite(enemy);
+			enemy.sprite.emitter().burst(FlameParticle.FACTORY, 5);
+		}
+		if(Random.Int(10)==0){
+			Buff.affect(enemy, Slow.class, Slow.duration(enemy) / 2);
+		}
+
+		if(Random.Int(20)==0){
+			Buff.prolong(enemy, Paralysis.class, 2f);
+		}
+		return super.attackProc(enemy, damage);
 	}
 
 	@Override

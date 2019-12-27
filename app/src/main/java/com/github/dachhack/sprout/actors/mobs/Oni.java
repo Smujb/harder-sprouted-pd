@@ -34,7 +34,8 @@ public class Oni extends Mob {
 		state = SLEEPING;
 
 		HP = HT = 200+(Dungeon.depth*10);
-		defenseSkill = 18+(Math.round((Dungeon.depth)/2));
+
+		scalesWithHeroLevel = true;
 
 		EXP = 22;
 		maxLvl = 40;
@@ -42,12 +43,11 @@ public class Oni extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(50, 90);
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 35;
+		if (!Dungeon.sanchikarahdeath) {
+			return Random.NormalIntRange(50, 90);
+		} else {
+			return Random.NormalIntRange(100, 300);
+		}
 	}
 
 	@Override

@@ -53,14 +53,14 @@ import com.watabou.utils.Callback;
 public class Badges {
 
 	public static enum Badge {
-		MONSTERS_SLAIN_1("10 enemies slain", 0), MONSTERS_SLAIN_2(
-				"50 enemies slain", 1), MONSTERS_SLAIN_3("150 enemies slain", 2), MONSTERS_SLAIN_4(
-				"250 enemies slain", 3), GOLD_COLLECTED_1("100 gold collected",
-				4), GOLD_COLLECTED_2("500 gold collected", 5), GOLD_COLLECTED_3(
-				"2500 gold collected", 6), GOLD_COLLECTED_4(
-				"7500 gold collected", 7), LEVEL_REACHED_1("Level 6 reached", 8), LEVEL_REACHED_2(
-				"Level 12 reached", 9), LEVEL_REACHED_3("Level 18 reached", 10), LEVEL_REACHED_4(
-				"Level 24 reached", 11), ALL_POTIONS_IDENTIFIED(
+		MONSTERS_SLAIN_1("100 enemies slain", 0), MONSTERS_SLAIN_2(
+				"500 enemies slain", 1), MONSTERS_SLAIN_3("1500 enemies slain", 2), MONSTERS_SLAIN_4(
+				"2500 enemies slain", 3), GOLD_COLLECTED_1("1000 gold collected",
+				4), GOLD_COLLECTED_2("5000 gold collected", 5), GOLD_COLLECTED_3(
+				"25000 gold collected", 6), GOLD_COLLECTED_4(
+				"75000 gold collected", 7), LEVEL_REACHED_1("Level 20 reached", 8), LEVEL_REACHED_2(
+				"Level 40 reached", 9), LEVEL_REACHED_3("Level 80 reached", 10), LEVEL_REACHED_4(
+				"Level 160 reached", 11), ALL_POTIONS_IDENTIFIED(
 				"All potions identified", 16), ALL_SCROLLS_IDENTIFIED(
 				"All scrolls identified", 17), ALL_RINGS_IDENTIFIED(
 				"All rings identified", 18), ALL_WANDS_IDENTIFIED(
@@ -88,10 +88,10 @@ public class Badges {
 				"20 pieces of food eaten", 45), FOOD_EATEN_3(
 				"30 pieces of food eaten", 46), FOOD_EATEN_4(
 				"40 pieces of food eaten", 47), MASTERY_WARRIOR, MASTERY_MAGE, MASTERY_ROGUE, MASTERY_HUNTRESS, ITEM_LEVEL_1(
-				"Item of level 3 acquired", 48), ITEM_LEVEL_2(
-				"Item of level 6 acquired", 49), ITEM_LEVEL_3(
-				"Item of level 9 acquired", 50), ITEM_LEVEL_4(
-				"Item of level 12 acquired", 51), RARE_ALBINO, RARE_BANDIT, RARE_SHIELDED, RARE_SENIOR, RARE_ACIDIC, RARE(
+				"Item of level 15 acquired", 48), ITEM_LEVEL_2(
+				"Item of level 100 acquired", 49), ITEM_LEVEL_3(
+				"Item of level 200 acquired", 50), ITEM_LEVEL_4(
+				"Item of level 300 acquired", 51), RARE_ALBINO, RARE_BANDIT, RARE_SHIELDED, RARE_SENIOR, RARE_ACIDIC, RARE(
 				"All rare monsters slain", 37, true), VICTORY_WARRIOR, VICTORY_MAGE, VICTORY_ROGUE, VICTORY_HUNTRESS, VICTORY(
 				"Amulet of Yendor obtained", 22), VICTORY_ALL_CLASSES(
 				"Amulet of Yendor obtained by Warrior, Mage, Rogue & Huntress",
@@ -217,22 +217,22 @@ public class Badges {
 		Badge badge = null;
 
 		if (!local.contains(Badge.MONSTERS_SLAIN_1)
-				&& Statistics.enemiesSlain >= 10) {
+				&& Statistics.enemiesSlain >= 100) {
 			badge = Badge.MONSTERS_SLAIN_1;
 			local.add(badge);
 		}
 		if (!local.contains(Badge.MONSTERS_SLAIN_2)
-				&& Statistics.enemiesSlain >= 50) {
+				&& Statistics.enemiesSlain >= 500) {
 			badge = Badge.MONSTERS_SLAIN_2;
 			local.add(badge);
 		}
 		if (!local.contains(Badge.MONSTERS_SLAIN_3)
-				&& Statistics.enemiesSlain >= 150) {
+				&& Statistics.enemiesSlain >= 1500) {
 			badge = Badge.MONSTERS_SLAIN_3;
 			local.add(badge);
 		}
 		if (!local.contains(Badge.MONSTERS_SLAIN_4)
-				&& Statistics.enemiesSlain >= 250) {
+				&& Statistics.enemiesSlain >= 2500) {
 			badge = Badge.MONSTERS_SLAIN_4;
 			local.add(badge);
 		}
@@ -244,22 +244,22 @@ public class Badges {
 		Badge badge = null;
 
 		if (!local.contains(Badge.GOLD_COLLECTED_1)
-				&& Statistics.goldCollected >= 100) {
+				&& Statistics.goldCollected >= 1000) {
 			badge = Badge.GOLD_COLLECTED_1;
 			local.add(badge);
 		}
 		if (!local.contains(Badge.GOLD_COLLECTED_2)
-				&& Statistics.goldCollected >= 500) {
+				&& Statistics.goldCollected >= 5000) {
 			badge = Badge.GOLD_COLLECTED_2;
 			local.add(badge);
 		}
 		if (!local.contains(Badge.GOLD_COLLECTED_3)
-				&& Statistics.goldCollected >= 2500) {
+				&& Statistics.goldCollected >= 25000) {
 			badge = Badge.GOLD_COLLECTED_3;
 			local.add(badge);
 		}
 		if (!local.contains(Badge.GOLD_COLLECTED_4)
-				&& Statistics.goldCollected >= 7500) {
+				&& Statistics.goldCollected >= 75000) {
 			badge = Badge.GOLD_COLLECTED_4;
 			local.add(badge);
 		}
@@ -270,19 +270,19 @@ public class Badges {
 	public static void validateLevelReached() {
 		Badge badge = null;
 
-		if (!local.contains(Badge.LEVEL_REACHED_1) && Dungeon.hero.lvl >= 6) {
+		if (!local.contains(Badge.LEVEL_REACHED_1) && Dungeon.hero.lvl >= 20) {
 			badge = Badge.LEVEL_REACHED_1;
 			local.add(badge);
 		}
-		if (!local.contains(Badge.LEVEL_REACHED_2) && Dungeon.hero.lvl >= 12) {
+		if (!local.contains(Badge.LEVEL_REACHED_2) && Dungeon.hero.lvl >= 40) {
 			badge = Badge.LEVEL_REACHED_2;
 			local.add(badge);
 		}
-		if (!local.contains(Badge.LEVEL_REACHED_3) && Dungeon.hero.lvl >= 18) {
+		if (!local.contains(Badge.LEVEL_REACHED_3) && Dungeon.hero.lvl >= 80) {
 			badge = Badge.LEVEL_REACHED_3;
 			local.add(badge);
 		}
-		if (!local.contains(Badge.LEVEL_REACHED_4) && Dungeon.hero.lvl >= 24) {
+		if (!local.contains(Badge.LEVEL_REACHED_4) && Dungeon.hero.lvl >= 160) {
 			badge = Badge.LEVEL_REACHED_4;
 			local.add(badge);
 		}
@@ -393,19 +393,19 @@ public class Badges {
 		}
 
 		Badge badge = null;
-		if (!local.contains(Badge.ITEM_LEVEL_1) && item.level >= 3) {
+		if (!local.contains(Badge.ITEM_LEVEL_1) && item.level >= 15) {
 			badge = Badge.ITEM_LEVEL_1;
 			local.add(badge);
 		}
-		if (!local.contains(Badge.ITEM_LEVEL_2) && item.level >= 6) {
+		if (!local.contains(Badge.ITEM_LEVEL_2) && item.level >= 100) {
 			badge = Badge.ITEM_LEVEL_2;
 			local.add(badge);
 		}
-		if (!local.contains(Badge.ITEM_LEVEL_3) && item.level >= 9) {
+		if (!local.contains(Badge.ITEM_LEVEL_3) && item.level >= 200) {
 			badge = Badge.ITEM_LEVEL_3;
 			local.add(badge);
 		}
-		if (!local.contains(Badge.ITEM_LEVEL_4) && item.level >= 12) {
+		if (!local.contains(Badge.ITEM_LEVEL_4) && item.level >= 300) {
 			badge = Badge.ITEM_LEVEL_4;
 			local.add(badge);
 		}

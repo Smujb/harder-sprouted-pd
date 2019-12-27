@@ -95,7 +95,7 @@ private static final String TXT_PREVENTING = "Strong magic aura of this place pr
 	@Override
 	public void execute(Hero hero, String action) {		
 
-		if (action == AC_PORT) {
+		if (action.equals(AC_PORT)) {
 			
 			 hero.spend(TIME_TO_USE);
 

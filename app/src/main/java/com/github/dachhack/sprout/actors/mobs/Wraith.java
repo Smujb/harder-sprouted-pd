@@ -95,6 +95,8 @@ public class Wraith extends Mob {
 	public void adjustStats(int level) {
 		this.level = level;
 		defenseSkill = attackSkill(null) * 5;
+		HP = HT = 1+level;
+		EXP = 1+level;
 		enemySeen = true;
 	}
 

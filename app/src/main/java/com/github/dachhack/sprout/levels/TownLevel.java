@@ -17,10 +17,6 @@
  */
 package com.github.dachhack.sprout.levels;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -29,39 +25,13 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Alchemy;
 import com.github.dachhack.sprout.actors.blobs.Alter;
-import com.github.dachhack.sprout.actors.blobs.Blob;
-import com.github.dachhack.sprout.actors.blobs.Fire;
-import com.github.dachhack.sprout.actors.blobs.Foliage;
-import com.github.dachhack.sprout.actors.blobs.Portal;
-import com.github.dachhack.sprout.actors.blobs.WaterOfHealth;
-import com.github.dachhack.sprout.actors.blobs.WaterOfTransmutation;
 import com.github.dachhack.sprout.actors.blobs.WellWater;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.Bestiary;
 import com.github.dachhack.sprout.actors.mobs.BlueCat;
-import com.github.dachhack.sprout.actors.mobs.Eye;
-import com.github.dachhack.sprout.actors.mobs.LitTower;
-import com.github.dachhack.sprout.actors.mobs.MineSentinel;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.actors.mobs.SokobanSentinel;
-import com.github.dachhack.sprout.actors.mobs.Zot;
-import com.github.dachhack.sprout.actors.mobs.Yog.BurningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.InfectingFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.PinningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.RottingFist;
-import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith;
-import com.github.dachhack.sprout.actors.mobs.npcs.ImpShopkeeper;
 import com.github.dachhack.sprout.actors.mobs.npcs.OtilukeNPC;
-import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
-import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanBlack;
-import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanCorner;
-import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
 import com.github.dachhack.sprout.actors.mobs.npcs.Shopkeeper;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer4;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer5;
-import com.github.dachhack.sprout.actors.mobs.pets.Bunny;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Generator;
@@ -70,45 +40,27 @@ import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.InactiveMrDestructo;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.SeekingClusterBombItem;
-import com.github.dachhack.sprout.items.Generator.Category;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
-import com.github.dachhack.sprout.items.keys.IronKey;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
-import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
-import com.github.dachhack.sprout.items.potions.PotionOfOverHealing;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfRegrowth;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
-import com.github.dachhack.sprout.items.wands.WandOfFlock.Sheep;
 import com.github.dachhack.sprout.levels.features.Chasm;
 import com.github.dachhack.sprout.levels.features.Door;
 import com.github.dachhack.sprout.levels.features.HighGrass;
-import com.github.dachhack.sprout.levels.traps.ActivatePortalTrap;
 import com.github.dachhack.sprout.levels.traps.AlarmTrap;
-import com.github.dachhack.sprout.levels.traps.ChangeSheepTrap;
 import com.github.dachhack.sprout.levels.traps.FireTrap;
-import com.github.dachhack.sprout.levels.traps.FleecingTrap;
 import com.github.dachhack.sprout.levels.traps.GrippingTrap;
-import com.github.dachhack.sprout.levels.traps.HeapGenTrap;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.levels.traps.ParalyticTrap;
 import com.github.dachhack.sprout.levels.traps.PoisonTrap;
-import com.github.dachhack.sprout.levels.traps.SokobanPortalTrap;
 import com.github.dachhack.sprout.levels.traps.SummoningTrap;
 import com.github.dachhack.sprout.levels.traps.ToxicTrap;
-import com.github.dachhack.sprout.plants.Dewcatcher;
-import com.github.dachhack.sprout.plants.Flytrap;
 import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.plants.Plant;
 import com.github.dachhack.sprout.plants.Starflower;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.windows.WndOtilukeMessage;
 import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-import com.watabou.utils.SparseArray;
 
 public class TownLevel extends Level {
 
@@ -189,7 +141,7 @@ public class TownLevel extends Level {
 			
 			map[exit] = Terrain.STATUE;
 		 }
-		
+		//Ah yes, the classic programmer trick - error? Just comment it out...
 		/* if (Dungeon.version>134){
 	
 		if(Actor.findChar(22 + WIDTH * 8) == null){
@@ -218,6 +170,7 @@ public class TownLevel extends Level {
 					drop(storeitem, i).type = Heap.Type.FOR_SALE;
 				}					
 			}
+
 			/*
 			if (Dungeon.version>134){
 			for (int i : potionspots) {
@@ -240,32 +193,14 @@ public class TownLevel extends Level {
 	public Item storeItem (){
 		Item prize;
 		switch (Random.Int(10)) {
-		case 0:
-			prize = new PotionOfHealing();
-			break;
 		case 1:
 			prize = Generator.random(Generator.Category.SEEDRICH);
-			break;
-		case 2:
-			prize = new PotionOfHealing();
-			break;
-		case 3:
-			prize =  new PotionOfHealing();
 			break;
 		case 5:
 			prize =  (Random.Int(10) < 3) ? new ActiveMrDestructo() :  new InactiveMrDestructo();
 			break;
 		case 6:
 			prize =  new SeekingClusterBombItem();
-			break;
-		case 7:
-			prize = new PotionOfHealing();
-			break;
-		case 8:
-			prize = new PotionOfHealing();
-			break;
-		case 9:
-			prize = new PotionOfHealing();
 			break;
 		default:
 			prize = new PotionOfHealing();
@@ -296,68 +231,67 @@ public class TownLevel extends Level {
    	
   @Override
 	protected void createItems() {
-				 
-		/* 6 + WIDTH * 25	to    10 + WIDTH *25  Magic
-		 * 4 + WIDTH * 27   to    4 + WIDTH * 22
-		 * 
-		 * 7 + WIDTH * 10	to    7 + WIDTH * 7		Normal
-		 * 12 + WIDTH * 13	to    12 + WIDTH * 8	
-		 */
-		 //drop(new PotionOfLiquidFlame(), 9 + WIDTH * 24).type = Heap.Type.FOR_SALE;
-	  
-	  Mob shopkeeper =  new Shopkeeper();
-      shopkeeper.pos = 13 + WIDTH * 10;
-      mobs.add(shopkeeper);
-      
-      Mob shopkeeper2 =  new Shopkeeper();
-      shopkeeper2.pos = 8 + WIDTH * 23;
-      mobs.add(shopkeeper2);
+
+	  /* 6 + WIDTH * 25	to    10 + WIDTH *25  Magic
+	   * 4 + WIDTH * 27   to    4 + WIDTH * 22
+	   *
+	   * 7 + WIDTH * 10	to    7 + WIDTH * 7		Normal
+	   * 12 + WIDTH * 13	to    12 + WIDTH * 8
+	   */
+	  //drop(new PotionOfLiquidFlame(), 9 + WIDTH * 24).type = Heap.Type.FOR_SALE;
+
+	  Mob shopkeeper = new Shopkeeper();
+	  shopkeeper.pos = 13 + WIDTH * 10;
+	  mobs.add(shopkeeper);
+
+	  Mob shopkeeper2 = new Shopkeeper();
+	  shopkeeper2.pos = 8 + WIDTH * 23;
+	  mobs.add(shopkeeper2);
       /*
       Mob shopkeeper3 =  new Shopkeeper();
       shopkeeper3.pos = 22 + WIDTH * 8;
       mobs.add(shopkeeper3);
       */
-      
-      Mob bluecat =  new BlueCat();
-      bluecat.pos = 35 + WIDTH * 5;
-      mobs.add(bluecat);
-      
-      
-      Mob tinkerer1 =  new Tinkerer4();
-      tinkerer1.pos = 31 + WIDTH * 20;
-      mobs.add(tinkerer1);
-      
-      Mob tinkerer2 =  new Tinkerer5();
-      tinkerer2.pos = 14 + WIDTH * 33;
-      mobs.add(tinkerer2);
-      
-     
-             
-      scrollspots = new int[11];
-      scrollspots[0] =  4 + WIDTH * 27;
-      scrollspots[1] =  4 + WIDTH * 26;
-      scrollspots[2] =  4 + WIDTH * 25;
-      scrollspots[3] =  4 + WIDTH * 24;
-      scrollspots[4] =  4 + WIDTH * 23;
-      scrollspots[5] =  4 + WIDTH * 22;
-      
-      scrollspots[6] =  6 + WIDTH * 25;
-      scrollspots[7] =  7 + WIDTH * 25;
-      scrollspots[8] =  8 + WIDTH * 25;
-      scrollspots[9] =  9 + WIDTH * 25;
-      scrollspots[10] =  10 + WIDTH * 25;
-      
-      storespots = new int[9];
-      storespots[0] =  7 + WIDTH * 10;
-      storespots[1] =  7 + WIDTH * 9;
-      storespots[2] =  7 + WIDTH * 8;
-      storespots[3] =  7 + WIDTH * 7;
-      
-      storespots[4] =  12 + WIDTH * 13;
-      storespots[5] =  12 + WIDTH * 12;
-      storespots[6] =  12 + WIDTH * 11;
-      storespots[7] =  12 + WIDTH * 10;
-      storespots[8] =  12 + WIDTH * 9;
+
+	  Mob bluecat = new BlueCat();
+	  bluecat.pos = 35 + WIDTH * 5;
+	  mobs.add(bluecat);
+
+
+	  Mob tinkerer1 = new Tinkerer4();
+	  tinkerer1.pos = 31 + WIDTH * 20;
+	  mobs.add(tinkerer1);
+
+	  Mob tinkerer2 = new Tinkerer5();
+	  tinkerer2.pos = 14 + WIDTH * 33;
+	  mobs.add(tinkerer2);
+
+
+	  scrollspots = new int[11];
+	  scrollspots[0] = 4 + WIDTH * 27;
+	  scrollspots[1] = 4 + WIDTH * 26;
+	  scrollspots[2] = 4 + WIDTH * 25;
+	  scrollspots[3] = 4 + WIDTH * 24;
+	  scrollspots[4] = 4 + WIDTH * 23;
+	  scrollspots[5] = 4 + WIDTH * 22;
+
+	  scrollspots[6] = 6 + WIDTH * 25;
+	  scrollspots[7] = 7 + WIDTH * 25;
+	  scrollspots[8] = 8 + WIDTH * 25;
+	  scrollspots[9] = 9 + WIDTH * 25;
+	  scrollspots[10] = 10 + WIDTH * 25;
+
+	  storespots = new int[9];
+	  storespots[0] = 7 + WIDTH * 10;
+	  storespots[1] = 7 + WIDTH * 9;
+	  storespots[2] = 7 + WIDTH * 8;
+	  storespots[3] = 7 + WIDTH * 7;
+
+	  storespots[4] = 12 + WIDTH * 13;
+	  storespots[5] = 12 + WIDTH * 12;
+	  storespots[6] = 12 + WIDTH * 11;
+	  storespots[7] = 12 + WIDTH * 10;
+	  storespots[8] = 12 + WIDTH * 9;
       
      /* 
       potionspots = new int[10];
@@ -373,29 +307,29 @@ public class TownLevel extends Level {
       potionspots[8] =  23 + WIDTH * 6;
       potionspots[9] =  24 + WIDTH * 6;
         */
-      
-      storeStock();      
-          
-		Alter alter = new Alter();
-		alter.seed(33 + WIDTH * 32, 1);
-		blobs.put(Alter.class, alter);	
-		
-		addChest(39 + WIDTH * 4);
-		addChest(40 + WIDTH * 4);
-		addChest(41 + WIDTH * 4);
-		addChest(42 + WIDTH * 4);
-		
-		addChest(41 + WIDTH * 18);
-		addChest(42 + WIDTH * 18);
-		
-		addChest(7 + WIDTH * 5);
-		addChest(8 + WIDTH * 5);
-		addChest(9 + WIDTH * 5);
-		
-		addChest(27 + WIDTH * 11);
-		addChest(27 + WIDTH * 12);
-		
-      //Activate Bunny Rancher Mode
+
+	  storeStock();
+
+	  Alter alter = new Alter();
+	  alter.seed(33 + WIDTH * 32, 1);
+	  blobs.put(Alter.class, alter);
+
+	  addChest(39 + WIDTH * 4);
+	  addChest(40 + WIDTH * 4);
+	  addChest(41 + WIDTH * 4);
+	  addChest(42 + WIDTH * 4);
+
+	  addChest(41 + WIDTH * 18);
+	  addChest(42 + WIDTH * 18);
+
+	  addChest(7 + WIDTH * 5);
+	  addChest(8 + WIDTH * 5);
+	  addChest(9 + WIDTH * 5);
+
+	  addChest(27 + WIDTH * 11);
+	  addChest(27 + WIDTH * 12);
+	  //WTF is this man!?
+	  //Activate Bunny Rancher Mode
       /*
       for (int i = 0; i < LENGTH; i++) {				
 			if (Random.Int(10)<2 && map[i]==Terrain.EMPTY){
@@ -405,8 +339,8 @@ public class TownLevel extends Level {
 			}
 		}
 		*/
-      
-	}	
+
+  }
   
   private void addChest(int pos) {
 		

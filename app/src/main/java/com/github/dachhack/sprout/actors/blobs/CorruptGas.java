@@ -38,23 +38,22 @@ public class CorruptGas extends Blob implements Hero.Doom {
 	protected void evolve() {
 		super.evolve();
 
-		int levelDamage = 5 + Dungeon.depth * 3;
-		int bleedDamage = 5 + Dungeon.depth * 2;
+		int levelDamage = 5 + Dungeon.depth * 2;
+		int bleedDamage = 5 + Dungeon.depth;
 
 		Char ch;
 		for (int i = 0; i < LENGTH; i++) {
 			if (cur[i] > 0 && (ch = Actor.findChar(i)) != null) {
 				
-				if (!ch.immunities().contains(ConfusionGas.class)) {
-					Buff.prolong(ch, Vertigo.class, 2);
-				}
-				
 			    if (!ch.immunities().contains(this.getClass())) {
+					if (!ch.immunities().contains(ConfusionGas.class)) {
+						Buff.prolong(ch, Vertigo.class, 2);
+					}
 					Buff.affect(ch, Bleeding.class).set(bleedDamage);
 					Buff.prolong(ch, Cripple.class, Cripple.DURATION);
 
 					int damage = (ch.HT + levelDamage) / 40;
-					if (Random.Int(40) < (ch.HT + levelDamage) % 40) {
+					if (Random.Int(40) < (ch.HT + levelDamage) % 40) {//So damage can be increased very occasionally by 1 if a certain condition is met? Dachhack what where you doing!?
 						damage++;
 					}
 
@@ -73,7 +72,7 @@ public class CorruptGas extends Blob implements Hero.Doom {
 
 	@Override
 	public String tileDesc() {
-		return "A greenish cloud of toxic gas is swirling here.";
+		return "A cloud of demon blood is swirling here.";
 	}
 
 	@Override
@@ -82,6 +81,6 @@ public class CorruptGas extends Blob implements Hero.Doom {
 		Badges.validateDeathFromGas();
 
 		Dungeon.fail(ResultDescriptions.GAS);
-		GLog.n("You died from a toxic gas..");
+		GLog.n("You died from demon blood...");
 	}
 }

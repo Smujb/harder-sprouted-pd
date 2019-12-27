@@ -21,6 +21,8 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
+import java.util.ArrayList;
+
 public class SanChikarahTranscend extends Item {
 
 	{
@@ -41,6 +43,10 @@ public class SanChikarahTranscend extends Item {
 		return true;
 	}
 
+	@Override
+	public ArrayList<String> actions(Hero hero) {//No dropping or throwing
+		return new ArrayList<>();
+	}
 
 	@Override
 	public boolean doPickUp(Hero hero) {

@@ -45,13 +45,14 @@ public class SpectralRat extends Mob  implements Callback {
 	{
 		name = "spectral rat";
 		spriteClass = SpectralRatSprite.class;
-		baseSpeed = 4f;
+		baseSpeed = 2f;
 
-		HP = HT = 80+(Dungeon.depth*Random.NormalIntRange(2, 5));
-		defenseSkill = 2;
+		HP = HT = 500;
 		
 		loot = new Meat();
 		lootChance = 0.5f;
+
+		scalesWithHeroLevel = true;
 
 	}
 
@@ -59,12 +60,7 @@ public class SpectralRat extends Mob  implements Callback {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(Dungeon.depth/2, Dungeon.depth);
-	}
-
-	@Override
-	public int attackSkill(Char target) {
-		return 50;
+		return Random.NormalIntRange(100, 250);
 	}
 
 	@Override
@@ -74,7 +70,7 @@ public class SpectralRat extends Mob  implements Callback {
 	
 	@Override
 	protected boolean canAttack(Char enemy) {
-		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
+		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos & Level.distance(pos,enemy.pos) < 4;
 	}
 
 	@Override
@@ -106,8 +102,9 @@ public class SpectralRat extends Mob  implements Callback {
 				Buff.prolong(enemy, Weakness.class, Weakness.duration(enemy));
 			}
 
-			int dmg = Random.Int(20, 45);
+			int dmg = Random.Int(20, 60);
 			enemy.damage(dmg, this);
+			damage(dmg/3,this);//Some self damage. This level feels way too spammy if you are a melee player.
 
 			if (!enemy.isAlive() && enemy == Dungeon.hero) {
 				Dungeon.fail(Utils.format(ResultDescriptions.MOB,
@@ -132,7 +129,7 @@ public class SpectralRat extends Mob  implements Callback {
 
 	@Override
 	public String description() {
-		return "This shadowy rat is phasing in and out of this plane. "
+		return "This shadowy rat is phasing in and out of this plane. Though it's bolts are dangerous, they will harm the creature itself as well."
 				+ "It's eyes burn with an uncanny hatred.";
 	}
 	

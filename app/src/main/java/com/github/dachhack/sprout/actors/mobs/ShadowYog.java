@@ -31,6 +31,7 @@ import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.effects.CellEmitter;
+import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.OrbOfZot;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
@@ -51,7 +52,8 @@ public class ShadowYog extends Mob  {
 		HP = HT = 50*Dungeon.hero.lvl;
 		
 		baseSpeed = 2f;
-		defenseSkill = 32;
+
+		scalesWithHeroLevel = true;
 
 		EXP = 100;
 
@@ -120,45 +122,35 @@ public class ShadowYog extends Mob  {
 			super.damage(dmg, src);
 	}
 
-	@Override
-	public int defenseProc(Char enemy, int damage) {
-                return super.defenseProc(enemy, damage);
-	}
-	
-
-	
-	@Override
-	public void beckon(int cell) {
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void die(Object cause) {
 		super.die(cause);
-		
-		Statistics.shadowYogsKilled++;
 
-      for (Mob mob : Dungeon.level.mobs) {
-			
-			if (mob instanceof ShadowYog){
-				   yogsAlive++;
-				 }
+		Statistics.shadowYogsKilled++;
+		yogsAlive = 0;
+		for (Mob mob : Dungeon.level.mobs) {
+
+			if (mob instanceof ShadowYog) {
+				yogsAlive++;
 			}
-			
-		 if(yogsAlive==0){
+		}
+
+		if (yogsAlive == 0) {
 			GameScene.bossSlain();
-			Dungeon.shadowyogkilled=true;
-			
+			Dungeon.shadowyogkilled = true;
+
 			Dungeon.level.drop(new OrbOfZot(), pos).sprite.drop();
-			
+			new Flare(8, 48).color(0xAA00FF, true).show(sprite, 3f);//Draw attention to the Orb of Zot
+
 			for (Mob mob : (Iterable<Mob>) Dungeon.level.mobs.clone()) {
 				if (mob instanceof Rat || mob instanceof GreyOni || mob instanceof SpectralRat || mob instanceof Eye) {
 					mob.die(cause);
 				}
 			}
-			
+
 			yell("...");
-		 }
+		}
 	}
 
 	@Override
