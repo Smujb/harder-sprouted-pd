@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.levels.painters;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.blobs.Foliage;
+import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.EasterEgg;
@@ -101,7 +102,7 @@ public class GardenPainter extends Painter {
 			int pos;
 			do {pos = room.random();}
 			while (level.heaps.get(pos) != null);
-			level.drop(new Bomb(), pos);
+			level.drop(new ActiveMrDestructo(), pos);
 			//Giving the hero hundreds of Ankhs is kinda OP...
 			//level.drop(new Ankh(), pos);
 		}

@@ -27,10 +27,16 @@ public class MegaExperiencePotion extends Item {
 
     public static final String AC_DRINK = "DRINK";
     public void apply(Hero hero) {
-        for (int i = 0; i < 80; i++) {
+        for (int i = 0; i < 52; i++) {
             hero.earnExp(hero.maxExp() - hero.exp);
         }
     }
+
+    @Override
+    public String desc() {
+        return "Drink this for cool stuff like much experience. If you want a realistic look at balance only drink it once.";
+    }
+
     @Override
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions(hero);

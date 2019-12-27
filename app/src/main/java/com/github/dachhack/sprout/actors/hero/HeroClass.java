@@ -24,6 +24,9 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.items.Bomb;
+import com.github.dachhack.sprout.items.BookOfDead;
+import com.github.dachhack.sprout.items.BookOfLife;
+import com.github.dachhack.sprout.items.BookOfTranscendence;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.EasterEgg;
 import com.github.dachhack.sprout.items.Egg;
@@ -53,8 +56,11 @@ import com.github.dachhack.sprout.items.nornstone.GreenNornStone;
 import com.github.dachhack.sprout.items.nornstone.PurpleNornStone;
 import com.github.dachhack.sprout.items.nornstone.YellowNornStone;
 import com.github.dachhack.sprout.items.potions.MegaExperiencePotion;
+import com.github.dachhack.sprout.items.potions.PotionOfHaste;
+import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.potions.PotionOfStrength;
+import com.github.dachhack.sprout.items.rings.RingOfWealth;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
@@ -261,21 +267,30 @@ public enum HeroClass {
 		if (!Dungeon.playtest) {
 			//Playtest
 			//TomeOfMastery tome = new TomeOfMastery(); tome.collect();
-			new WandOfDisintegration().identify().setTesting().collect();
-			new WandOfFirebolt().identify().setTesting().collect();
-			new WandOfLightning().identify().setTesting().collect();
-			new WandOfAvalanche().identify().setTesting().collect();
-			new WandOfTelekinesis().identify().setTesting().collect();
-			new WandHolster().setTesting().collect();
+			new WandOfDisintegration().identify().reinforce().upgrade(15).collect();
+			new WandOfFirebolt().identify().reinforce().upgrade(15).collect();
+			new WandOfLightning().identify().reinforce().upgrade(15).collect();
+			new WandOfAvalanche().identify().reinforce().upgrade(15).collect();
+			new WandOfTelekinesis().identify().reinforce().upgrade(15).collect();
+			new WandHolster().collect();
+
+			new DewVial().collect();
+
+			new BookOfDead().collect();
+			new BookOfLife().collect();
+			new BookOfTranscendence().collect();
+
+			new RingOfWealth().identify().upgrade(28).collect();
+			new PotionOfHealing().quantity(50).identify().collect();
 
 			//hero.HT=hero.HP=999;
 			hero.STR = hero.STR + 10;
 			PlateArmor armor1 = new PlateArmor();
-			armor1.reinforce().upgrade(140).identify().collect();
+			armor1.reinforce().upgrade(15).identify().collect();
 			// PlateArmor armor2 = new PlateArmor();
 			// armor2.upgrade(14).identify().collect();
 			WarHammer hammer = new WarHammer();
-			hammer.reinforce().upgrade(115).identify().collect();
+			hammer.reinforce().upgrade(15).identify().collect();
 			Spectacles specs = new Spectacles();
 			specs.collect();
 			Whistle whistle = new Whistle();
@@ -284,11 +299,11 @@ public enum HeroClass {
 			//Flytrap.Seed seed1 = new Flytrap.Seed(); seed1.collect();
 			//Phaseshift.Seed seed2 = new Phaseshift.Seed(); seed2.collect();
 			//Starflower.Seed seed4 = new Starflower.Seed(); seed4.collect();
-			new NeptunusTrident().enchantNeptune().setTesting().identify().collect();
-			new LokisFlail().enchantLoki().setTesting().identify().collect();
-			new JupitersWrath().enchantJupiter().setTesting().identify().collect();
-			new CromCruachAxe().enchantLuck().setTesting().identify().collect();
-			new AresSword().enchantAres().setTesting().identify().collect();
+			//new NeptunusTrident().enchantNeptune().setTesting().identify().collect();
+			//new LokisFlail().enchantLoki().setTesting().identify().collect();
+			//new JupitersWrath().enchantJupiter().setTesting().identify().collect();
+			//new CromCruachAxe().enchantLuck().setTesting().identify().collect();
+			//new AresSword().enchantAres().setTesting().identify().collect();
 			ScrollHolder bag2 = new ScrollHolder();
 			bag2.collect();
 			// armor = new PlateArmor(); armor.upgrade(130); armor.identify().collect();
@@ -297,7 +312,7 @@ public enum HeroClass {
 			//hammer.identify().collect();
 			// Wand wand = new WandOfDisintegration(); wand.upgrade(50); wand.collect();
 			Wand wand3 = new WandOfFlock();
-			wand3.upgrade(15);
+			wand3.upgrade(15).reinforce();
 			wand3.collect();
 			// Wand wand2 = new WandOfTelekinesis(); wand2.upgrade(15); wand2.collect();
 			//Wand wand3 = new WandOfTeleportation(); wand3.upgrade(15); wand3.collect();
@@ -316,8 +331,8 @@ public enum HeroClass {
 			sk3.collect();
 			JournalPage sk4 = new Sokoban4();
 			sk4.collect();
-			JournalPage dol = new Town();
-			dol.collect();
+			//JournalPage dol = new Town();
+			//dol.collect();
 			JournalPage sk5 = new Vault();
 			sk5.collect();
 			JournalPage dra = new DragonCave();
