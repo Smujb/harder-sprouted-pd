@@ -17,7 +17,9 @@
  */
 package com.github.dachhack.sprout.levels.painters;
 
+import com.github.dachhack.sprout.Constants;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Heap;
@@ -143,7 +145,6 @@ public class StandardPainter extends Painter {
 	private static void paintGraveyard(Level level, Room room) {
 		fill(level, room.left + 1, room.top + 1, room.width() - 1,
 				room.height() - 1, Terrain.GRASS);
-
 		int w = room.width() - 1;
 		int h = room.height() - 1;
 		int nGraves = Math.max(w, h) / 2;
@@ -151,13 +152,23 @@ public class StandardPainter extends Painter {
 		int index = Random.Int(nGraves);
 
 		int shift = Random.Int(2);
+		if (Dungeon.depth == 31) {
+			shift = 0;
+		}
 		for (int i = 0; i < nGraves; i++) {
 			int pos = w > h ? room.left + 1 + shift + i * 2
 					+ (room.top + 2 + Random.Int(h - 2)) * Level.getWidth()
 					: (room.left + 2 + Random.Int(w - 2))
 							+ (room.top + 1 + shift + i * 2) * Level.getWidth();
-			level.drop(i == index ? Generator.random() : new Gold().random(),
-					pos).type = Heap.Type.TOMB;
+			if (Statistics.gravestonesSpawned > Constants.MAX_GRAVES) {
+				level.drop(i == index ? Generator.random() : new Gold().random(),
+						pos).type = Heap.Type.SKELETON;
+			} else {
+				level.drop(i == index ? Generator.random() : new Gold().random(),
+						pos).type = Heap.Type.TOMB;
+				Statistics.gravestonesSpawned++;
+			}
+
 		}
 	}
 

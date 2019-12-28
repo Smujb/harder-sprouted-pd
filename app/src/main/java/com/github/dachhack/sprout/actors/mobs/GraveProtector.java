@@ -49,7 +49,9 @@ public class GraveProtector extends Mob implements Callback {
 		EXP = 10;
 		state = HUNTING;
 		flying = true;
-		
+
+		scalesWithHeroLevel = true;
+
 		HP = HT = 55;
 		defenseSkill = 15;
 		

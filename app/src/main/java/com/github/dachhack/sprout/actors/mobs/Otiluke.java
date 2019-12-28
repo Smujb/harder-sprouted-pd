@@ -57,7 +57,7 @@ public class Otiluke extends Mob implements Callback {
 		name = "stone golem Otiluke";
 		spriteClass = OtilukeSprite.class;
 
-		HP = HT = 10000;
+		HP = HT = 20000;
 		
 		state=PASSIVE;
 

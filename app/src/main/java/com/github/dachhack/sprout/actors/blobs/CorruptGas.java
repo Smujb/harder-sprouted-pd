@@ -38,7 +38,7 @@ public class CorruptGas extends Blob implements Hero.Doom {
 	protected void evolve() {
 		super.evolve();
 
-		int levelDamage = 5 + Dungeon.depth * 2;
+		int levelDamage = (int) (5 + Dungeon.depth * 1.5);
 		int bleedDamage = 5 + Dungeon.depth;
 
 		Char ch;

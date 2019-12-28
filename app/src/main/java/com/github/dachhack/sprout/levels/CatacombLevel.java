@@ -39,7 +39,11 @@ public class CatacombLevel extends RegularLevel {
 		cleared=true;
 	}
 
-	
+	@Override
+	protected void paint() {
+		super.paint();
+	}
+
 	@Override
 	public String tilesTex() {
 		return Assets.TILES_SEWERS;
@@ -68,12 +72,10 @@ public class CatacombLevel extends RegularLevel {
 			if (r.type == Type.NULL) {
 				int connections = r.connected.size();
 				if (connections == 0) {
-
-				} else if (Random.Int(connections * connections) == 0) {
+					r.type = Type.TUNNEL;
+				} else {
 					r.type = Type.STANDARD;
 					count++;
-				} else {
-					r.type = Type.TUNNEL;
 				}
 			}
 		}

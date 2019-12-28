@@ -70,12 +70,11 @@ public class MineSentinel extends Statue {
 
 		weapon.identify();
 		weapon.enchant(Enchantment.random());
-		weapon.upgrade(Random.Int(150));
+		weapon.upgrade(Random.NormalIntRange(25,50));
 		
 
-		HP = HT = 500 + Dungeon.depth * 20;
+		HP = HT = 20 + Dungeon.depth * 10;
 		//HP = HT = 5;
-		defenseSkill = 20+ adjustForDepth(1);
 		//defenseSkill = 2;
 	}
 
@@ -106,7 +105,7 @@ public class MineSentinel extends Statue {
 				Char ch = Actor.findChar(p);
 				if (ch != null && ch instanceof MineSentinel &&  Random.Int(10)<2) {
 					ch.damage(1, this);
-					if (((Mob)ch).state==PASSIVE){
+					if (((Mob)ch).state==PASSIVE) {
 						((Mob)ch).state = HUNTING;
 					}
 				 break;

@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Strength;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Speck;
@@ -47,7 +48,7 @@ public class WandOfAvalanche extends Wand {
 
 	@Override
 	public int max(int lvl) {
-		return 10 + 8*lvl;
+		return 10 + 9*lvl;
 	}
 
 	@Override
@@ -80,17 +81,20 @@ public class WandOfAvalanche extends Wand {
 					
 					 int damage = damageRoll();
 			         if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
+			         if (ch == Dungeon.hero) {
+			         	damage = Random.Int(damage/2) + 1;
+					 }
 					 ch.damage(damage, this);
 	
 
-					if (ch.isAlive() && Random.Int(2 + d) == 0) {
-						Buff.prolong(ch, Paralysis.class, Random.IntRange(2, 6));
+					if (ch.isAlive() && Random.Int(2 + d) < 2 && !(ch instanceof Hero)) {//Doesn't self-paralyze
+						Buff.prolong(ch, Paralysis.class, Random.IntRange(5, 10));
 					}
 				}
 
 				CellEmitter.get(i).start(Speck.factory(Speck.ROCK), 0.07f,
 						3 + (size - d));
-				Camera.main.shake(3, 0.07f * (3 + (size - d)));
+				Camera.main.shake(3, 0.07f * (Math.max(1, level() - d)));
 			}
 		}
 

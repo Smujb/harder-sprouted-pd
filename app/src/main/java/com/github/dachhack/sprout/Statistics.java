@@ -41,6 +41,7 @@ public class Statistics {
 	public static int waters;
 	public static int sewerKills;
 	public static int prisonKills;
+	public static int gravestonesSpawned;
 
 	public static float duration;
 	public static int floormoves;
@@ -78,6 +79,7 @@ public class Statistics {
 		waters = 0;
 		sewerKills = 0;
 		prisonKills = 0;
+		gravestonesSpawned = 0;
 
 		duration = 0;
 		moves = 0;
@@ -108,6 +110,7 @@ public class Statistics {
 	private static final String BALLS = "balls";
 	private static final String PRISONKILLS = "prisonKills";
 	private static final String SEWERKILLS = "sewerKills";
+	private static final String GRAVES = "gravesSpawned";
 	
 	private static final String NIGHT = "nightHunt";
 	private static final String ANKHS = "ankhsUsed";
@@ -143,6 +146,7 @@ public class Statistics {
 		bundle.put(WATERS, waters);
 		bundle.put(SEWERKILLS, sewerKills);
 		bundle.put(PRISONKILLS, prisonKills);
+		bundle.put(GRAVES, gravestonesSpawned);
 	}
 
 	public static void restoreFromBundle(Bundle bundle) {
@@ -164,6 +168,8 @@ public class Statistics {
 		goldThievesKilled = bundle.getInt(THIEVES);
 		shadowYogsKilled = bundle.getInt(SYOGS);
 		ballsCooked = bundle.getInt(BALLS);
+
+		gravestonesSpawned = bundle.getInt(GRAVES);
 		
 		nightHunt = bundle.getInt(NIGHT);
 		ankhsUsed = bundle.getInt(ANKHS);

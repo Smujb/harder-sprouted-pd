@@ -17,7 +17,9 @@
  */
 package com.github.dachhack.sprout.levels.painters;
 
+import com.github.dachhack.sprout.Constants;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.Item;
@@ -64,8 +66,14 @@ public class CryptPainter extends Painter {
 			set(level, new Point(room.right - 1, room.top + 1), Terrain.STATUE);
 			cy = room.top + 2;
 		}
+		if (Statistics.gravestonesSpawned > Constants.MAX_GRAVES) {
+			level.drop(prize(level), cx + cy * Level.getWidth()).type = Type.SKELETON;
+		} else {
+			level.drop(prize(level), cx + cy * Level.getWidth()).type = Type.TOMB;
+			Statistics.gravestonesSpawned++;
+		}
 
-		level.drop(prize(level), cx + cy * Level.getWidth()).type = Type.TOMB;
+
 	}
 
 	private static Item prize(Level level) {

@@ -40,14 +40,14 @@ public class Gullin extends Kupua {
 		name = "gullin";
 		spriteClass = GullinSprite.class;
 
-		HP = HT = 2500;
+		HP = HT = 2200;
 
 		EXP = 20;
 	}
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(100+ adjustForDepth(0), 200+ adjustForDepth(0));
+		return Random.NormalIntRange(200, 400);
 	}
 	
 	@Override

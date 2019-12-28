@@ -59,7 +59,7 @@ public class Zot extends Mob {
 		spriteClass = ZotSprite.class;
 		baseSpeed = 2f;
 
-		HP = HT = 10000;
+		HP = HT = 40000;
 		EXP = 20;
 	}
 

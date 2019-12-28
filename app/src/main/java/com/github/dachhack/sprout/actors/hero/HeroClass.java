@@ -33,6 +33,7 @@ import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.ShadowDragonEgg;
 import com.github.dachhack.sprout.items.TomeOfMastery;
+import com.github.dachhack.sprout.items.Towel;
 import com.github.dachhack.sprout.items.Whistle;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
 import com.github.dachhack.sprout.items.armor.PlateArmor;
@@ -78,6 +79,7 @@ import com.github.dachhack.sprout.items.wands.WandOfMagicMissile;
 import com.github.dachhack.sprout.items.wands.WandOfTelekinesis;
 import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
 import com.github.dachhack.sprout.items.weapon.melee.Dagger;
+import com.github.dachhack.sprout.items.weapon.melee.Glaive;
 import com.github.dachhack.sprout.items.weapon.melee.ShortSword;
 import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
 import com.github.dachhack.sprout.items.weapon.melee.relic.AresSword;
@@ -282,7 +284,8 @@ public enum HeroClass {
 			new BookOfLife().collect();
 			new BookOfTranscendence().collect();
 
-			new RingOfWealth().identify().upgrade(28).collect();
+			(hero.belongings.misc2 = new RingOfWealth()).identify().upgrade(28);
+			hero.belongings.misc2.activate(hero);
 			new PotionOfHealing().quantity(50).identify().collect();
 
 			//hero.HT=hero.HP=999;
@@ -293,6 +296,10 @@ public enum HeroClass {
 			// armor2.upgrade(14).identify().collect();
 			WarHammer hammer = new WarHammer();
 			hammer.reinforce().upgrade(15).identify().collect();
+			Glaive glaive = new Glaive();
+			glaive.reinforce().upgrade(15).identify().collect();
+			Towel towel = new Towel();
+			towel.identify().collect();
 			Spectacles specs = new Spectacles();
 			specs.collect();
 			Whistle whistle = new Whistle();
@@ -335,10 +342,10 @@ public enum HeroClass {
 			sk4.collect();
 			//JournalPage dol = new Town();
 			//dol.collect();
-			JournalPage sk5 = new Vault();
-			sk5.collect();
-			JournalPage dra = new DragonCave();
-			dra.collect();
+			//JournalPage sk5 = new Vault();
+			//sk5.collect();
+			//JournalPage dra = new DragonCave();
+			//dra.collect();
 			new MegaExperiencePotion().collect();
 			//JournalPage town = new Town(); town.collect();
 			//JournalPage cave = new DragonCave(); cave.collect();
@@ -399,8 +406,8 @@ public enum HeroClass {
 			for (int i = 0; i < 250; i++) {
 				//Scroll scroll = new ScrollOfMagicalInfusion();
 				//scroll.identify().collect();
-				//Scroll scroll2 = new ScrollOfUpgrade();
-				//scroll2.identify().collect();
+				Scroll scroll2 = new ScrollOfMagicMapping();
+				scroll2.identify().collect();
 
 				Scroll scroll3 = new ScrollOfIdentify();
 				scroll3.identify().collect();

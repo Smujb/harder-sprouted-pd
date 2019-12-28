@@ -51,7 +51,7 @@ public class Kupua extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(70+ adjustForDepth(0), 160+ adjustForDepth(0));
+		return Random.NormalIntRange(200, 300);
 	}
 
 	@Override
