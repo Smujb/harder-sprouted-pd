@@ -81,6 +81,7 @@ import com.github.dachhack.sprout.items.weapon.melee.Chainsaw;
 import com.github.dachhack.sprout.items.weapon.melee.Dagger;
 import com.github.dachhack.sprout.items.weapon.melee.Glaive;
 import com.github.dachhack.sprout.items.weapon.melee.ShortSword;
+import com.github.dachhack.sprout.items.weapon.melee.Spork;
 import com.github.dachhack.sprout.items.weapon.melee.WarHammer;
 import com.github.dachhack.sprout.items.weapon.melee.relic.AresSword;
 import com.github.dachhack.sprout.items.weapon.melee.relic.CromCruachAxe;
@@ -294,16 +295,25 @@ public enum HeroClass {
 			armor1.reinforce().upgrade(15).identify().collect();
 			// PlateArmor armor2 = new PlateArmor();
 			// armor2.upgrade(14).identify().collect();
+
 			WarHammer hammer = new WarHammer();
 			hammer.reinforce().upgrade(15).identify().collect();
+
 			Glaive glaive = new Glaive();
 			glaive.reinforce().upgrade(15).identify().collect();
+
+			Spork spork = new Spork();
+			spork.reinforce().upgrade(15).identify().collect();
+
 			Towel towel = new Towel();
 			towel.identify().collect();
+
 			Spectacles specs = new Spectacles();
 			specs.collect();
+
 			Whistle whistle = new Whistle();
 			whistle.collect();
+
 			//Dewcatcher.Seed seed3 = new Dewcatcher.Seed(); seed3.collect();
 			//Flytrap.Seed seed1 = new Flytrap.Seed(); seed1.collect();
 			//Phaseshift.Seed seed2 = new Phaseshift.Seed(); seed2.collect();

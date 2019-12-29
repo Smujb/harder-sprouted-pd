@@ -27,6 +27,7 @@ import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Charm;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -197,6 +198,7 @@ public class Otiluke extends Mob implements Callback {
 		IMMUNITIES.add(ToxicGas.class);
 		IMMUNITIES.add(ScrollOfPsionicBlast.class);
 		IMMUNITIES.add(Vertigo.class);
+		IMMUNITIES.add(Paralysis.class);
 	}
 
 	@Override
