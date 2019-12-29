@@ -127,7 +127,7 @@ public class BlueWraith extends Wraith  {
 
 	
 	@Override
-	public int damageRoll() {
+	public int magicDamageRoll() {
 		return Random.NormalIntRange(12, 20);
 	}
 

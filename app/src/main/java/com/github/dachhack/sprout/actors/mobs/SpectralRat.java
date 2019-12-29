@@ -45,9 +45,8 @@ public class SpectralRat extends Mob  implements Callback {
 	{
 		name = "spectral rat";
 		spriteClass = SpectralRatSprite.class;
-		baseSpeed = 2f;
 
-		HP = HT = 500;
+		HP = HT = 550;
 		
 		loot = new Meat();
 		lootChance = 0.5f;
@@ -104,7 +103,7 @@ public class SpectralRat extends Mob  implements Callback {
 
 			int dmg = Random.Int(20, 60);
 			enemy.damage(dmg, this);
-			damage(dmg/3,this);//Some self damage. This level feels way too spammy if you are a melee player.
+			damage(dmg*3,this);//Some self damage. This level feels way too spammy if you are a melee player.
 
 			if (!enemy.isAlive() && enemy == Dungeon.hero) {
 				Dungeon.fail(Utils.format(ResultDescriptions.MOB,

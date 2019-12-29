@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -51,6 +52,12 @@ public class WandOfAmok extends Wand {
 			GLog.i("nothing happened");
 
 		}
+	}
+
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		Buff.affect(defender, Amok.class, 10f);
 	}
 
 	@Override

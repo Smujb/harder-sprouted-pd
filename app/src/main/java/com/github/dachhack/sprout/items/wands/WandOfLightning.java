@@ -50,12 +50,12 @@ public class WandOfLightning extends Wand {
 	private int nPoints;
 
 	@Override
-	public int max(int lvl) {
+	public int magicMax(int lvl) {
 		return 10 + lvl*5;
 	}
 
 	@Override
-	public int min(int lvl) {
+	public int magicMin(int lvl) {
 		return 5 + lvl;
 	}
 
@@ -111,7 +111,7 @@ public class WandOfLightning extends Wand {
 		if (ch != null) {
 
 			affected.clear();
-			hit(ch, damageRoll());
+			hit(ch, magicDamageRoll());
 
 		} else {
 
@@ -130,6 +130,6 @@ public class WandOfLightning extends Wand {
 	public String desc() {
 		return "This wand conjures forth deadly arcs of electricity, which deal damage "
 				+ "to several creatures standing close to each other." +
-				"\n\n" + statsDesc(levelKnown);
+				"\n\n" + statsDesc();
 	}
 }

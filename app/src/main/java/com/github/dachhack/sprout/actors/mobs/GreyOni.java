@@ -40,7 +40,7 @@ public class GreyOni extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(100, 300);
+		return Random.NormalIntRange(200, 350);
 	}
 
 

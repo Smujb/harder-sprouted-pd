@@ -57,7 +57,7 @@ public class Otiluke extends Mob implements Callback {
 		name = "stone golem Otiluke";
 		spriteClass = OtilukeSprite.class;
 
-		HP = HT = 20000;
+		HP = HT = 25000;
 		
 		state=PASSIVE;
 
@@ -146,7 +146,7 @@ public class Otiluke extends Mob implements Callback {
 				Buff.prolong(enemy, Weakness.class, Weakness.duration(enemy));
 			}
 
-			int dmg = Random.Int(100, 160+ adjustForDepth(0));
+			int dmg = Random.Int(50, 140);
 			enemy.damage(dmg, this);
 
 			if (!enemy.isAlive() && enemy == Dungeon.hero) {

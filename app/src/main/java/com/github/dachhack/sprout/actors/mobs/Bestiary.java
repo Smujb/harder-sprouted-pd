@@ -232,7 +232,7 @@ public class Bestiary {
 				classes = new Class<?>[] { FlyingProtector.class };
 			    break;
 			case 35:
-				chances = new float[] {1, 1 };
+				chances = new float[] {1, 0.3f };
 				classes = new Class<?>[] {GreyOni.class, SpectralRat.class };
 			    break;
 			case 36:

@@ -32,7 +32,6 @@ import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokobanSwitch;
 import com.github.dachhack.sprout.actors.mobs.npcs.Shopkeeper;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Pushing;
-import com.github.dachhack.sprout.effects.SpellSprite;
 import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Heap.Type;
@@ -59,12 +58,12 @@ public class WandOfTelekinesis extends Wand {
 	private static final String TXT_PREVENTING = "Something scrambles the telekinesis magic! ";
 
 	@Override
-	public int max(int lvl) {
+	public int magicMax(int lvl) {
 		return 7 + 5*lvl;
 	}
 
 	@Override
-	public int min(int lvl) {
+	public int magicMin(int lvl) {
 		return 2 + lvl;
 	}
 
@@ -87,7 +86,7 @@ public class WandOfTelekinesis extends Wand {
 
 			if ((ch = Actor.findChar(c)) != null) {
 
-				ch.damage(damageRoll(), this);
+				ch.damage(magicDamageRoll(), this);
 
 				if (i == Ballistica.distance - 1) {
 
@@ -226,6 +225,6 @@ public class WandOfTelekinesis extends Wand {
 	public String desc() {
 		return "Waves of magic force from this wand will affect all cells on their way triggering traps, trampling high vegetation, "
 				+ "opening closed doors and closing open ones. They also push back monsters.\n\n"+
-				statsDesc(levelKnown);
+				statsDesc();
 	}
 }

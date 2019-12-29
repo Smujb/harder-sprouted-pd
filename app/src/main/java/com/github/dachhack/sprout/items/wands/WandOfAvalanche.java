@@ -47,12 +47,12 @@ public class WandOfAvalanche extends Wand {
 	}
 
 	@Override
-	public int max(int lvl) {
-		return 10 + 9*lvl;
+	public int magicMax(int lvl) {
+		return 15 + 10*lvl;
 	}
 
 	@Override
-	public int min(int lvl) {
+	public int magicMin(int lvl) {
 		return 6 + 3*lvl;
 	}
 
@@ -79,12 +79,14 @@ public class WandOfAvalanche extends Wand {
 
 					ch.sprite.flash();
 					
-					 int damage = damageRoll();
+					 int damage = magicDamageRoll();
 			         if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 			         if (ch == Dungeon.hero) {
-			         	damage = Random.Int(damage/2) + 1;
+			         	damage = damage/3;
 					 }
+			         damage -= Random.NormalIntRange(ch.dr()/2,ch.dr());
 					 ch.damage(damage, this);
+
 	
 
 					if (ch.isAlive() && Random.Int(2 + d) < 2 && !(ch instanceof Hero)) {//Doesn't self-paralyze
@@ -105,6 +107,12 @@ public class WandOfAvalanche extends Wand {
 	}
 
 	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		Buff.affect(defender, Paralysis.class, 2 + wand.level()/10);
+	}
+
+	@Override
 	protected void fx(int cell, Callback callback) {
 		MagicMissile.earth(curUser.sprite.parent, curUser.pos, cell, callback);
 		Sample.INSTANCE.play(Assets.SND_ZAP);
@@ -115,6 +123,6 @@ public class WandOfAvalanche extends Wand {
 		return "When a discharge of this wand hits a wall (or any other solid obstacle) it causes "
 				+ "an avalanche of stones, damaging and stunning all creatures in the affected area." +
 				"It will deal reduced damage at distance, but may harm the player when close up." +
-				"\n\n" + statsDesc(levelKnown);
+				"\n\n" + statsDesc();
 	}
 }

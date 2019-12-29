@@ -29,6 +29,10 @@ public class PathFinder {
 	
 	private static int size = 0;
 
+	public static int[] NEIGHBOURS4;
+	public static int[] NEIGHBOURS8;
+	public static int[] NEIGHBOURS9;
+
 	private static int[] dir;
 	
 	public static void setMapSize( int width, int height ) {
@@ -43,6 +47,9 @@ public class PathFinder {
 			queue = new int[size];
 			
 			dir = new int[]{-1, +1, -width, +width, -width-1, -width+1, +width-1, +width+1};
+			NEIGHBOURS4 = new int[]{-width, -1, +1, +width};
+			NEIGHBOURS8 = new int[]{-width-1, -width, -width+1, -1, +1, +width-1, +width, +width+1};
+			NEIGHBOURS9 = new int[]{-width-1, -width, -width+1, -1, 0, +1, +width-1, +width, +width+1};
 		}
 	}
 	

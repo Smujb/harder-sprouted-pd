@@ -79,10 +79,16 @@ public class Kupua extends Mob {
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
+	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
 	static {
-		IMMUNITIES.add(Death.class);
 		IMMUNITIES.add(ToxicGas.class);
 		IMMUNITIES.add(CorruptGas.class);
+		RESISTANCES.add(Death.class);
+	}
+
+	@Override
+	public HashSet<Class<?>> resistances() {
+		return RESISTANCES;
 	}
 
 	@Override

@@ -28,12 +28,14 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.ItemStatusHandler;
 import com.github.dachhack.sprout.items.KindOfWeapon;
 import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.items.rings.RingOfMagic.Magic;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.CellSelector;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -304,33 +306,61 @@ public abstract class Wand extends KindOfWeapon {
 		return this;
 	}
 
-	public int max(int lvl) {
+	@Override
+	public void proc(Char attacker, Char defender, int damage) {
+		super.proc(attacker, defender, damage);
+		if (attacker instanceof Hero && ((Hero)attacker).subClass == HeroSubClass.BATTLEMAGE) {
+			onHit(this, (Hero) attacker, defender, damage);
+		}
+	}
+
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		if (wand.curCharges < wand.maxCharges && damage > 0) {
+
+			wand.curCharges++;
+			if (Dungeon.quickslot.contains(wand)) {
+				QuickSlotButton.refresh();
+			}
+
+			ScrollOfRecharging.charge(attacker);
+		}
+	}
+
+	public int magicMax(int lvl) {
 		return 0;
 	}
-	public int min(int lvl) {
+	public int magicMin(int lvl) {
 		return 0;
 	}
 
-	public int max() {
-		return max(level());
+	public int magicMax() {
+		return magicMax(level());
 	}
-	public int min() {
-		return min(level());
-	}
-
-	public int damageRoll() {
-		return damageRoll(level);
+	public int magicMin() {
+		return magicMin(level());
 	}
 
-	public int damageRoll(int lvl) {
-		return Random.NormalIntRange(min(lvl),max(lvl));
+	@Override
+	public int damageRoll(Hero owner) {
+		float multiplier = 1f + curCharges/(float)maxCharges;//Up to double damage at full charges
+		int damage = super.damageRoll(owner);
+		damage = (int) (damage*multiplier);
+		return damage;
 	}
 
-	public String statsDesc(boolean Identified) {
-		if (!Identified) {
-			return "This Wand will typically deal " + min(0) + "-" + max(0) + " damage.";
+	public int magicDamageRoll() {
+		return magicDamageRoll(level);
+	}
+
+	public int magicDamageRoll(int lvl) {
+		return Random.NormalIntRange(magicMin(lvl),magicMax(lvl));
+	}
+
+	public String statsDesc() {
+		if (!levelKnown) {
+			return "This wand will typically deal " + magicMin(0) + "-" + magicMax(0) + " damage.";
 		} else {
-			return "This Wand deals  " + min() + "-" + max() + " damage.";
+			return "This wand deals  " + magicMin() + "-" + magicMax() + " damage.";
 		}
 	}
 
@@ -360,7 +390,7 @@ public abstract class Wand extends KindOfWeapon {
 	}
 
 	private void calculateDamage() {
-		int tier = 1 + level / 3;
+		int tier = 2;
 		MIN = tier;
 		MAX = (tier * tier - tier + 10) / 2 + level;
 	}

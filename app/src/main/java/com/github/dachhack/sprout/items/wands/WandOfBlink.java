@@ -21,7 +21,10 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
+import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.mechanics.Ballistica;
@@ -29,6 +32,7 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Callback;
+import com.watabou.utils.Random;
 
 public class WandOfBlink extends Wand {
 
@@ -65,7 +69,15 @@ public class WandOfBlink extends Wand {
 				callback);
 		Sample.INSTANCE.play(Assets.SND_ZAP);
 		if (!Dungeon.sokobanLevel(Dungeon.depth)){
-		curUser.sprite.visible = false;
+			curUser.sprite.visible = false;
+		}
+	}
+
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		if (Random.Int(wand.level + 150) < wand.level + 100) {
+			Buff.affect(defender, MagicalSleep.class);
 		}
 	}
 

@@ -68,7 +68,7 @@ public class Zot extends Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(300, 400);
+		return Random.NormalIntRange(200, 450);
 	}
 
 	@Override
@@ -242,9 +242,6 @@ public class Zot extends Mob {
 	
 	@Override
 	public void damage(int dmg, Object src) {
-
-		int max = Math.round(dmg*.5f);
-		dmg = Random.Int(1,max);
 
 		
 		if(Dungeon.hero.heroClass==HeroClass.HUNTRESS && !checkPhases()){

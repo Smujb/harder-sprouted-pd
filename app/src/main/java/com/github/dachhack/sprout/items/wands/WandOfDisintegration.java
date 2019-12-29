@@ -25,9 +25,12 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Strength;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.DeathRay;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
+import com.github.dachhack.sprout.items.weapon.enchantments.Death;
+import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
@@ -43,12 +46,12 @@ public class WandOfDisintegration extends Wand {
 	}
 
 	@Override
-	public int max(int lvl) {
+	public int magicMax(int lvl) {
 		return 10 + 7*lvl;
 	}
 
 	@Override
-	public int min(int lvl) {
+	public int magicMin(int lvl) {
 		return 1 + (int)(0.5f*lvl);
 	}
 
@@ -96,7 +99,7 @@ public class WandOfDisintegration extends Wand {
 			Dungeon.observe();
 		}
 
-		int dmg = damageRoll();
+		int dmg = magicDamageRoll();
 		if (Dungeon.hero.buff(Strength.class) != null){ dmg *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 		for (Char ch : chars) {
 			ch.damage(dmg, this);
@@ -120,9 +123,17 @@ public class WandOfDisintegration extends Wand {
 	}
 
 	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		if (Random.Float() < defender.HP/(float)(defender.HT*2)) {
+			defender.damage(defender.HP, new Death());
+		}
+	}
+
+	@Override
 	public String desc() {
 		return "This wand emits a beam of destructive energy, which pierces all creatures in its way. "
 				+ "The more targets it hits, the more damage it inflicts to each of them." +
-				"\n\n" + statsDesc(levelKnown);
+				"\n\n" + statsDesc();
 	}
 }

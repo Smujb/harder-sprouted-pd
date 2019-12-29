@@ -92,7 +92,7 @@ public class ZotPhase extends Mob implements Callback{
 			spend(TIME_TO_ZAP);
 
 			if (hit(this, enemy, true)) {
-				int dmg = Random.Int(80+ adjustForDepth(0), 160+ adjustForDepth(3));
+				int dmg = Random.Int(80, 160);
 				if (Level.water[enemy.pos] && !enemy.flying) {
 					dmg *= 1.5f;
 				}
@@ -118,17 +118,6 @@ public class ZotPhase extends Mob implements Callback{
 
 			return !visible;
 		}
-	}
-	
-	@Override
-	public void damage(int dmg, Object src) {
-
-		if(src instanceof Item){
-			int max = Math.round(dmg*.5f);
-			dmg = Random.Int(1,max);
-		}
-
-		super.damage(dmg, src);
 	}
 
 	@Override

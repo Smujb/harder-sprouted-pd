@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.particles.BlastParticle;
@@ -42,6 +43,7 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
+import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 public class WandOfFirebolt extends Wand {
@@ -50,12 +52,12 @@ public class WandOfFirebolt extends Wand {
 		name = "Wand of Firebolt";
 	}
 
-	public int min(int lvl){
+	public int magicMin(int lvl){
 		return (1+lvl) * chargesPerCast();
 	}
 
 	//1x/2x/3x damage
-	public int max(int lvl){
+	public int magicMax(int lvl){
 		return (6+4*lvl) * chargesPerCast();
 	}
 
@@ -82,7 +84,7 @@ public class WandOfFirebolt extends Wand {
 		Char ch = Actor.findChar(cell);
 		if (ch != null) {
 
-			int damage= damageRoll();
+			int damage= magicDamageRoll();
 	        if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 			ch.damage(damage, this);
 
@@ -161,7 +163,37 @@ public class WandOfFirebolt extends Wand {
 			Dungeon.observe();
 		}
 	}
-	
+
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		int bonusdamage = wand.damageRoll(attacker)/5;
+		for (int n : PathFinder.NEIGHBOURS9) {
+			int pos = defender.pos + n;
+			Char enemy = Actor.findChar(pos);
+			if (enemy != null & (Random.Int(2) == 0 | enemy == defender)) {//Guaranteed to burn the target, may burn adjacent mobs as well.
+				if (defender.buff(Burning.class) != null) {
+					Buff.affect(defender, Burning.class).reignite(defender);
+					defender.damage(bonusdamage, this);
+				} else {
+					Buff.affect(defender, Burning.class).reignite(defender);
+				}
+			} else {
+				if (Random.Int(2) == 0 & pos != attacker.pos) {
+					GameScene.add(Blob.seed(pos, 3, Fire.class));
+				}
+			}
+		}
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+			if (Level.fieldOfView[mob.pos] & Random.Int(4) == 0) {
+				GameScene.add(Blob.seed(mob.pos, 3, Fire.class));
+			}
+		}
+
+
+		defender.sprite.emitter().burst(FlameParticle.FACTORY, (wand.level()+3)*5);
+	}
+
 	@Override
 	protected void fx(int cell, Callback callback) {
 		MagicMissile.fire(curUser.sprite.parent, curUser.pos, cell, callback);		
@@ -173,6 +205,6 @@ public class WandOfFirebolt extends Wand {
 		return "This wand unleashes bursts of magical fire. It will ignite "
 				+ "flammable terrain, and will damage and burn a creature it hits."
 				+ "It is very unstable at higher levels. Use with caution." +
-				"\n\n" + statsDesc(levelKnown);
+				"\n\n" + statsDesc();
 	}
 }

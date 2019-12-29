@@ -1211,7 +1211,7 @@ public class Hero extends Char {
 				damage += Buff.affect(this, Combo.class).hit(enemy, damage);
 			}
 			break;
-		case BATTLEMAGE:
+		/*case BATTLEMAGE:
 			if (wep instanceof Wand) {
 				Wand wand = (Wand) wep;
 				if (wand.curCharges < wand.maxCharges && damage > 0) {
@@ -1225,10 +1225,10 @@ public class Hero extends Char {
 				}
 				damage += wand.curCharges;
 			}
-			break;
+			break;*/
 		case SNIPER:
 			if (rangedWeapon != null) {
-				Buff.prolong(this, SnipersMark.class, attackDelay() * 1.1f).object = enemy
+				Buff.prolong(this, SnipersMark.class, 4f).object = enemy
 						.id();
 			}
 			break;
