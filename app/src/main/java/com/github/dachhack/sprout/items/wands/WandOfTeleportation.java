@@ -21,6 +21,7 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfTeleportation;
@@ -34,6 +35,33 @@ public class WandOfTeleportation extends Wand {
 		name = "Wand of Teleportation";
 	}
 
+
+	public static void teleportChar(Char ch) {
+		int count = 10;
+		int pos;
+		do {
+			pos = Dungeon.level.randomRespawnCell();
+			if (count-- <= 0) {
+				break;
+			}
+		} while (pos == -1);
+
+		if (pos == -1) {
+
+			GLog.w(ScrollOfTeleportation.TXT_NO_TELEPORT);
+
+		} else {
+
+			ch.pos = pos;
+			ch.sprite.place(ch.pos);
+			ch.sprite.visible = Dungeon.visible[pos];
+			GLog.i(curUser.name + " teleported " + ch.name
+					+ " to somewhere");
+
+		}
+	}
+
+
 	@Override
 	protected void onZap(int cell) {
 
@@ -46,28 +74,7 @@ public class WandOfTeleportation extends Wand {
 
 		} else if (ch != null && !(ch instanceof NPC)) {
 
-			int count = 10;
-			int pos;
-			do {
-				pos = Dungeon.level.randomRespawnCell();
-				if (count-- <= 0) {
-					break;
-				}
-			} while (pos == -1);
-
-			if (pos == -1) {
-
-				GLog.w(ScrollOfTeleportation.TXT_NO_TELEPORT);
-
-			} else {
-
-				ch.pos = pos;
-				ch.sprite.place(ch.pos);
-				ch.sprite.visible = Dungeon.visible[pos];
-				GLog.i(curUser.name + " teleported " + ch.name
-						+ " to somewhere");
-
-			}
+			teleportChar(ch);
 
 		} else {
 
@@ -81,6 +88,12 @@ public class WandOfTeleportation extends Wand {
 		MagicMissile.coldLight(curUser.sprite.parent, curUser.pos, cell,
 				callback);
 		Sample.INSTANCE.play(Assets.SND_ZAP);
+	}
+
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		teleportChar(defender);
 	}
 
 	@Override

@@ -21,12 +21,15 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -48,6 +51,11 @@ public class WandOfBlink extends Wand {
 			Invisibility.dispel();
 			setKnown();
 			return;
+		}
+
+		Char ch = Actor.findChar(cell);
+		if (ch != null) {
+			processSoulMark(ch, chargesPerCast());
 		}
 
 		int level = level();
@@ -76,7 +84,11 @@ public class WandOfBlink extends Wand {
 	@Override
 	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
 		super.onHit(wand, attacker, defender, damage);
-		if (Random.Int(wand.level + 150) < wand.level + 100) {
+		if (Random.Int( 100-wand.level()) < 30) {
+			Buff.prolong(defender, Blindness.class, 1 + Random.Int(wand.level()/20+3));
+			Buff.prolong(defender, Cripple.class, Cripple.DURATION);
+		}
+		if (Random.Int(Level.distance(attacker.pos, defender.pos)*2 - (wand.level()/2) + 10) <= 2) {
 			Buff.affect(defender, MagicalSleep.class);
 		}
 	}

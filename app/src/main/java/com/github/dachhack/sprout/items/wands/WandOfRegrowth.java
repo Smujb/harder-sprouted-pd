@@ -19,16 +19,21 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Regrowth;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.MagicMissile;
+import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
+import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
+import com.watabou.utils.Random;
 
 public class WandOfRegrowth extends Wand {
 
@@ -69,6 +74,23 @@ public class WandOfRegrowth extends Wand {
 		MagicMissile
 				.foliage(curUser.sprite.parent, curUser.pos, cell, callback);
 		Sample.INSTANCE.play(Assets.SND_ZAP);
+	}
+
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		int maxValue = (int) (damage * 0.2f);
+		int effValue = Math.min(Random.IntRange(0, maxValue), attacker.HT
+				- attacker.HP);
+
+		if (effValue > 0) {
+
+			attacker.HP += effValue;
+			attacker.sprite.emitter().start(Speck.factory(Speck.HEALING), 0.4f,
+					1);
+			attacker.sprite.showStatus(CharSprite.POSITIVE,
+					Integer.toString(effValue));
+		}
 	}
 
 	@Override

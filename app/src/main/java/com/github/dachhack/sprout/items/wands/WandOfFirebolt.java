@@ -88,6 +88,8 @@ public class WandOfFirebolt extends Wand {
 	        if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 			ch.damage(damage, this);
 
+	        processSoulMark(ch, chargesPerCast());
+
 	
 			Buff.affect(ch, Burning.class).reignite(ch);
 

@@ -21,6 +21,10 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.buffs.Roots;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.FlyingProtector;
 import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -114,6 +118,12 @@ public class WandOfFlock extends Wand {
 		return "A flick of this wand summons a flock of magic sheep, creating temporary impenetrable obstacle.";
 	}
 
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		Buff.affect(defender, Roots.class, Paralysis.duration(defender));
+	}
+
 	public static class Sheep extends NPC {
 
 		private static final String[] QUOTES = { "Baa!", "Baa?", "Baa.",
@@ -146,6 +156,8 @@ public class WandOfFlock extends Wand {
 		@Override
 		public void damage(int dmg, Object src) {
 		}
+
+
 
 		@Override
 		public String description() {

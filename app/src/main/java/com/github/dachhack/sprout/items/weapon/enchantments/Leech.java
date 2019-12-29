@@ -40,12 +40,7 @@ public class Leech extends Weapon.Enchantment {
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {
 
-		int level = Math.max(0, weapon.level);
-
-		// lvl 0 - 33%
-		// lvl 1 - 43%
-		// lvl 2 - 50%
-		int maxValue = damage * (level + 2) / (level + 6);
+		int maxValue = (int) (damage * 0.2f);
 		int effValue = Math.min(Random.IntRange(0, maxValue), attacker.HT
 				- attacker.HP);
 

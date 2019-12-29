@@ -37,9 +37,7 @@ public class ScrollOfRage extends Scroll {
 		consumedValue = 5;
 	}
 
-	@Override
-	protected void doRead() {
-
+	public void readThis() {
 		for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
 			mob.beckon(curUser.pos);
 			if (Level.fieldOfView[mob.pos]) {
@@ -64,6 +62,12 @@ public class ScrollOfRage extends Scroll {
 				3);
 		Sample.INSTANCE.play(Assets.SND_CHALLENGE);
 		Invisibility.dispel();
+	}
+
+	@Override
+	protected void doRead() {
+
+		readThis();
 
 		curUser.spendAndNext(TIME_TO_READ);
 	}

@@ -1521,10 +1521,10 @@ public class Hero extends Char {
 				
 			}
 
-			buff(Hunger.class).satisfy(10);
+			buff(Hunger.class).satisfy(50);
 		}
 
-		if (subClass == HeroSubClass.WARLOCK) {
+		/*if (subClass == HeroSubClass.WARLOCK) {//Warlock no longer heals when killing mobs. Soul Mark is much more interesting.
 
 			int value = Math.min(HT - HP, 1 + (Dungeon.depth - 1) / 5);
 			if (value > 0) {
@@ -1533,7 +1533,7 @@ public class Hero extends Char {
 			}
 
 			buff(Hunger.class).satisfy(100);
-		}
+		}*/
 	}
 
 	public int maxExp() {

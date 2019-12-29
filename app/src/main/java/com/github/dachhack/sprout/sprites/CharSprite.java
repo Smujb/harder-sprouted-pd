@@ -56,8 +56,8 @@ public class CharSprite extends MovieClip implements Tweener.Listener,
 	private static final float FLASH_INTERVAL = 0.05f;
 
 	public enum State {
-		BURNING, LEVITATING, INVISIBLE, PARALYSED, FROZEN, ILLUMINATED
-	}
+		BURNING, LEVITATING, INVISIBLE, PARALYSED, FROZEN, ILLUMINATED, MARKED;
+    }
 
 	protected Animation idle;
 	protected Animation run;

@@ -35,7 +35,7 @@ public class GreyOni extends Mob {
 		HP = HT = 750;
 		scalesWithHeroLevel = true;
 
-		EXP = 22;		
+		EXP = 22;
 	}
 
 	@Override

@@ -143,6 +143,12 @@ public class WandOfMagicMissile extends Wand {
 				"\n\n" + statsDesc();
 	}
 
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		attacker.belongings.charge(false);//Grants 1 charge for each wand in the hero's inventory
+	}
+
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {
 		@Override
 		public void onSelect(Item item) {

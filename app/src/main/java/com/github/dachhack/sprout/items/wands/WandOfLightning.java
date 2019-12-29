@@ -26,10 +26,12 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Strength;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.effects.LightningLarge;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
+import com.github.dachhack.sprout.items.weapon.enchantments.Shock;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.utils.GLog;
@@ -120,10 +122,16 @@ public class WandOfLightning extends Wand {
 
 		}
 		if(Random.Int(10)<5){
-		curUser.sprite.parent.add(new Lightning(points, nPoints, callback));
+			curUser.sprite.parent.add(new Lightning(points, nPoints, callback));
 		} else {
 			curUser.sprite.parent.add(new LightningLarge(points, nPoints, callback));	
 		}
+	}
+
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		new Shock().proc(wand, attacker, defender, damage);
 	}
 
 	@Override

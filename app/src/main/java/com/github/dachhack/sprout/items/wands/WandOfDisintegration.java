@@ -23,13 +23,17 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.DeathRay;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
+import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
@@ -92,7 +96,7 @@ public class WandOfDisintegration extends Wand {
 			}
 
 			CellEmitter.center(c).burst(PurpleParticle.BURST,
-					Random.IntRange(1, 2));
+					Random.IntRange(1 + level()/4, 2 + level()/2));
 		}
 
 		if (terrainAffected) {
@@ -103,6 +107,7 @@ public class WandOfDisintegration extends Wand {
 		if (Dungeon.hero.buff(Strength.class) != null){ dmg *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 		for (Char ch : chars) {
 			ch.damage(dmg, this);
+			processSoulMark(ch, chargesPerCast());
 			ch.sprite.centerEmitter().burst(PurpleParticle.BURST,
 					Random.IntRange(1, 2));
 			ch.sprite.flash();
@@ -125,8 +130,20 @@ public class WandOfDisintegration extends Wand {
 	@Override
 	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
 		super.onHit(wand, attacker, defender, damage);
-		if (Random.Float() < defender.HP/(float)(defender.HT*2)) {
-			defender.damage(defender.HP, new Death());
+		if (Random.Int(10) == 0) {//1/10 times, attack the highest HP enemy on the map!
+			Mob highestHP = null;
+			int highestHPAmt = -1;
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+				if (!mob.ally & mob.HP > highestHPAmt) {
+					highestHP = mob;
+					highestHPAmt = mob.HP;
+				}
+			}
+			if (highestHP != null) {
+				highestHP.damage(wand.magicDamageRoll(), wand);
+				attacker.sprite.parent.add(new DeathRay(attacker.sprite.center(),
+						DungeonTilemap.tileCenterToWorld(highestHP.pos)));
+			}
 		}
 	}
 

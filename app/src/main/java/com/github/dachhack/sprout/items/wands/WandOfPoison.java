@@ -21,9 +21,12 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Strength;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -52,6 +55,15 @@ public class WandOfPoison extends Wand {
 			GLog.i("nothing happened");
 
 		}
+	}
+
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		Buff.affect(defender, Poison.class).set( 3 + Dungeon.depth / 2 );
+		Buff.affect( defender, Bleeding.class ).set( damage );
+		Buff.affect( defender, Cripple.class, Cripple.DURATION);
+
 	}
 
 	@Override

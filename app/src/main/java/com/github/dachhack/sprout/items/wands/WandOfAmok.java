@@ -23,12 +23,15 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.MagicMissile;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfRage;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
+import com.watabou.utils.Random;
 
 public class WandOfAmok extends Wand {
 
@@ -40,7 +43,7 @@ public class WandOfAmok extends Wand {
 	protected void onZap(int cell) {
 		Char ch = Actor.findChar(cell);
 		if (ch != null) {
-
+			processSoulMark(ch, chargesPerCast());
 			if (ch == Dungeon.hero) {
 				Buff.affect(ch, Vertigo.class, Vertigo.duration(ch));
 			} else {
@@ -57,7 +60,9 @@ public class WandOfAmok extends Wand {
 	@Override
 	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
 		super.onHit(wand, attacker, defender, damage);
-		Buff.affect(defender, Amok.class, 10f);
+		if (Random.Int(5) == 0) {
+			Buff.affect(attacker, Strength.class);
+		}
 	}
 
 	@Override

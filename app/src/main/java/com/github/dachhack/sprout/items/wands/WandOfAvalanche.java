@@ -23,12 +23,15 @@ import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Burning;
+import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.utils.BArray;
@@ -87,6 +90,7 @@ public class WandOfAvalanche extends Wand {
 			         damage -= Random.NormalIntRange(ch.dr()/2,ch.dr());
 					 ch.damage(damage, this);
 
+					 processSoulMark(ch, chargesPerCast());
 	
 
 					if (ch.isAlive() && Random.Int(2 + d) < 2 && !(ch instanceof Hero)) {//Doesn't self-paralyze
@@ -96,7 +100,7 @@ public class WandOfAvalanche extends Wand {
 
 				CellEmitter.get(i).start(Speck.factory(Speck.ROCK), 0.07f,
 						3 + (size - d));
-				Camera.main.shake(3, 0.07f * (Math.max(1, level() - d)));
+				Camera.main.shake(2 + level()/5, 0.07f * 10);
 			}
 		}
 
@@ -109,7 +113,14 @@ public class WandOfAvalanche extends Wand {
 	@Override
 	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
 		super.onHit(wand, attacker, defender, damage);
-		Buff.affect(defender, Paralysis.class, 2 + wand.level()/10);
+		if (Random.Int(8) == 0) {
+			Buff.affect(defender, Paralysis.class, 2 + wand.level() / 10);
+			Buff.affect(defender, Cripple.class, Cripple.DURATION);
+			defender.damage(defender.HT/2,new Death());
+			CellEmitter.get(defender.pos).start(Speck.factory(Speck.ROCK), 0.07f,
+					3 + (wand.level()/5));
+			Camera.main.shake(2 + wand.level()/5, 0.07f * 10);
+		}
 	}
 
 	@Override

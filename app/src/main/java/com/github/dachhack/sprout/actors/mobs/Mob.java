@@ -29,10 +29,13 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Dewcharge;
+import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
+import com.github.dachhack.sprout.actors.buffs.SoulMark;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
+import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.Surprise;
 import com.github.dachhack.sprout.effects.Wound;
 import com.github.dachhack.sprout.items.Generator;
@@ -389,14 +392,20 @@ public abstract class Mob extends Char {
 	@Override
 	public int defenseProc(Char enemy, int damage) {
 		if (!enemySeen && enemy == Dungeon.hero) {
-			if (((Hero)enemy).subClass == HeroSubClass.ASSASSIN) {
+			if (((Hero) enemy).subClass == HeroSubClass.ASSASSIN) {
 				damage *= 1.34f;
 				Wound.hit(this);
 			} else {
 				Surprise.hit(this);
 			}
 		}
-			return damage;
+		if (buff(SoulMark.class) != null) {
+			int restoration = Math.min(damage, HP);
+			Buff.affect(Dungeon.hero, Hunger.class).satisfy(restoration);
+			Dungeon.hero.HP = (int)Math.ceil(Math.min(Dungeon.hero.HT, Dungeon.hero.HP+(restoration*0.2f)));
+			Dungeon.hero.sprite.emitter().burst( Speck.factory(Speck.HEALING), 1 );
+		}
+		return damage;
 	}
 
 	public void aggro(Char ch) {

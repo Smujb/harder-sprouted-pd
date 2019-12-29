@@ -21,7 +21,13 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Bleeding;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
+import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.buffs.Vertigo;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.npcs.NPC;
 import com.github.dachhack.sprout.actors.mobs.npcs.SheepSokoban;
@@ -45,6 +51,7 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
+import com.watabou.utils.Random;
 
 public class WandOfTelekinesis extends Wand {
 
@@ -219,6 +226,16 @@ public class WandOfTelekinesis extends Wand {
 	protected void fx(int cell, Callback callback) {
 		MagicMissile.force(curUser.sprite.parent, curUser.pos, cell, callback);
 		Sample.INSTANCE.play(Assets.SND_ZAP);
+	}
+
+	@Override
+	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
+		super.onHit(wand, attacker, defender, damage);
+		if (Random.Int(5) == 0) {
+			Buff.affect(defender, Vertigo.class, 2 + wand.level() / 10);
+			Buff.affect(defender, Cripple.class, 2 + wand.level() / 10);
+			Buff.affect(defender, Bleeding.class).set(defender.HP/10);
+		}
 	}
 
 	@Override
