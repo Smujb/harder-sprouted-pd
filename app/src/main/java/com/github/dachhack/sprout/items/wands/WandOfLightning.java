@@ -76,6 +76,8 @@ public class WandOfLightning extends Wand {
 			return;
 		}
 
+		processSoulMark(ch, chargesPerCast());
+
 		if (ch == Dungeon.hero) {
 			Camera.main.shake(2, 0.3f);
 		}

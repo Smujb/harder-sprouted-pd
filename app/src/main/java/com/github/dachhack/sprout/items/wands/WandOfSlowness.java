@@ -41,6 +41,8 @@ public class WandOfSlowness extends Wand {
 
 			Buff.affect(ch, Slow.class, Slow.duration(ch) / 3 + level());
 
+			processSoulMark(ch, chargesPerCast());
+
 		} else {
 
 			GLog.i("nothing happened");

@@ -95,6 +95,8 @@ public class WandOfTelekinesis extends Wand {
 
 				ch.damage(magicDamageRoll(), this);
 
+				processSoulMark(ch, chargesPerCast());
+
 				if (i == Ballistica.distance - 1) {
 
 

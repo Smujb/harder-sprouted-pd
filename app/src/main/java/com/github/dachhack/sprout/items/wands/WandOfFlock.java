@@ -54,9 +54,16 @@ public class WandOfFlock extends Wand {
 
 		int n = level + 2;
 
-		if (Actor.findChar(cell) != null && Ballistica.distance > 2) {
-			cell = Ballistica.trace[Ballistica.distance - 2];
+		Char ch = Actor.findChar(cell);
+
+		if (ch != null) {
+			processSoulMark(ch, chargesPerCast());
+			if( Ballistica.distance > 2) {
+
+				cell = Ballistica.trace[Ballistica.distance - 2];
+			}
 		}
+
 
 		boolean[] passable = BArray.or(Level.passable, Level.avoid, null);
 		for (Actor actor : Actor.all()) {

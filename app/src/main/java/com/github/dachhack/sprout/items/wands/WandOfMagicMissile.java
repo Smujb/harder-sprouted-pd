@@ -89,6 +89,7 @@ public class WandOfMagicMissile extends Wand {
             int damage= magicDamageRoll();
             if (Dungeon.hero.buff(Strength.class) != null){ damage *= (int) 4f; Buff.detach(Dungeon.hero, Strength.class);}
 			ch.damage(damage, this);
+            processSoulMark(ch, chargesPerCast());
 
 			ch.sprite.burst(0xFF99CCFF, level / 2 + 2);
 

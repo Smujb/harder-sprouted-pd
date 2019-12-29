@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Regrowth;
@@ -54,7 +55,10 @@ public class WandOfRegrowth extends Wand {
 
 			}
 		}
-
+		Char ch = Actor.findChar(cell);
+		if (ch != null) {
+			processSoulMark(ch, chargesPerCast());
+		}
 		int c = Dungeon.level.map[cell];
 		if (c == Terrain.EMPTY || c == Terrain.EMBERS
 				|| c == Terrain.EMPTY_DECO || c == Terrain.GRASS

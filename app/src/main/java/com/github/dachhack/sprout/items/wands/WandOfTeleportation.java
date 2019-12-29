@@ -75,6 +75,7 @@ public class WandOfTeleportation extends Wand {
 		} else if (ch != null && !(ch instanceof NPC)) {
 
 			teleportChar(ch);
+			processSoulMark(ch, chargesPerCast());
 
 		} else {
 

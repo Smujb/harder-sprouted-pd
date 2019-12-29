@@ -50,6 +50,8 @@ public class WandOfPoison extends Wand {
 			Buff.affect(ch, Poison.class).set(
 					Poison.durationFactor(ch) * (poisonbase + level()*2));
 
+			processSoulMark(ch, chargesPerCast());
+
 		} else {
 
 			GLog.i("nothing happened");
