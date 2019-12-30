@@ -42,19 +42,6 @@ public class RoyalSpork extends MeleeWeapon {
 	@Override
 	public void proc(Char attacker, Char defender, int damage) {
 		
-		if (defender instanceof Gullin 
-        		|| defender instanceof Kupua
-        		|| defender instanceof MineSentinel
-        		|| defender instanceof Otiluke
-        		|| defender instanceof Zot
-        		|| defender instanceof ZotPhase){
-        	
-        	//damage*=2;
-			
-			defender.damage(Random.Int(damage,damage*8), this);
-		}
-        
-		
 		if (enchantment != null) {
 			enchantment.proc(this, attacker, defender, damage);		
 		}

@@ -65,7 +65,7 @@ public class WaterOfTransmutation extends WellWater {
 
 	@Override
 	protected Item affectItem(Item item) {
-
+		boolean reinforced = item.reinforced;
 		if (item instanceof MeleeWeapon & !(item instanceof RelicMeleeWeapon)) {
 			item = changeWeapon((MeleeWeapon) item);
 		} else if (item instanceof Scroll) {
@@ -102,6 +102,9 @@ public class WaterOfTransmutation extends WellWater {
 
 		if (item != null) {
 			Journal.remove(Feature.WELL_OF_TRANSMUTATION);
+			if (reinforced) {
+				item.reinforce();
+			}
 		}
 
 
@@ -127,7 +130,7 @@ public class WaterOfTransmutation extends WellWater {
 			} else if (level < 0) {
 				n.degrade(-level);
 			}
-
+			n.reinforce();
 			n.levelKnown = weapon.levelKnown;
 			n.cursedKnown = weapon.cursedKnown;
 			n.cursed = weapon.cursed;

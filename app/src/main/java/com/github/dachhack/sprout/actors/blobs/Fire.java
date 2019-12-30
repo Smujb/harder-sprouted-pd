@@ -86,7 +86,7 @@ public class Fire extends Blob {
 						}
 					}
 						
-                    /*
+
 					if (shelf && Random.Float()<.02 && Dungeon.hero.buff(MagicSight.class) != null){
 							
 							if (Dungeon.limitedDrops.vaultpage.dropped()) {
@@ -94,9 +94,6 @@ public class Fire extends Blob {
 							}
 					
 					}
-					*/
-					
-					
 
 					observe = true;
 					GameScene.updateMap(pos);

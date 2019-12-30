@@ -65,10 +65,8 @@ public class Dewdrop extends Item {
 				}
 				return false;
 			}
-		} else if (vial != null) {
-
+		} else {
 			vial.collectDew(this, amountToFill);
-
 		}
 
 		Sample.INSTANCE.play(Assets.SND_DEWDROP);

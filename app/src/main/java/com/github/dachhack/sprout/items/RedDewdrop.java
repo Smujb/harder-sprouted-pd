@@ -17,14 +17,7 @@
  */
 package com.github.dachhack.sprout.items;
 
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroClass;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
-import com.watabou.noosa.audio.Sample;
 
 public class RedDewdrop extends Dewdrop {
 

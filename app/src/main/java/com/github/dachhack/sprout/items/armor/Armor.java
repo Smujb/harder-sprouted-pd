@@ -133,7 +133,7 @@ public class Armor extends EquipableItem {
 
 	@Override
 	protected float time2equip(Hero hero) {
-		return hero.speed();
+		return 1f;
 	}
 
 	@Override

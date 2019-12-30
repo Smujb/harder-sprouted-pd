@@ -70,7 +70,11 @@ public class MineSentinel extends Statue {
 
 		weapon.identify();
 		weapon.enchant(Enchantment.random());
-		weapon.upgrade(Random.NormalIntRange(25,50));
+		if (Dungeon.depth == 24) {
+			weapon.upgrade(15);
+		} else {
+			weapon.upgrade(Random.NormalIntRange(25, 50));
+		}
 		
 
 		HP = HT = 20 + Dungeon.depth * 10;
@@ -187,8 +191,7 @@ public class MineSentinel extends Statue {
 
 	@Override
 	public int dr() {
-		//return Dungeon.depth*3;
-		return 3;
+		return Dungeon.depth*3;
 	}
 
 	@Override
@@ -216,11 +219,10 @@ public class MineSentinel extends Statue {
 
 	@Override
 	public void die(Object cause) {
-		Dungeon.level.drop(weapon, pos).sprite.drop();
 		if (!Dungeon.limitedDrops.hallskey.dropped() && Dungeon.depth==24) {
 			Dungeon.limitedDrops.hallskey.drop();
 			Dungeon.level.drop(new HallsKey(), pos).sprite.drop();
-			explodeDew(pos);				
+			explodeDew(pos);
 		} 
 		super.die(cause);
 	}

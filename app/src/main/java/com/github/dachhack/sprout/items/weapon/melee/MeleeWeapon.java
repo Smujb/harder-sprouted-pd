@@ -91,18 +91,14 @@ public class MeleeWeapon extends Weapon {
 		info.append(p);
 		info.append("This " + name + " is " + Utils.indefinite(quality));
 		info.append(" tier-" + tier + " melee weapon. ");
-
+		float multiplier = (imbue == Imbue.LIGHT ? 0.75f : (imbue == Imbue.HEAVY ? 1.5f : 1));
 		if (levelKnown) {
-			info.append("Its average damage is "
-					+ Math.round((MIN + (MAX - MIN) / 2)
-							* (imbue == Imbue.LIGHT ? 0.75f
-									: (imbue == Imbue.HEAVY ? 1.5f : 1)))
-					+ " points per hit. ");
+			info.append("It will deal " + Math.round(MIN*multiplier) + "-" + Math.round(MAX*multiplier) + " damage per hit and require " + STR + " strength to use. ");
+			if (STR > Dungeon.hero.STR()) {
+				info.append("This weapon is too heavy for you. ");
+			}
 		} else {
-			info.append("Its typical average damage is "
-					+ (min() + (max() - min()) / 2) + " points per hit "
-					+ "and usually it requires " + typicalSTR()
-					+ " points of strength. ");
+			info.append("It will typically deal " + Math.round(min()*multiplier) + "-" + Math.round(max()*multiplier) + " damage per hit and usually require " + typicalSTR() + " strength to use.");
 			if (typicalSTR() > Dungeon.hero.STR()) {
 				info.append("Probably this weapon is too heavy for you. ");
 			}

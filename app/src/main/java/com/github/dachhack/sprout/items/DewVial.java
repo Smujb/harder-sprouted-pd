@@ -129,34 +129,17 @@ public class DewVial extends Item {
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
 		if (volume > 99) {
-			actions.add(AC_DRINK);
-					
-			if (Dungeon.dewWater){
-				actions.add(AC_WATER);
-			} else {
-				actions.add(AC_SIP);
-			}
-			
-			actions.add(AC_SPLASH);
 			actions.add(AC_BLESS);
-		}	
-		else if (volume > 49) {
-			actions.add(AC_DRINK);
-			actions.add(AC_SIP);
-			actions.add(AC_SPLASH);
 		}
 		
-		else if (volume > 29) {
-			actions.add(AC_DRINK);
-			actions.add(AC_SIP);
+		 if (volume > 29) {
 			actions.add(AC_SPLASH);
 		}
-		else if (volume > 2) {
+		 if (volume > 2) {
 			actions.add(AC_DRINK);
-			actions.add(AC_SIP);
 
 		} 
-		else if (volume > 0) {
+		if (volume > 0) {
 			actions.add(AC_SIP);
 			
 		}
