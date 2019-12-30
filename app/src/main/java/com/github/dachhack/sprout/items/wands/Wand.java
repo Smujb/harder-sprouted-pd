@@ -228,8 +228,8 @@ public abstract class Wand extends KindOfWeapon {
 	protected void processSoulMark(Char target, int chargesUsed){
 		if (target != Dungeon.hero &&
 				Dungeon.hero.subClass == HeroSubClass.WARLOCK &&
-				Random.Float() > (Math.pow(0.99f, (level()*chargesUsed)+1) - 0.09f)){//5% chance at +0, up to 48.4% chance at +100, 72.4 chance at +200, 86.8% chance at +300
-			SoulMark.prolong(target, SoulMark.class, SoulMark.DURATION + level());
+				Random.Float() > (Math.pow(0.99f, (level()*chargesUsed)+1) - 0.09f)){//5% chance at +0, up to 48.4% chance at +100, 72.4% chance at +200, 86.8% chance at +300
+			SoulMark.prolong(target, SoulMark.class, SoulMark.DURATION + level()/20f);
 			String marked = "Soul Marked";
 			target.sprite.showStatus(CharSprite.NEGATIVE, marked);
 		}

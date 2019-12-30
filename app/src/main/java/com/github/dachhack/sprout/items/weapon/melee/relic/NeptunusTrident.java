@@ -76,42 +76,42 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 		
 		int length = Level.getLength();
 		int width = Level.getWidth();
-		for (int i = width; i < length - width; i++){
-			int	 dist = Level.distance(hero.pos, i);
-			  if (dist<distance){
-			    //GLog.i("TRI2 %s", dist);	
-			    if (checkFloodable(i)) {
-			    	affected.add(i);
-			    	Dungeon.level.map[i]=Terrain.WATER;
+		for (int i = width; i < length - width; i++) {
+			int dist = Level.distance(hero.pos, i);
+			if (dist < distance) {
+				//GLog.i("TRI2 %s", dist);
+				if (checkFloodable(i)) {
+					affected.add(i);
+					Dungeon.level.map[i] = Terrain.WATER;
 					Level.water[i] = true;
-			     }
-			   }
-			  
+				}
 			}
-		//GLog.i("TRI1 %s", length);
-		for (int n : affected){
-				int t = Terrain.WATER_TILES;
-				for (int j = 0; j < Level.NEIGHBOURS4.length; j++) {
-					if ((Terrain.flags[Dungeon.level.map[n + Level.NEIGHBOURS4[j]]] & Terrain.UNSTITCHABLE) != 0) {
-						t += 1 << j;
-						
-					}
-				}
-				
-				Char ch = Actor.findChar(n);
-				if (ch != null && ch != hero) {
-					Buff.affect(ch, Slow.class, Slow.duration(ch) / 3 + level);
-				}
-				
-				Dungeon.level.map[n] = t;
-				//Level.water[i] = true;
-				GameScene.updateMap(n);		  
 		}
+		//GLog.i("TRI1 %s", length);
+		for (int n : affected) {
+			int t = Terrain.WATER_TILES;
+			for (int j = 0; j < Level.NEIGHBOURS4.length; j++) {
+				if ((Terrain.flags[Dungeon.level.map[n + Level.NEIGHBOURS4[j]]] & Terrain.UNSTITCHABLE) != 0) {
+					t += 1 << j;
+
+				}
+			}
+
+			Char ch = Actor.findChar(n);
+			if (ch != null && ch != hero) {
+				Buff.affect(ch, Slow.class, Slow.duration(ch) / 3 + level);
+			}
+
+			Dungeon.level.map[n] = t;
+			//Level.water[i] = true;
+
+		}
+		GameScene.updateMap();
 		Dungeon.observe();
 		
 	}
 	
-	private boolean checkFloodable (int cell){
+	public static boolean checkFloodable (int cell){
 		
 		boolean check=false;
 		

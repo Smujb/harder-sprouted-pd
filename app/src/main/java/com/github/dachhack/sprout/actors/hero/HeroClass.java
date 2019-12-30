@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.items.Amulet;
 import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.BookOfDead;
 import com.github.dachhack.sprout.items.BookOfLife;
@@ -30,7 +31,9 @@ import com.github.dachhack.sprout.items.BookOfTranscendence;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.EasterEgg;
 import com.github.dachhack.sprout.items.Egg;
+import com.github.dachhack.sprout.items.OrbOfZot;
 import com.github.dachhack.sprout.items.OtilukesJournal;
+import com.github.dachhack.sprout.items.Palantir;
 import com.github.dachhack.sprout.items.ShadowDragonEgg;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.Towel;
@@ -38,6 +41,7 @@ import com.github.dachhack.sprout.items.Whistle;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
 import com.github.dachhack.sprout.items.armor.PlateArmor;
 import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
+import com.github.dachhack.sprout.items.bags.AnkhChain;
 import com.github.dachhack.sprout.items.bags.KeyRing;
 import com.github.dachhack.sprout.items.bags.PotionBandolier;
 import com.github.dachhack.sprout.items.bags.ScrollHolder;
@@ -164,6 +168,7 @@ public enum HeroClass {
 		}
 		OtilukesJournal jn = new OtilukesJournal();
 		jn.identify().collect();
+		Dungeon.limitedDrops.journal.drop();
 			//new OtilukesJournal().collect();
 			//Dungeon.limitedDrops.journal.drop();
 		
@@ -277,6 +282,8 @@ public enum HeroClass {
 			new WandOfTelekinesis().identify().reinforce().upgrade(15).collect();
 			new WandHolster().collect();
 
+			new AnkhChain().collect();
+
 			new PotionBandolier().collect();
 
 			new DewVial().collect();
@@ -284,6 +291,8 @@ public enum HeroClass {
 			new BookOfDead().collect();
 			new BookOfLife().collect();
 			new BookOfTranscendence().collect();
+			//new Palantir().collect();
+			new Amulet().collect();
 
 			(hero.belongings.misc2 = new RingOfWealth()).identify().upgrade(28);
 			hero.belongings.misc2.activate(hero);

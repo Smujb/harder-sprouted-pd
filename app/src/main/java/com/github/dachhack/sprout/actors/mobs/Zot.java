@@ -60,6 +60,7 @@ public class Zot extends Mob {
 		baseSpeed = 2f;
 
 		HP = HT = 40000;
+
 		EXP = 20;
 	}
 

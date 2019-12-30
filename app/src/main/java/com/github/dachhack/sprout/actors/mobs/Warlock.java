@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Weakness;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.food.Meat;
@@ -58,6 +59,9 @@ public class Warlock extends Mob implements Callback {
 		
 		lootOther = new Meat();
 		lootChanceOther = 0.5f; // by default, see die()
+
+		lootThird = new Egg();
+		lootChanceThird = 1f;
 	}
 
 	@Override

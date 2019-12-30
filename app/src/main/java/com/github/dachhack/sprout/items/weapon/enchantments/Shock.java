@@ -38,28 +38,6 @@ public class Shock extends Weapon.Enchantment {
 
 	private static final String TXT_SHOCKING = "Shocking %s";
 
-	public boolean proc(Wand wand, Char attacker, Char defender, int damage) {
-		int level = Math.max( 0, wand.level );
-
-		if (Random.Int( level + 3 ) >= 2) {
-
-			affected.clear();
-
-			arcs.clear();
-			arc(attacker, defender, 4);
-
-			affected.remove(defender); //defender isn't hurt by lightning
-			for (Char ch : affected) {
-				ch.damage((int) Math.ceil(damage / 3f), this);
-			}
-
-			attacker.sprite.parent.add(new Lightning(points, nPoints, null));
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	@Override
 	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
 		return false;
@@ -70,7 +48,7 @@ public class Shock extends Weapon.Enchantment {
 		// lvl 0 - 25%
 		// lvl 1 - 40%
 		// lvl 2 - 50%
-		/*int level = Math.max(0, weapon.level);
+		int level = Math.max(0, weapon.level);
 
 		if (Random.Int(level + 4) >= 3) {
 
@@ -90,8 +68,8 @@ public class Shock extends Weapon.Enchantment {
 
 			return false;
 
-		}*/
-		int level = Math.max( 0, weapon.level );
+		}
+		/*int level = Math.max( 0, weapon.level );
 
 		if (Random.Int( level + 3 ) >= 2) {
 
@@ -109,7 +87,7 @@ public class Shock extends Weapon.Enchantment {
 			return true;
 		} else {
 			return false;
-		}
+		}*/
 	}
 
 	@Override
@@ -124,7 +102,7 @@ public class Shock extends Weapon.Enchantment {
 
 	private ArrayList<Lightning> arcs = new ArrayList<>();
 
-	private void arc( Char attacker, Char defender, int dist ) {
+	/*private void arc( Char attacker, Char defender, int dist ) {
 
 		affected.add(defender);
 
@@ -142,9 +120,9 @@ public class Shock extends Weapon.Enchantment {
 				}
 			}
 		}
-	}
+	}*/
 
-	/*private void hit(Char ch, int damage, int range) {
+	private void hit(Char ch, int damage) {
 
 		if (damage < 1) {
 			return;
@@ -170,5 +148,5 @@ public class Shock extends Weapon.Enchantment {
 		if (ns.size() > 0) {
 			hit(Random.element(ns), Random.Int(damage / 2, damage));
 		}
-	}*/
+	}
 }

@@ -24,6 +24,8 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.blobs.Blob;
+import com.github.dachhack.sprout.actors.blobs.StormClouds;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -34,6 +36,7 @@ import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.weapon.enchantments.Shock;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
+import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Camera;
@@ -133,7 +136,10 @@ public class WandOfLightning extends Wand {
 	@Override
 	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
 		super.onHit(wand, attacker, defender, damage);
-		new Shock().proc(wand, attacker, defender, damage);
+		if (attacker == Dungeon.hero) {
+			Camera.main.shake(2, 0.3f);
+		}
+		GameScene.add(Blob.seed(defender.pos, 100, StormClouds.class));
 	}
 
 	@Override

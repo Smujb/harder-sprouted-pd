@@ -60,6 +60,7 @@ public class Speck extends Image {
 	public static final int STENCH = 110;
 	public static final int FORGE = 111;
 	public static final int CONFUSION = 112;
+	public static final int STORM       = 117;
 
 	private static final int SIZE = 7;
 
@@ -104,6 +105,7 @@ public class Speck extends Image {
 		case PARALYSIS:
 		case STENCH:
 		case CONFUSION:
+		case STORM:
 		case DUST:
 		case CORRUPT:
 			frame(film.get(STEAM));
@@ -135,6 +137,13 @@ public class Speck extends Image {
 			angle = Random.Float(360);
 			angularSpeed = Random.Float(-360, +360);
 			lifespan = 1f;
+			break;
+
+		case STORM:
+			hardlight( 0x8AD8D8 );
+			angularSpeed = Random.Float( -20, +20 );
+			angle = Random.Float( 360 );
+			lifespan = Random.Float( 1f, 3f );
 			break;
 
 		case FORGE:
@@ -413,6 +422,7 @@ public class Speck extends Image {
 			case CONFUSION:
 			case CORRUPT:
 			case DUST:
+			case STORM:
 				am = p < 0.5f ? p : 1 - p;
 				scale.set(1 + p * 2);
 				break;

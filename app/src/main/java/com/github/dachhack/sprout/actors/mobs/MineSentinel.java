@@ -196,6 +196,7 @@ public class MineSentinel extends Statue {
 
 		if (state == PASSIVE) {
 			state = HUNTING;
+			return;
 		}
 
 		super.damage(dmg, src);

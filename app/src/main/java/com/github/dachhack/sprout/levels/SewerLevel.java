@@ -27,6 +27,7 @@ import com.github.dachhack.sprout.actors.mobs.npcs.Ghost.GnollArcher;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
 import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.DewVial;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Mushroom;
 import com.github.dachhack.sprout.items.misc.Spectacles;
 import com.github.dachhack.sprout.items.Towel;
@@ -135,11 +136,11 @@ public class SewerLevel extends RegularLevel {
 			addItemToSpawn(new Blueberry());
 			addItemToSpawn(new Cloudberry());
 			addItemToSpawn(new Blackberry());
+
+			addItemToSpawn(new Egg());
 			
 			//addItemToSpawn(new Spectacles());
 			//addItemToSpawn(new Towel());
-			
-			//addItemToSpawn(new Egg());
 		}
 		
 		if (Dungeon.depth == 2){
