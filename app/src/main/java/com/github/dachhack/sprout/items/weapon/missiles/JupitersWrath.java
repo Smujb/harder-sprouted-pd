@@ -180,16 +180,8 @@ public class JupitersWrath extends MissileWeapon {
 
 	@Override
 	public void proc(Char attacker, Char defender, int damage) {
-		
-		if (defender instanceof Gullin 
-        		|| defender instanceof Kupua
-        		|| defender instanceof MineSentinel
-        		|| defender instanceof Otiluke
-        		|| defender instanceof Zot
-        		|| defender instanceof ZotPhase){
-        	
-        	damage*=4;
-		}
+
+		damage*=4;
         
 		
 		super.proc(attacker, defender, damage);
@@ -325,7 +317,7 @@ public class JupitersWrath extends MissileWeapon {
 		@Override
 		public boolean act() {
 			if (charge < chargeCap) {
-				charge+=level;
+				charge+=1;
 				if (charge >= chargeCap) {
 					GLog.w("Jupiter's Wraith is filled with energy!");
 				}

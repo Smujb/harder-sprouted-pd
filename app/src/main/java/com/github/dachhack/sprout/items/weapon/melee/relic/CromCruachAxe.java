@@ -74,6 +74,8 @@ public class CromCruachAxe extends RelicMeleeWeapon {
 
 		cooldown = 0;
 		bones = false;
+
+		defaultAction = AC_DISPEL;
 		
   }
 		
@@ -92,7 +94,7 @@ public class CromCruachAxe extends RelicMeleeWeapon {
 		if (action.equals(AC_DISPEL)) {
 			GLog.w("Negating energy surrounds you!");
 			charge = 0;
-			Buff.prolong(hero, MagicImmunity.class, 2f*(level/10));	
+			Buff.prolong(hero, MagicImmunity.class, 10f + (level/5f));
 		} else
 			super.execute(hero, action);
 	}
@@ -103,7 +105,7 @@ public class CromCruachAxe extends RelicMeleeWeapon {
 		@Override
 		public boolean act() {
 			if (charge < chargeCap) {
-				charge+=level;
+				charge+=1;
 				if (charge >= chargeCap) {
 					GLog.w("Your axe pulsates with negating power.");					
 				}

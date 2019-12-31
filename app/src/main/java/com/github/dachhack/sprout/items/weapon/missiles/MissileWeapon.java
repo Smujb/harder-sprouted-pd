@@ -113,8 +113,8 @@ public class MissileWeapon extends Weapon {
 						&& enemy.buff(PinCushion.class) == null)
 					bonus += 3;
 
-				if (enemy.buff(PinCushion.class) == null || Random.Float() > Math.pow(0.9, bonus))
-					Buff.affect(enemy, PinCushion.class).stick(this);
+				//if (enemy.buff(PinCushion.class) == null || Random.Float() > Math.pow(0.9, bonus))
+				Buff.affect(enemy, PinCushion.class).stick(this);
 			}
 		}
 	}

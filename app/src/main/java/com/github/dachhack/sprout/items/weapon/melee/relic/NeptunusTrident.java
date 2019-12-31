@@ -63,6 +63,8 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 
 		cooldown = 0;
 		bones = false;
+
+		defaultAction = AC_FLOOD;
 	}
 	
 	
@@ -169,7 +171,7 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 		@Override
 		public boolean act() {
 			if (charge < chargeCap) {
-				charge+=level;
+				charge+=1;
 				if (charge >= chargeCap) {
 					GLog.w("Your trident draws in the tides.");
 				}

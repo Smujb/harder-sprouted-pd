@@ -51,9 +51,9 @@ public class AresLeech extends Weapon.Enchantment {
 		int drains = 0;
 		
 		boolean procced = false;
-		int distance = 1 + level*2;	
+		int distance = 5 + level/5;
 		
-		int maxValue = damage * (level + 2) / (level + 6);
+		int maxValue = (int) (damage * 0.2f);
 		int effValue = Math.min(Random.IntRange(0, maxValue), attacker.HT - attacker.HP);
 		
 		for (Mob mob : Dungeon.level.mobs) {
@@ -62,7 +62,7 @@ public class AresLeech extends Weapon.Enchantment {
 		
 		if (Level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() && !mob.isPassive()){
 			  if(effValue<mob.HP){	
-				   mob.damage(effValue, weapon);
+				   mob.damage(Random.Int(maxValue), weapon);
 				   weapon.charge++;
 				   drains++;
 				}	

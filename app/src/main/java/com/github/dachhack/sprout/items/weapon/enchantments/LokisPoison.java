@@ -19,7 +19,11 @@ package com.github.dachhack.sprout.items.weapon.enchantments;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Cripple;
+import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
@@ -30,7 +34,7 @@ import com.watabou.utils.Random;
 
 public class LokisPoison extends Weapon.Enchantment {
 
-	private static final String TXT_VENOMOUS = "Loki's Venomous %s";
+	private static final String TXT_VENOMOUS = "Vicious %s";
 
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing(0x4400AA);
 
@@ -41,36 +45,11 @@ public class LokisPoison extends Weapon.Enchantment {
 	
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {
-		// lvl 0 - 33%
-		// lvl 1 - 50%
-		// lvl 2 - 60%
-		int level = Math.max(0, weapon.level);
-		int distance = 1 + level*2;	
-		
-        for (Mob mob : Dungeon.level.mobs) {
-			
-        	if (Level.distance(attacker.pos, mob.pos) < distance && Random.Int(level + 3) >= 2) {
-
-    			Buff.affect(
-    					defender,
-    					com.github.dachhack.sprout.actors.buffs.LokisPoison.class)
-    					.set(com.github.dachhack.sprout.actors.buffs.LokisPoison
-    							.durationFactor(defender) * (level + 1));
-        	}
-		}
-
-		if (Random.Int(level + 3) >= 2) {
-
-			Buff.affect(
-					defender,
-					com.github.dachhack.sprout.actors.buffs.LokisPoison.class)
-					.set(com.github.dachhack.sprout.actors.buffs.LokisPoison
-							.durationFactor(defender) * (level + 1));
-
-			return true;
-		} else {
-			return false;
-		}
+		Buff.affect(defender, Poison.class).set( 3 + Dungeon.depth / 2 );
+		Buff.affect( defender, Bleeding.class ).set( damage );
+		Buff.prolong( defender, Cripple.class, Cripple.DURATION);
+		Buff.prolong( defender, Vertigo.class, Vertigo.DURATION);
+		return true;
 	}
 
 	@Override

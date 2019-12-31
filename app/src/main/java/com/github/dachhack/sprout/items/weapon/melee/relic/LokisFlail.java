@@ -76,6 +76,8 @@ public class LokisFlail extends RelicMeleeWeapon {
 
 		cooldown = 0;
 		bones = false;
+
+		defaultAction = AC_STEALTH;
 		
   }
 	
@@ -94,20 +96,21 @@ public class LokisFlail extends RelicMeleeWeapon {
 	@Override
 	public void execute(Hero hero, String action) {
 		if (action.equals(AC_STEALTH)) {
-			
-			  if (Dungeon.depth==29) {
-					GLog.w(TXT_PREVENTING);
-					return;
-			
-			   } 
+
+			if (Dungeon.depth == 29) {
+				GLog.w(TXT_PREVENTING);
+				return;
+
+			}
 			GLog.w("Your sword fills you with restoring energy!");
 			charge = 0;
-			Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
+			Buff.affect(hero, Invisibility.class, Invisibility.DURATION + level);
 			GLog.i("You see your hands turn invisible!");
 			Sample.INSTANCE.play(Assets.SND_MELD);
 
-		} else
+		} else {
 			super.execute(hero, action);
+		}
 	}
 
 	
@@ -116,7 +119,7 @@ public class LokisFlail extends RelicMeleeWeapon {
 		@Override
 		public boolean act() {
 			if (charge < chargeCap) {
-				charge+=level;
+				charge+=1;
 				if (charge >= chargeCap) {
 					GLog.w("Your flail is fully charged.");					
 				}

@@ -75,6 +75,8 @@ public class AresSword extends RelicMeleeWeapon {
 
 		cooldown = 0;
 		bones = false;
+
+		defaultAction = AC_REGEN;
 		
   }
 		
@@ -104,9 +106,9 @@ public class AresSword extends RelicMeleeWeapon {
 		@Override
 		public boolean act() {
 			if (charge < chargeCap) {
-				charge+=level;
+				charge+=1;
 				if (charge >= chargeCap) {
-					GLog.w("Your sword glows with life-giving power.");					
+					GLog.w("Your sword glows with life-giving power.");
 				}
 				updateQuickslot();
 			}
