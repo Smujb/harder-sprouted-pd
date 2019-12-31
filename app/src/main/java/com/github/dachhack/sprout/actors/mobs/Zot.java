@@ -49,6 +49,7 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ZotSprite;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -65,6 +66,8 @@ public class Zot extends Mob {
 		spriteClass = ZotSprite.class;
 		baseSpeed = 2f;
 		EXP = 20;
+
+		seeThroughInvisibility = true;
 	}
 	private int HPAtLastJump = HP = HT = 40000;
 
@@ -79,6 +82,15 @@ public class Zot extends Mob {
 	@Override
 	public int dr() {
 		return 200;
+	}
+
+	@Override
+	public int attackSkill(Char target) {
+		if (enemy.invisible > 0) {
+			return super.attackSkill(target)/2;
+		} else {
+			return super.attackSkill(target);
+		}
 	}
 
 	@Override
@@ -165,6 +177,11 @@ public class Zot extends Mob {
 		if (HPAtLastJump - HP > 5000) {
 			canJump = true;
 		}
+
+		if (enemy.invisible > 0) {
+			GLog.n("Zot: Fool. I can still see you!");
+		}
+
 		if (canJump) {
 			jump();
 			return true;
@@ -175,6 +192,8 @@ public class Zot extends Mob {
 
 	private void jump() {
 		canJump = false;
+
+		HPAtLastJump = HP;
 		
 		if (!checkPhases()){
 			ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
@@ -207,8 +226,11 @@ public class Zot extends Mob {
 		move(newPos);
 
 		if (Dungeon.visible[newPos]) {
-			CellEmitter.get(newPos).burst(Speck.factory(Speck.WOOL), 6);
+			CellEmitter.get(newPos).burst(Speck.factory(Speck.WOOL), 10);
 			Sample.INSTANCE.play(Assets.SND_PUFF);
+		}
+		if (enemy != null) {
+			MagicEye.spawnAroundChance(enemy.pos);
 		}
 
 		spend(TIME_TO_TELEPORT);
@@ -220,13 +242,13 @@ public class Zot extends Mob {
 		for (Mob mob : Dungeon.level.mobs) {
 			if (mob instanceof ZotPhase) {
 				phases++;
-				if (Dungeon.hero.heroClass!=HeroClass.HUNTRESS && phases>6){
-				check=true;
-				}else if (phases>10){
-				  check=true;
+				if (Dungeon.hero.heroClass != HeroClass.HUNTRESS && phases > 6) {
+					check = true;
+				} else if (phases > 10) {
+					check = true;
 				}
-		}			
-	  }
+			}
+		}
 		return check;
 	}
 	
@@ -236,13 +258,13 @@ public class Zot extends Mob {
 		for (Mob mob : Dungeon.level.mobs) {
 			if (mob instanceof MagicEye) {
 				phases++;
-				if (Dungeon.hero.heroClass!=HeroClass.HUNTRESS && phases>20){
-				check=true;
-				}else if (phases>30){
-				  check=true;
+				if (Dungeon.hero.heroClass != HeroClass.HUNTRESS && phases > 20) {
+					check = true;
+				} else if (phases > 30) {
+					check = true;
 				}
-		}			
-	  }
+			}
+		}
 		return check;
 	}
 	
@@ -250,7 +272,7 @@ public class Zot extends Mob {
 	public void damage(int dmg, Object src) {
 
 		
-		if(Dungeon.hero.heroClass==HeroClass.HUNTRESS && !checkPhases()){
+		if(Dungeon.hero.heroClass == HeroClass.HUNTRESS && !checkPhases()){
 			ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
 
 			for (int i = 0; i < Level.NEIGHBOURS8.length; i++) {

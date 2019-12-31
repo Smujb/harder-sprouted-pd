@@ -34,9 +34,11 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.utils.Utils;
+import com.watabou.noosa.Camera;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
+import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
 
 public class ZotSprite extends MobSprite {
@@ -98,7 +100,7 @@ public class ZotSprite extends MobSprite {
 						}
 					});
 			if (enemy instanceof Hero) {
-				camera.shake(3, 0.2f);
+				Camera.main.shake(3, 0.3f);
 			}
 			play(cast);
 			turnTo(ch.pos, cell);

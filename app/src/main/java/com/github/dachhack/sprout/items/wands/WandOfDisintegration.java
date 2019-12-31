@@ -96,7 +96,7 @@ public class WandOfDisintegration extends Wand {
 			}
 
 			CellEmitter.center(c).burst(PurpleParticle.BURST,
-					Random.IntRange(1 + level()/4, 2 + level()/2));
+					Random.IntRange(1 + level()/8, 2 + level()/4));
 		}
 
 		if (terrainAffected) {

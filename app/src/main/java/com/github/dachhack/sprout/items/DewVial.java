@@ -450,10 +450,11 @@ public class DewVial extends Item {
 	}
 	
 	
-	public void fill() {
+	public DewVial fill() {
 		volume = MAX_VOLUME();
 		GLog.p(TXT_FULL);
 		updateQuickslot();
+		return this;
 	}
 
 	// removed as people need a bigger distinction to realize the dew vial

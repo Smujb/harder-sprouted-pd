@@ -71,6 +71,8 @@ public abstract class Mob extends Char {
 	public AiState PASSIVE = new Passive();
 	public AiState state = SLEEPING;
 
+	public boolean seeThroughInvisibility = false;
+
 	public boolean scalesWithHeroLevel = false;
 
 	public Class<? extends CharSprite> spriteClass;
@@ -194,7 +196,7 @@ public abstract class Mob extends Char {
 		}
 		*/
 		boolean enemyInFOV = enemy != null && enemy.isAlive()
-				&& Level.fieldOfView[enemy.pos] && enemy.invisible<=0 ;
+				&& Level.fieldOfView[enemy.pos] && (enemy.invisible<=0 | seeThroughInvisibility) ;
 
 		return state.act(enemyInFOV, justAlerted);
 	}

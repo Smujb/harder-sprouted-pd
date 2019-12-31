@@ -144,6 +144,10 @@ public enum HeroClass {
 
 		hero.heroClass = this;
 
+		if (Badges.isUnlocked(masteryBadge())) {
+			new TomeOfMastery().collect();
+		}
+
 		initCommon(hero);
 
 		switch (this) {
@@ -164,9 +168,7 @@ public enum HeroClass {
 			break;
 		}
 
-		if (Badges.isUnlocked(masteryBadge())) {
-			new TomeOfMastery().collect();
-		}
+
 
 			//new OtilukesJournal().collect();
 			//Dungeon.limitedDrops.journal.drop();
@@ -290,7 +292,7 @@ public enum HeroClass {
 
 			new PotionBandolier().collect();
 
-			new DewVial().collect();
+			new DewVial().fill().collect();
 
 			new BookOfDead().collect();
 			new BookOfLife().collect();

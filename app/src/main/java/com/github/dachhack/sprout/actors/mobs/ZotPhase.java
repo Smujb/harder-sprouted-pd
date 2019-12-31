@@ -51,7 +51,9 @@ public class ZotPhase extends Mob implements Callback{
 		EXP = 36;		
 
 		loot = Generator.Category.SCROLL;
-		lootChance = 0.33f;		
+		lootChance = 0.33f;
+
+		seeThroughInvisibility = true;
 		
 	}
 
@@ -60,10 +62,18 @@ public class ZotPhase extends Mob implements Callback{
 		return Random.NormalIntRange(115, 200);
 	}
 
+	@Override
+	public int attackSkill(Char target) {
+		if (enemy.invisible > 0) {
+			return super.attackSkill(target)/2;
+		} else {
+			return super.attackSkill(target);
+		}
+	}
 
 	@Override
 	public int dr() {
-		return 40;
+		return 100;
 	}
 
 	@Override
@@ -73,6 +83,10 @@ public class ZotPhase extends Mob implements Callback{
 
 	@Override
 	protected boolean doAttack(Char enemy) {
+
+		if (enemy.invisible > 0 & Random.Int(3) == 0) {
+			GLog.n("Zot: Fool. I can still see you!");
+		}
 
 		if (Level.distance(pos, enemy.pos) <= 1) {
 
