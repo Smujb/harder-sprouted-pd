@@ -94,6 +94,7 @@ import com.github.dachhack.sprout.items.weapon.melee.relic.NeptunusTrident;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.Dart;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
+import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 
@@ -166,9 +167,7 @@ public enum HeroClass {
 		if (Badges.isUnlocked(masteryBadge())) {
 			new TomeOfMastery().collect();
 		}
-		OtilukesJournal jn = new OtilukesJournal();
-		jn.identify().collect();
-		Dungeon.limitedDrops.journal.drop();
+
 			//new OtilukesJournal().collect();
 			//Dungeon.limitedDrops.journal.drop();
 		
@@ -177,6 +176,9 @@ public enum HeroClass {
 	}
 
 	private static void initCommon(Hero hero) {
+		OtilukesJournal jn = new OtilukesJournal();
+		jn.identify().collect();
+		Dungeon.limitedDrops.journal.drop();
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR))
 			(hero.belongings.armor = new ClothArmor()).upgrade(3).identify();
 
@@ -281,6 +283,8 @@ public enum HeroClass {
 			new WandOfAvalanche().identify().reinforce().upgrade(15).collect();
 			new WandOfTelekinesis().identify().reinforce().upgrade(15).collect();
 			new WandHolster().collect();
+
+			new Tamahawk().quantity(40).collect();
 
 			new AnkhChain().collect();
 

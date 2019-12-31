@@ -17,6 +17,10 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
@@ -29,6 +33,8 @@ public class Skull extends MissileWeapon {
 
 		MIN = 1;
 		MAX = 4;
+
+		scaling = 1;
 
 		bones = false; // Finding them in bones would be semi-frequent and
 						// disappointing.
@@ -52,6 +58,23 @@ public class Skull extends MissileWeapon {
 	public Item random() {
 		quantity = Random.Int(5, 15);
 		return this;
+	}
+
+	@Override
+	public void proc(Char attacker, Char defender, int damage) {
+		super.proc(attacker, defender, damage);
+		int level = Math.max(0, this.level);
+
+		if (Random.Int(level + 100) >= 92) {
+
+			defender.damage(defender.HP, this);
+			defender.sprite.emitter().burst(ShadowParticle.UP, 5);
+
+			if (!defender.isAlive() && attacker instanceof Hero) {
+				Badges.validateGrimWeapon();
+			}
+
+		}
 	}
 
 	@Override

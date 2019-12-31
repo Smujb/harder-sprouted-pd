@@ -141,12 +141,15 @@ import com.github.dachhack.sprout.items.weapon.melee.relic.NeptunusTrident;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.CurareDart;
+import com.github.dachhack.sprout.items.weapon.missiles.CurareShuriken;
 import com.github.dachhack.sprout.items.weapon.missiles.Dart;
 import com.github.dachhack.sprout.items.weapon.missiles.IncendiaryDart;
+import com.github.dachhack.sprout.items.weapon.missiles.IncendiaryShuriken;
 import com.github.dachhack.sprout.items.weapon.missiles.Javelin;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.items.weapon.missiles.Shuriken;
 import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
+import com.github.dachhack.sprout.items.weapon.missiles.Wave;
 import com.github.dachhack.sprout.plants.BlandfruitBush;
 import com.github.dachhack.sprout.plants.Blindweed;
 import com.github.dachhack.sprout.plants.Dewcatcher;
@@ -243,9 +246,9 @@ public class Generator {
 				Sword.class, Longsword.class, BattleAxe.class, WarHammer.class,
 				Glaive.class, ShortSword.class, Dart.class, Javelin.class,
 				IncendiaryDart.class, CurareDart.class, Shuriken.class,
-				Boomerang.class, Tamahawk.class, Spork.class };
+				Boomerang.class, Tamahawk.class, Wave.class, CurareShuriken.class, IncendiaryShuriken.class, Spork.class };
 		Category.WEAPON.probs = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-				0, 1, 1, 1, 1, 0, 1, 0 };
+				0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0 };
 
 		Category.RELIC_WEAPON.classes = new Class<?>[] {
 				NeptunusTrident.class, AresSword.class, CromCruachAxe.class, LokisFlail.class };

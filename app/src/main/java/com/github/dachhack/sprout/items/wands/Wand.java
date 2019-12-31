@@ -56,7 +56,7 @@ public abstract class Wand extends KindOfWeapon {
 	public static final String AC_ZAP = "ZAP";
 
 	private static final String TXT_WOOD = "This thin %s wand is warm to the touch. Who knows what it will do when used?";
-	private static final String TXT_DAMAGE = "When this wand is used as a melee weapon, its average damage is %d points per hit.";
+	private static final String TXT_DAMAGE = "When this wand is used as a melee weapon, it will deal  %1$d-%2$d damage.";
 	private static final String TXT_WEAPON = "You can use this wand as a melee weapon.";
 
 	private static final String TXT_FIZZLES = "your wand fizzles; it must be out of charges for now";
@@ -280,7 +280,7 @@ public abstract class Wand extends KindOfWeapon {
 		if (Dungeon.hero.heroClass == HeroClass.MAGE) {
 			info.append("\n\n");
 			if (levelKnown) {
-				info.append(String.format(TXT_DAMAGE, MIN + (MAX - MIN) / 2));
+				info.append(String.format(TXT_DAMAGE, MIN, MAX));
 			} else {
 				info.append(String.format(TXT_WEAPON));
 			}

@@ -37,6 +37,8 @@ public class IncendiaryDart extends MissileWeapon {
 
 		STR = 12;
 
+		scaling = 2;
+
 		MIN = 1;
 		MAX = 2;
 	}

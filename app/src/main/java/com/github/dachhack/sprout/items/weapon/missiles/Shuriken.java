@@ -32,6 +32,8 @@ public class Shuriken extends MissileWeapon {
 		MIN = 2;
 		MAX = 6;
 
+		scaling = 2;
+
 		DLY = 0.5f;
 	}
 

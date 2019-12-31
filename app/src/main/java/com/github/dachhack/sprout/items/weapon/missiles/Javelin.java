@@ -34,6 +34,7 @@ public class Javelin extends MissileWeapon {
 
 		MIN = 2;
 		MAX = 15;
+		scaling = 4;
 	}
 
 	public Javelin() {

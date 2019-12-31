@@ -33,9 +33,9 @@ public class CurareDart extends MissileWeapon {
 		image = ItemSpriteSheet.CURARE_DART;
 
 		STR = 14;
-
-		MIN = 1;
-		MAX = 3;
+		scaling = 3;
+		//MIN = 1;
+		//MAX = 3;
 	}
 
 	public CurareDart() {

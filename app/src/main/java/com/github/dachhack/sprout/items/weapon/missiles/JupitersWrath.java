@@ -82,8 +82,12 @@ public class JupitersWrath extends MissileWeapon {
 
 		STR = 10;
 
-		MIN = 4;
-		MAX = 8;
+		//MIN = 4;
+		//MAX = 8;
+
+		scaling = 6;
+
+		upgradeable = true;
 
 		stackable = false;
 		unique = true;

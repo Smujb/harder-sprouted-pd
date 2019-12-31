@@ -37,6 +37,8 @@ public class Boomerang extends MissileWeapon {
 
 		stackable = false;
 		unique = true;
+		scaling = 2;
+		upgradeable = true;
 
 		bones = false;
 	}
@@ -53,8 +55,6 @@ public class Boomerang extends MissileWeapon {
 
 	@Override
 	public Item upgrade(boolean enchant) {
-		MIN += 1;
-		MAX += 2;
 		super.upgrade(enchant);
 
 		updateQuickslot();
@@ -64,8 +64,6 @@ public class Boomerang extends MissileWeapon {
 
 	@Override
 	public Item degrade() {
-		MIN -= 1;
-		MAX -= 2;
 		return super.degrade();
 	}
 
@@ -75,6 +73,16 @@ public class Boomerang extends MissileWeapon {
 		if (attacker instanceof Hero && ((Hero) attacker).rangedWeapon == this) {
 			circleBack(defender.pos, (Hero) attacker);
 		}
+	}
+
+	@Override
+	public int min() {
+		return 1 + level;
+	}
+
+	@Override
+	public int max() {
+		return 6 + level*2;
 	}
 
 	@Override

@@ -38,6 +38,8 @@ public class IncendiaryShuriken extends MissileWeapon {
 		MIN = 2;
 		MAX = 6;
 
+		scaling = 3;
+
 		DLY = 0.5f;
 	}
 

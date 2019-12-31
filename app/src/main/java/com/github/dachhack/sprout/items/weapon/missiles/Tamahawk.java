@@ -32,6 +32,8 @@ public class Tamahawk extends MissileWeapon {
 
 		STR = 17;
 
+		scaling = 5;
+
 		MIN = 4;
 		MAX = 20;
 	}

@@ -51,6 +51,8 @@ public class RiceBall extends MissileWeapon {
 
 		MIN = 1;
 		MAX = 2;
+
+		scaling = 1;
 		
 		DLY = 0.25f;
 

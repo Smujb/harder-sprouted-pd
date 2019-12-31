@@ -23,14 +23,19 @@ import com.github.dachhack.sprout.actors.mobs.Bat;
 import com.github.dachhack.sprout.actors.mobs.Brute;
 import com.github.dachhack.sprout.actors.mobs.Gnoll;
 import com.github.dachhack.sprout.actors.mobs.GoldThief;
+import com.github.dachhack.sprout.actors.mobs.Kupua;
+import com.github.dachhack.sprout.actors.mobs.Otiluke;
 import com.github.dachhack.sprout.actors.mobs.PoisonGoo;
 import com.github.dachhack.sprout.actors.mobs.Rat;
 import com.github.dachhack.sprout.actors.mobs.RatBoss;
 import com.github.dachhack.sprout.actors.mobs.Shaman;
 import com.github.dachhack.sprout.actors.mobs.SpectralRat;
 import com.github.dachhack.sprout.actors.mobs.Thief;
+import com.github.dachhack.sprout.actors.mobs.Zot;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost.GnollArcher;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.armor.glyphs.Viscosity;
+import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
@@ -43,6 +48,8 @@ public class ForestDart extends MissileWeapon {
 
 		MIN = 4;
 		MAX = 10;
+
+		scaling = 3;
 
 		bones = false; // Finding them in bones would be semi-frequent and
 						// disappointing.
@@ -61,18 +68,7 @@ public class ForestDart extends MissileWeapon {
 	public void proc(Char attacker, Char defender, int damage) {
 		
 		
-       if (    defender instanceof Gnoll 
-    		|| defender instanceof GnollArcher  
-    		|| defender instanceof Shaman  
-    		|| defender instanceof Brute
-    		|| defender instanceof Bat
-    		|| defender instanceof Rat
-    		|| defender instanceof RatBoss
-    		|| defender instanceof Assassin 
-    		|| defender instanceof Thief 
-    		|| defender instanceof GoldThief 
-    		|| defender instanceof PoisonGoo 
-    		|| defender instanceof SpectralRat 
+       if (defender instanceof Gnoll || defender instanceof Shaman || defender instanceof Brute || defender instanceof Bat || defender instanceof Rat || defender instanceof Assassin || defender instanceof Thief || defender instanceof GoldThief || defender instanceof PoisonGoo || defender instanceof SpectralRat || defender instanceof Kupua || defender instanceof Zot || defender instanceof Otiluke
     		){
     	   defender.damage(Random.Int(damage*2,damage*5), this);
        } else {

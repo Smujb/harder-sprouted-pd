@@ -34,6 +34,7 @@ public class CurareShuriken extends MissileWeapon {
 
 		STR = 13;
 
+		scaling = 2;
 		MIN = 2;
 		MAX = 6;
 

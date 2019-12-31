@@ -46,6 +46,44 @@ public class MissileWeapon extends Weapon {
 		defaultAction = AC_THROW;
 	}
 
+	public boolean upgradeable = false;
+
+	public int min(){
+		return scaleFactor() + scalesWith();
+	}
+
+	public int max(){
+		return scaleFactor() * 2 + scaleFactor() * scalesWith();
+	}
+
+	public int scalesWith() {
+		if (upgradeable) {
+			return level;
+		} else {
+			return Dungeon.hero.lvl;
+		}
+	}
+
+	int scaling;
+
+	public int scaleFactor() {
+		int tier = scaling;
+		if (Dungeon.hero.heroClass == HeroClass.HUNTRESS) {
+			tier = (int) (tier*1.25f);
+		}
+		if (Dungeon.sanchikarahdeath) {
+			tier *= 2;
+		}
+		return tier;
+	}
+
+	@Override
+	public int damageRoll(Hero hero) {
+		MIN = min();
+		MAX = max();
+		return super.damageRoll(hero);
+	}
+
 	@Override
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = super.actions(hero);
@@ -75,7 +113,7 @@ public class MissileWeapon extends Weapon {
 						&& enemy.buff(PinCushion.class) == null)
 					bonus += 3;
 
-				if (Random.Float() > Math.pow(0.7, bonus))
+				if (enemy.buff(PinCushion.class) == null || Random.Float() > Math.pow(0.9, bonus))
 					Buff.affect(enemy, PinCushion.class).stick(this);
 			}
 		}
@@ -142,14 +180,12 @@ public class MissileWeapon extends Weapon {
 
 		StringBuilder info = new StringBuilder(desc());
 
-		info.append("\n\nAverage damage of this weapon equals to "
-				+ (MIN + (MAX - MIN) / 2) + " points per hit. ");
+		info.append("It will deal " + min() + "-" + max() + " damage per hit and require " + STR + " strength to use. ");
+		if (STR > Dungeon.hero.STR()) {
+			info.append("This weapon is too heavy for you. ");
+		}
 
 		if (Dungeon.hero.belongings.backpack.items.contains(this)) {
-			if (STR > Dungeon.hero.STR()) {
-				info.append("\n\nBecause of your inadequate strength the accuracy and speed "
-						+ "of your attack with this " + name + " is decreased.");
-			}
 			if (STR < Dungeon.hero.STR()
 					&& Dungeon.hero.heroClass == HeroClass.HUNTRESS) {
 				info.append("\n\nBecause of your excess strength the damage "
