@@ -17,16 +17,11 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
@@ -38,9 +33,11 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class ZotPhase extends Mob implements Callback{
 
-	private static final float TIME_TO_ZAP = 2f;
+	private static final float TIME_TO_ZAP = 3f;
 
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
@@ -48,7 +45,7 @@ public class ZotPhase extends Mob implements Callback{
 		name = "Zot";
 		spriteClass = ZotPhaseSprite.class;
 
-		HP = HT = 1000;
+		HP = HT = 2000;
 		baseSpeed = 2f;
 
 		EXP = 36;		
@@ -92,9 +89,9 @@ public class ZotPhase extends Mob implements Callback{
 			spend(TIME_TO_ZAP);
 
 			if (hit(this, enemy, true)) {
-				int dmg = Random.Int(80, 160);
+				int dmg = Random.Int(80, 120);
 				if (Level.water[enemy.pos] && !enemy.flying) {
-					dmg *= 1.5f;
+					dmg *= 2f;
 				}
 				enemy.damage(dmg, LightningTrap.LIGHTNING);
 

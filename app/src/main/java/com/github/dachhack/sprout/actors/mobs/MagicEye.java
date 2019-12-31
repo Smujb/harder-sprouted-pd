@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
 import com.github.dachhack.sprout.items.potions.PotionOfMending;
+import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
@@ -50,12 +51,10 @@ public class MagicEye extends Mob {
 		name = "enchanted evil eye";
 		spriteClass = MagicEyeSprite.class;
 
-		HP = HT = 400+(adjustForDepth(0)*Random.NormalIntRange(4, 7));
-		defenseSkill = 40+ adjustForDepth(1);
+		HP = HT = 1500;
 		viewDistance = Light.DISTANCE;
 
 		EXP = 16;
-		maxLvl = 25;
 
 		flying = true;
 
@@ -65,7 +64,7 @@ public class MagicEye extends Mob {
 
 	@Override
 	public int dr() {
-		return 70+ adjustForDepth(1);
+		return 120;
 	}
 
 	private int hitCell;
@@ -84,13 +83,8 @@ public class MagicEye extends Mob {
 	}
 
 	@Override
-	public int attackSkill(Char target) {
-		return 30+ adjustForDepth(0);
-	}
-
-	@Override
 	protected float attackDelay() {
-		return 1.6f;
+		return 2f;
 	}
 
 	@Override
@@ -128,7 +122,7 @@ public class MagicEye extends Mob {
 			}
 
 			if (hit(this, ch, true)) {
-				ch.damage(Random.NormalIntRange(50, 100), this);
+				ch.damage(Random.NormalIntRange(50, 80), this);
 
 				if (Dungeon.visible[pos]) {
 					ch.sprite.flash();
@@ -175,7 +169,16 @@ public class MagicEye extends Mob {
 			return null;
 		}
 	}
-	
+
+
+	@Override
+	public void damage(int dmg, Object src) {
+		if (src instanceof Wand) {
+			dmg = Random.NormalIntRange(1,dmg/2);
+		}
+		super.damage(dmg, src);
+	}
+
 	@Override
 	public String description() {
 		return "One of this demon's other names is \"orb of hatred\", because when it sees an enemy, "
@@ -184,7 +187,6 @@ public class MagicEye extends Mob {
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
 	static {
-		RESISTANCES.add(WandOfDisintegration.class);
 		RESISTANCES.add(Death.class);
 		RESISTANCES.add(Leech.class);
 	}

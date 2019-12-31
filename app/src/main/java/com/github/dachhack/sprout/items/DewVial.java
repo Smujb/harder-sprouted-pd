@@ -88,7 +88,7 @@ public class DewVial extends Item {
 		name = "dew vial";
 		image = ItemSpriteSheet.VIAL;
 
-		defaultAction = AC_DRINK;
+		defaultAction = AC_BLESS;
 
 		unique = true;
 	}
@@ -293,7 +293,7 @@ public class DewVial extends Item {
 			GLog.i("You are moving much faster!");
 			volume = volume - 10;
 			
-		} else if (action.equals(AC_BLESS) && !Dungeon.dewDraw) {	
+		} else if (action.equals(AC_BLESS) && !Dungeon.dewDraw && volume >= 100) {
 
 			boolean procced = uncurse(hero, hero.belongings.backpack.items.toArray(new Item[0]));
 			procced = uncurse(hero, hero.belongings.weapon,
@@ -307,14 +307,12 @@ public class DewVial extends Item {
 				GLog.i(TXT_NOT_PROCCED);
 			}
 													
-			volume -= 50;
+			volume -= 65;
 			
-		} else if (action.equals(AC_BLESS) && Dungeon.dewDraw) {	
+		} else if (action.equals(AC_BLESS) && Dungeon.dewDraw && volume >= 100) {
 
 			curUser = hero;
 			GameScene.selectItem(itemSelector, WndBag.Mode.UPGRADEDEW,	TXT_SELECT);
-													
-				
 			
 		} else {
 
@@ -331,8 +329,8 @@ public class DewVial extends Item {
 			levelLimit = Dungeon.dewVial.upgradeLimit();
 		}
         
-        float lvlchance = 0.33f;
-        if (hero.heroClass == HeroClass.MAGE){lvlchance = 0.38f;}
+        float lvlchance = 0.50f;
+        if (hero.heroClass == HeroClass.MAGE){lvlchance = 0.55f;}
         
         boolean procced = false;
 		boolean proccedUp = false;
@@ -342,7 +340,6 @@ public class DewVial extends Item {
 				item.uncurse();
 				if(item.level<0){item.upgrade(-item.level);} //upgrade to even
 				if (!item.cursed) {procced = true;}
-				hero.sprite.emitter().start(ShadowParticle.UP, 0.05f, 10);
 			}
 			
 			if (item != null && Random.Float()<lvlchance && item.isUpgradable() && item.level < levelLimit){
@@ -373,6 +370,10 @@ public class DewVial extends Item {
 		}
 		
 		if (proccedUp){GLog.i(TXT_BLESSED);}
+
+		if (procced) {
+			hero.sprite.emitter().start(ShadowParticle.UP, 0.05f, 10);
+		}
 					
 		return procced;
 	}

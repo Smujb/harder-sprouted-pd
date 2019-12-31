@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.pets.Fairy;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Lightning;
@@ -85,22 +86,24 @@ public class ZotSprite extends MobSprite {
 	}
 
 	@Override
-	public void attack(int cell) {
+	public void attack(final int cell) {
 		if (!Level.adjacent(cell, ch.pos)) {
-			//Char enemy = Actor.findChar(cell);
-				  ((MissileSprite) parent.recycle(MissileSprite.class)).reset(ch.pos,
+			Char enemy = Actor.findChar(cell);
+			((MissileSprite) parent.recycle(MissileSprite.class)).reset(ch.pos,
 					cell, new Skull(), new Callback() {
 						@Override
 						public void call() {
-							ch.onAttackComplete();
+							explode(cell);
+							ch.next();
 						}
-				});
-		 	  
-		  			  		
+					});
+			if (enemy instanceof Hero) {
+				camera.shake(3, 0.2f);
+			}
 			play(cast);
 			turnTo(ch.pos, cell);
-			explode(cell);			
-			
+			explode(cell);
+
 		} else {
 
 			super.attack(cell);
@@ -128,14 +131,10 @@ public class ZotSprite extends MobSprite {
 				}
 
 				Char ch = Actor.findChar(c);
-				if (ch != null && ch==Dungeon.hero) {
-					// those not at the center of the blast take damage less
-					// consistently.
-					int minDamage = c == cell ? Dungeon.depth + 5 : 1;
-					int maxDamage = 10 + Dungeon.depth * 2;
+				if (ch != null) {
 
-					int dmg = Random.NormalIntRange(minDamage, maxDamage)
-							- Random.Int(ch.dr());
+					int dmg = this.ch.damageRoll()
+							- Random.NormalIntRange(ch.dr()/2,ch.dr());
 					if (dmg > 0) {
 						ch.damage(dmg, this);
 					}

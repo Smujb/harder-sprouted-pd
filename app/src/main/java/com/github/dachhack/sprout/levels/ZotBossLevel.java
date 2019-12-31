@@ -42,8 +42,8 @@ public class ZotBossLevel extends Level {
 	{
 		color1 = 0x534f3e;
 		color2 = 0xb9d661;
-		cleared=true;
-		viewDistance = 6;
+		cleared = true;
+		viewDistance = 4;
 	}
 
 	private static final int ROOM_LEFT = getWidth() / 2 - 2;

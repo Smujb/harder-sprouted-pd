@@ -26,6 +26,8 @@ import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Amok;
+import com.github.dachhack.sprout.actors.buffs.Blindness;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Charm;
 import com.github.dachhack.sprout.actors.buffs.Poison;
@@ -48,39 +50,44 @@ import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ZotSprite;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class Zot extends Mob {
 
 	private static final int JUMP_DELAY = 5;
 
+	public static final float TIME_TO_TELEPORT = 1f;
+
+	private boolean canJump = false;
 	{
 		name = "Zot";
 		spriteClass = ZotSprite.class;
 		baseSpeed = 2f;
-
-		HP = HT = 40000;
-
 		EXP = 20;
 	}
+	private int HPAtLastJump = HP = HT = 40000;
 
 	private int timeToJump = JUMP_DELAY;
 	
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(200, 450);
+		return Random.NormalIntRange(250, 500);
 	}
 
 	@Override
 	public int dr() {
-		return 100;
+		return 200;
 	}
 
 	@Override
 	protected boolean act() {
+		int regen = Dungeon.hero.buff(AutoHealPotion.class) != null ? 200 : Random.Int(200,500);
+
+		boolean blinded = this.buff(Blindness.class) != null;
 		
-		if (paralysed) {
+		if (paralysed | blinded) {
 			yell("ARRRGH!");
 			
 			if(!checkEyes()){
@@ -105,19 +112,15 @@ public class Zot extends Mob {
 			
 			if (HP < HT) {
 				sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
-				HP = HP + 200;			
+				HP = HP + Math.min(HT - HP, regen);
 			}
 		}
 
 		
 		boolean result = super.act();
-
-		int regen = Dungeon.hero.buff(AutoHealPotion.class) != null ? 1 : Random.Int(50,100);
-				
-		
-		if (HP < HT) {
+		if (HP < HT & !Level.fieldOfView[this.pos]) {//Only heals when not visible
 			sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
-			HP = HP + regen;			
+			HP = HP + Math.min(HT - HP, regen);
 		}
 		return result;
 	}
@@ -144,7 +147,7 @@ public class Zot extends Mob {
 
 	@Override
 	protected boolean getCloser(int target) {
-		if (Level.fieldOfView[target]) {
+		if (canJump && Level.fieldOfView[target]) {
 			jump();
 			return true;
 		} else {
@@ -159,8 +162,10 @@ public class Zot extends Mob {
 
 	@Override
 	protected boolean doAttack(Char enemy) {
-		timeToJump--;
-		if (timeToJump <= 0 && Level.adjacent(pos, enemy.pos)) {
+		if (HPAtLastJump - HP > 5000) {
+			canJump = true;
+		}
+		if (canJump) {
 			jump();
 			return true;
 		} else {
@@ -169,7 +174,7 @@ public class Zot extends Mob {
 	}
 
 	private void jump() {
-		timeToJump = JUMP_DELAY;
+		canJump = false;
 		
 		if (!checkPhases()){
 			ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
@@ -206,7 +211,7 @@ public class Zot extends Mob {
 			Sample.INSTANCE.play(Assets.SND_PUFF);
 		}
 
-		spend(1 / speed());
+		spend(TIME_TO_TELEPORT);
 	}
 	
 	private boolean checkPhases(){
@@ -277,6 +282,20 @@ public class Zot extends Mob {
 	@Override
 	public String description() {
 		return "Zot.";
+	}
+
+	private final static String HPATLASTJUMP = "last_jump";
+
+	@Override
+	public void storeInBundle(Bundle bundle) {
+		bundle.put(HPATLASTJUMP, HPAtLastJump);
+		super.storeInBundle(bundle);
+	}
+
+	@Override
+	public void restoreFromBundle(Bundle bundle) {
+		HPAtLastJump = bundle.getInt(HPATLASTJUMP);
+		super.restoreFromBundle(bundle);
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

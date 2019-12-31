@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.Item;
+import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
@@ -67,7 +68,7 @@ public class Skull extends MissileWeapon {
 
 		if (Random.Int(level + 100) >= 92) {
 
-			defender.damage(defender.HP, this);
+			defender.damage(defender.HP, new Death());
 			defender.sprite.emitter().burst(ShadowParticle.UP, 5);
 
 			if (!defender.isAlive() && attacker instanceof Hero) {

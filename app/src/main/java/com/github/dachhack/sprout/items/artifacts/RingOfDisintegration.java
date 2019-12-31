@@ -294,7 +294,7 @@ public class RingOfDisintegration extends Artifact {
 			} else if (item instanceof Scroll && !item.isIdentified()){
 				GLog.w("You're not sure what type of scroll this is yet.");
 		   } else if (item != null){
-			GLog.w("You are unable to add this scroll to the book.");
+			GLog.w("You are unable to add this item to the ring.");
 		}
 	 }
 	};

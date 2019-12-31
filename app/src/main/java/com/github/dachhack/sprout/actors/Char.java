@@ -318,10 +318,6 @@ public abstract class Char extends Actor {
 				}
 			}
 		}
-		if (dmg <= 0) {
-			sprite.showStatus(CharSprite.NEUTRAL, "blocked");
-			return;
-		}
 		HP -= dmg;
 		sprite.showStatus(HP > HT / 2 ? CharSprite.WARNING
 				: CharSprite.NEGATIVE, Integer.toString(dmg));

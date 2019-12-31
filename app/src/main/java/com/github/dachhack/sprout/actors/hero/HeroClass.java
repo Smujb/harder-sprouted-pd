@@ -277,11 +277,11 @@ public enum HeroClass {
 		if (!Dungeon.playtest) {
 			//Playtest
 			//TomeOfMastery tome = new TomeOfMastery(); tome.collect();
-			new WandOfDisintegration().identify().reinforce().upgrade(15).collect();
-			new WandOfFirebolt().identify().reinforce().upgrade(15).collect();
-			new WandOfLightning().identify().reinforce().upgrade(15).collect();
-			new WandOfAvalanche().identify().reinforce().upgrade(15).collect();
-			new WandOfTelekinesis().identify().reinforce().upgrade(15).collect();
+			new WandOfDisintegration().identify().reinforce().upgrade(300).collect();
+			new WandOfFirebolt().identify().reinforce().upgrade(300).collect();
+			new WandOfLightning().identify().reinforce().upgrade(300).collect();
+			new WandOfAvalanche().identify().reinforce().upgrade(300).collect();
+			new WandOfTelekinesis().identify().reinforce().upgrade(300).collect();
 			new WandHolster().collect();
 
 			new Tamahawk().quantity(40).collect();
@@ -305,18 +305,20 @@ public enum HeroClass {
 			//hero.HT=hero.HP=999;
 			hero.STR = hero.STR + 10;
 			PlateArmor armor1 = new PlateArmor();
-			armor1.reinforce().upgrade(15).identify().collect();
+			armor1.reinforce().upgrade(100).identify().collect();
 			// PlateArmor armor2 = new PlateArmor();
 			// armor2.upgrade(14).identify().collect();
 
+			new Palantir().collect();
+
 			WarHammer hammer = new WarHammer();
-			hammer.reinforce().upgrade(15).identify().collect();
+			hammer.reinforce().upgrade(300).identify().collect();
 
 			Glaive glaive = new Glaive();
-			glaive.reinforce().upgrade(15).identify().collect();
+			glaive.reinforce().upgrade(300).identify().collect();
 
 			Spork spork = new Spork();
-			spork.reinforce().upgrade(15).identify().collect();
+			spork.reinforce().upgrade(300).identify().collect();
 
 			Towel towel = new Towel();
 			towel.identify().collect();
