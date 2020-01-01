@@ -214,6 +214,9 @@ public class Blacksmith extends NPC {
 		
 			first = item1;
 			second = item2;
+		int startingLevel = item1.level;
+		int minLevelIncrease = Math.min(100, item2.level);
+		int minLevelAfterForge = startingLevel + minLevelIncrease;
 		
 
 		Sample.INSTANCE.play(Assets.SND_EVOKE);
@@ -241,6 +244,10 @@ public class Blacksmith extends NPC {
 		}
 		
 		GLog.p(TXT_LOOKS_BETTER, first.name());
+
+		if (first.level < minLevelAfterForge) {
+			first.upgrade(minLevelAfterForge - first.level);
+		}
 		Dungeon.hero.spendAndNext(2f);
 		Badges.validateItemLevelAquired(first);
 

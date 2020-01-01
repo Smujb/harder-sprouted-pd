@@ -81,7 +81,7 @@ public class MissileWeapon extends Weapon {
 	public int damageRoll(Hero hero) {
 		MIN = min();
 		MAX = max();
-		return super.damageRoll(hero);
+		return Random.NormalIntRange(min(), max());
 	}
 
 	@Override
@@ -104,17 +104,16 @@ public class MissileWeapon extends Weapon {
 			if (!curUser.shoot(enemy, this)) {
 				miss(cell);
 			} else if (!(this instanceof Boomerang || this instanceof JupitersWrath)) {
-				int bonus = 0;
+				/*int bonus = 0;
 
 				for (Buff buff : curUser.buffs(RingOfSharpshooting.Aim.class))
 					bonus += ((RingOfSharpshooting.Aim) buff).level;
 
 				if (curUser.heroClass == HeroClass.HUNTRESS
 						&& enemy.buff(PinCushion.class) == null)
-					bonus += 3;
+					bonus += 3;*/
 
 				//if (enemy.buff(PinCushion.class) == null || Random.Float() > Math.pow(0.9, bonus))
-				Buff.affect(enemy, PinCushion.class).stick(this);
 			}
 		}
 	}
@@ -143,6 +142,9 @@ public class MissileWeapon extends Weapon {
 				detach(null);
 			}
 		}
+		if (defender.buff(PinCushion.class) == null) {
+			Buff.affect(defender, PinCushion.class).stick(this);
+		}
 	}
 
 	@Override
@@ -154,7 +156,7 @@ public class MissileWeapon extends Weapon {
 				if (index == 0) {
 					MissileWeapon.super.doEquip(hero);
 				}
-			};
+			}
 		});
 
 		return false;

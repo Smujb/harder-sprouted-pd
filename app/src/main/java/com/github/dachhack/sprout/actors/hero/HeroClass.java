@@ -31,6 +31,7 @@ import com.github.dachhack.sprout.items.BookOfTranscendence;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.EasterEgg;
 import com.github.dachhack.sprout.items.Egg;
+import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.OrbOfZot;
 import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.Palantir;
@@ -45,6 +46,7 @@ import com.github.dachhack.sprout.items.bags.AnkhChain;
 import com.github.dachhack.sprout.items.bags.KeyRing;
 import com.github.dachhack.sprout.items.bags.PotionBandolier;
 import com.github.dachhack.sprout.items.bags.ScrollHolder;
+import com.github.dachhack.sprout.items.bags.SeedPouch;
 import com.github.dachhack.sprout.items.bags.WandHolster;
 import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.items.journalpages.DragonCave;
@@ -91,10 +93,12 @@ import com.github.dachhack.sprout.items.weapon.melee.relic.AresSword;
 import com.github.dachhack.sprout.items.weapon.melee.relic.CromCruachAxe;
 import com.github.dachhack.sprout.items.weapon.melee.relic.LokisFlail;
 import com.github.dachhack.sprout.items.weapon.melee.relic.NeptunusTrident;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.Dart;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
+import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 
@@ -144,7 +148,7 @@ public enum HeroClass {
 
 		hero.heroClass = this;
 
-		if (Badges.isUnlocked(masteryBadge())) {
+		if (Badges.isUnlocked(masteryBadge()) || Dungeon.testing) {
 			new TomeOfMastery().collect();
 		}
 
@@ -289,15 +293,25 @@ public enum HeroClass {
 			new Tamahawk().quantity(40).collect();
 
 			new AnkhChain().collect();
+			new KeyRing().collect();
+
+			new SeedPouch().collect();
+
+			new Phaseshift.Seed().quantity(100).collect();
+
+			RelicMeleeWeapon wep = (RelicMeleeWeapon) Generator.random(Generator.Category.RELIC_WEAPON);
+			if (wep != null) {
+				wep.collect();
+				wep.identify().setTesting();
+			}
 
 			new PotionBandolier().collect();
 
 			new DewVial().fill().collect();
 
-			new BookOfDead().collect();
-			new BookOfLife().collect();
-			new BookOfTranscendence().collect();
-			//new Palantir().collect();
+			//new BookOfDead().collect();
+			//new BookOfLife().collect();
+			//new BookOfTranscendence().collect();
 			new Amulet().collect();
 
 			(hero.belongings.misc2 = new RingOfWealth()).identify().upgrade(28);
@@ -359,6 +373,8 @@ public enum HeroClass {
 			//ConchShell conch = new ConchShell(); conch.collect();
 			//AncientCoin coin = new AncientCoin(); coin.collect();
 			//TenguKey key = new TenguKey(); key.collect();
+			JournalPage dol = new Town();
+			dol.collect();
 			JournalPage sk1 = new Sokoban1();
 			sk1.collect();
 			JournalPage sk2 = new Sokoban2();
@@ -367,8 +383,6 @@ public enum HeroClass {
 			sk3.collect();
 			JournalPage sk4 = new Sokoban4();
 			sk4.collect();
-			//JournalPage dol = new Town();
-			//dol.collect();
 			//JournalPage sk5 = new Vault();
 			//sk5.collect();
 			//JournalPage dra = new DragonCave();

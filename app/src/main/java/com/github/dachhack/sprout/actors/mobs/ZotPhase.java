@@ -54,6 +54,8 @@ public class ZotPhase extends Mob implements Callback{
 		lootChance = 0.33f;
 
 		seeThroughInvisibility = true;
+
+		scalesWithHeroLevel = true;
 		
 	}
 

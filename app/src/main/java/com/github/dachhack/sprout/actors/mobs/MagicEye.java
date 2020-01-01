@@ -60,6 +60,8 @@ public class MagicEye extends Mob {
 
 		loot = new PotionOfMending();
 		lootChance = 0.05f;
+
+		scalesWithHeroLevel = true;
 	}
 
 	@Override

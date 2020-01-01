@@ -68,6 +68,8 @@ public class Zot extends Mob {
 		EXP = 20;
 
 		seeThroughInvisibility = true;
+
+		scalesWithHeroLevel = true;
 	}
 	private int HPAtLastJump = HP = HT = 40000;
 
@@ -91,6 +93,11 @@ public class Zot extends Mob {
 		} else {
 			return super.attackSkill(target);
 		}
+	}
+
+	@Override
+	public int defenseSkill(Char enemy) {
+		return super.defenseSkill(enemy)/2;
 	}
 
 	@Override
