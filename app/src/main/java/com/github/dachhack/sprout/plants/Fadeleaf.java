@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.plants;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -25,12 +26,14 @@ import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfTeleportation;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
+import com.github.dachhack.sprout.windows.WndOtiluke;
 import com.watabou.noosa.Game;
 
 public class Fadeleaf extends Plant {
@@ -48,23 +51,20 @@ public class Fadeleaf extends Plant {
 		super.activate(ch);
 
 		if (ch instanceof Hero) {
+            if (Dungeon.bossLevel()) {
+                GLog.w("Stop trying to escape from the boss");
+                return;
+            }
 
-			((Hero) ch).curAction = null;
-			if (((Hero) ch).subClass == HeroSubClass.WARDEN){
-
-				if (Dungeon.bossLevel()) {
-					GLog.w( "No teleportation allowed!!!!" );
-					return;
-
+            Hero hero = ((Hero)ch);
+			hero.curAction = null;
+			if (hero.subClass == HeroSubClass.WARDEN){//If hero has visited safe room, send them there
+				OtilukesJournal journal = hero.belongings.getItem(OtilukesJournal.class);
+				if (journal != null) {
+					journal.returnDepth = Dungeon.depth;
+					journal.returnPos = hero.pos;
+					WndOtiluke.port(0, journal.firsts[0]);
 				}
-
-				Buff buff = Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
-				if (buff != null) buff.detach();
-
-				InterlevelScene.mode = InterlevelScene.Mode.RETURN;
-				InterlevelScene.returnDepth = Math.max(1, (Dungeon.depth - 1));
-				InterlevelScene.returnPos = -2;
-				Game.switchScene( InterlevelScene.class );
 
 			} else {
 				ScrollOfTeleportation.teleportHero((Hero) ch);

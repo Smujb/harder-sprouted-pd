@@ -53,6 +53,7 @@ import com.github.dachhack.sprout.items.bags.WandHolster;
 import com.github.dachhack.sprout.items.food.Food;
 import com.github.dachhack.sprout.items.journalpages.DragonCave;
 import com.github.dachhack.sprout.items.journalpages.JournalPage;
+import com.github.dachhack.sprout.items.journalpages.SafeSpotPage;
 import com.github.dachhack.sprout.items.journalpages.Sokoban1;
 import com.github.dachhack.sprout.items.journalpages.Sokoban2;
 import com.github.dachhack.sprout.items.journalpages.Sokoban3;
@@ -100,8 +101,21 @@ import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.Dart;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
+import com.github.dachhack.sprout.plants.BlandfruitBush;
+import com.github.dachhack.sprout.plants.Blindweed;
+import com.github.dachhack.sprout.plants.Dewcatcher;
+import com.github.dachhack.sprout.plants.Dreamfoil;
+import com.github.dachhack.sprout.plants.Earthroot;
+import com.github.dachhack.sprout.plants.Fadeleaf;
+import com.github.dachhack.sprout.plants.Firebloom;
+import com.github.dachhack.sprout.plants.Flytrap;
+import com.github.dachhack.sprout.plants.Icecap;
 import com.github.dachhack.sprout.plants.Phaseshift;
 import com.github.dachhack.sprout.plants.Plant;
+import com.github.dachhack.sprout.plants.Sorrowmoss;
+import com.github.dachhack.sprout.plants.Starflower;
+import com.github.dachhack.sprout.plants.Stormvine;
+import com.github.dachhack.sprout.plants.Sungrass;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 
@@ -378,6 +392,8 @@ public enum HeroClass {
 			//ConchShell conch = new ConchShell(); conch.collect();
 			//AncientCoin coin = new AncientCoin(); coin.collect();
 			//TenguKey key = new TenguKey(); key.collect();
+			JournalPage safe = new SafeSpotPage();
+			safe.collect();
 			JournalPage dol = new Town();
 			dol.collect();
 			JournalPage sk1 = new Sokoban1();
@@ -462,12 +478,20 @@ public enum HeroClass {
 				Scroll scroll5 = new ScrollOfPsionicBlast();
 				scroll5.identify().collect();
 
-				Plant.Seed seed = (Plant.Seed) Generator.random(SEED);
-				if (seed != null) {
-					seed.collect();
-				} else {
-					new Phaseshift.Seed().collect();
-				}
+				new BlandfruitBush.Seed().collect();
+				new Blindweed.Seed().collect();
+				new Dewcatcher.Seed().collect();
+				new Dreamfoil.Seed().collect();
+				new Earthroot.Seed().collect();
+				new Fadeleaf.Seed().collect();
+				new Firebloom.Seed().collect();
+				new Flytrap.Seed().collect();
+				new Icecap.Seed().collect();
+				new Phaseshift.Seed().collect();
+				new Sorrowmoss.Seed().collect();
+				new Starflower.Seed().collect();
+				new Stormvine.Seed().collect();
+				new Sungrass.Seed().collect();
 
 			}
 				

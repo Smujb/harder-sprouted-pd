@@ -53,8 +53,8 @@ public enum HeroSubClass {
 					+ "effectively ignoring it when using a missile weapon."),
 	WARDEN(
 			"warden",
-			"Having a strong connection with forces of nature gives _Wardens_ an ability to gather dewdrops and "
-					+ "seeds from plants. Also trampling a high grass grants them a temporary armor buff.");
+			"Having a strong connection with forces of nature gives _Wardens_ more powerful effects when stepping on plants. "
+					+ "Also trampling a high grass grants them a temporary armor buff.");
 
 	private String title;
 	private String desc;

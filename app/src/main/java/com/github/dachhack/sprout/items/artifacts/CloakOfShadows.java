@@ -25,13 +25,11 @@ public class CloakOfShadows extends Artifact {
 
 		level = 0;
 		exp = 0;
-		levelCap = 15;
+		levelCap = 20;
 
 		charge = level + 5;
 		partialCharge = 0;
-		chargeCap = level + 5;
-
-		cooldown = 0;
+		chargeCap = level + 10;
 
 		defaultAction = AC_STEALTH;
 
@@ -57,9 +55,6 @@ public class CloakOfShadows extends Artifact {
 			if (!stealthed) {
 				if (!isEquipped(hero))
 					GLog.i("You need to equip your cloak to do that.");
-				else if (cooldown > 0)
-					GLog.i("Your cloak needs " + cooldown
-							+ " more rounds to re-energize.");
 				else if (Dungeon.depth == 29)
 					GLog.i("An ancient magic in this place prevents you from using your cloak.");
 				else if (charge <= 1)
@@ -147,20 +142,17 @@ public class CloakOfShadows extends Artifact {
 	}
 
 	private static final String STEALTHED = "stealthed";
-	private static final String COOLDOWN = "cooldown";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
 		bundle.put(STEALTHED, stealthed);
-		bundle.put(COOLDOWN, cooldown);
 	}
 
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
 		stealthed = bundle.getBoolean(STEALTHED);
-		cooldown = bundle.getInt(COOLDOWN);
 	}
 
 	public class cloakRecharge extends ArtifactBuff {
@@ -168,7 +160,7 @@ public class CloakOfShadows extends Artifact {
 		public boolean act() {
 			if (charge < chargeCap) {
 				if (!stealthed)
-					partialCharge += (1f / (60 - (chargeCap - charge) * 2));
+					partialCharge += 0.2f;
 
 				if (partialCharge >= 1) {
 					charge++;
@@ -176,13 +168,9 @@ public class CloakOfShadows extends Artifact {
 					if (charge == chargeCap) {
 						partialCharge = 0;
 					}
-
 				}
 			} else
 				partialCharge = 0;
-
-			if (cooldown > 0)
-				cooldown--;
 
 			updateQuickslot();
 
@@ -243,7 +231,6 @@ public class CloakOfShadows extends Artifact {
 			if (target.invisible > 0)
 				target.invisible--;
 			stealthed = false;
-			cooldown = 10 - (level / 3);
 
 			updateQuickslot();
 			super.detach();

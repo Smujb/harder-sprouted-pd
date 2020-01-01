@@ -121,7 +121,7 @@ public class WndOtiluke extends Window {
 	}
 
 	
-	public void port(int room, boolean first){
+	public static void port(int room, boolean first){
 		
 		 Hero hero = Dungeon.hero;
 		 hero.spend(TIME_TO_USE);
@@ -141,10 +141,12 @@ public class WndOtiluke extends Window {
 		InterlevelScene.returnDepth = Dungeon.depth;
 		InterlevelScene.returnPos = Dungeon.hero.pos;
 		InterlevelScene.journalpage = room;
-		InterlevelScene.first = true;
+		if (room != 5 && room != 0) {
+			InterlevelScene.first = true;
+		} else {
+			InterlevelScene.first = first;
+		}
+
 		Game.switchScene(InterlevelScene.class);
-		
-		
-	  
 	}
 }
