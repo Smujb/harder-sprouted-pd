@@ -2,7 +2,10 @@ package com.github.dachhack.sprout.plants;
 
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Levitation;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.items.potions.PotionOfLevitation;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
@@ -24,7 +27,11 @@ public class Stormvine extends Plant {
 		super.activate(ch);
 
 		if (ch != null) {
-			Buff.affect(ch, Vertigo.class, Vertigo.duration(ch));
+			if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+				Buff.affect(ch, Levitation.class, 10f);
+			} else {
+				Buff.affect(ch, Vertigo.class, Vertigo.DURATION);
+			}
 		}
 	}
 

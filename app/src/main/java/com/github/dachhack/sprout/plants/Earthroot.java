@@ -19,7 +19,9 @@ package com.github.dachhack.sprout.plants;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.EarthParticle;
 import com.github.dachhack.sprout.items.potions.PotionOfParalyticGas;
@@ -43,8 +45,12 @@ public class Earthroot extends Plant {
 	public void activate(Char ch) {
 		super.activate(ch);
 
-		if (ch != null) {
-			Buff.affect(ch, Armor.class).level = ch.HT;
+		if (ch == Dungeon.hero) {
+			if (Dungeon.hero.subClass == HeroSubClass.WARDEN){
+				Buff.affect(ch, Barkskin.class).level(Dungeon.hero.lvl + 5);
+			} else {
+				Buff.affect(ch, Armor.class).level(ch.HT);
+			}
 		}
 
 		if (Dungeon.visible[pos]) {

@@ -26,28 +26,32 @@ public enum HeroSubClass {
 	GLADIATOR(
 			"gladiator",
 			"A successful attack with a melee weapon allows the _Gladiator_ to start a combo, "
-					+ "in which every next successful hit inflicts more damage."), BERSERKER(
+					+ "in which every next successful hit inflicts more damage."),
+	BERSERKER(
 			"berserker",
 			"When severely wounded, the _Berserker_ enters a state of wild fury "
 					+ "significantly increasing his damage output."),
 
 	WARLOCK("warlock",
-			"After killing an enemy the _Warlock_ consumes its soul. "
-					+ "It heals his wounds and satisfies his hunger."), BATTLEMAGE(
+			"When attacking with wands, the _Warlock_ may mark their soul. "
+					+ "When this enemy takes physical damage, it will replenish the Warlock's health and hunger."),
+	BATTLEMAGE(
 			"battlemage",
-			"When fighting with a wand in his hands, the _Battlemage_ inflicts additional damage depending "
-					+ "on the current number of charges. Every successful hit restores 1 charge to this wand."),
+			"When fighting with a wand in his hands, the _Battlemage_ inflicts additional effects depending "
+					+ "on the wand's type. Every successful hit restores 1 charge to this wand."),
 
 	ASSASSIN(
 			"assassin",
-			"When performing a surprise attack, the _Assassin_ inflicts additional damage to his target."), FREERUNNER(
+			"When performing a surprise attack, the _Assassin_ inflicts additional damage to his target."),
+	FREERUNNER(
 			"freerunner",
 			"The _Freerunner_ moves faster when he unencumbered and not starving, "
 					+ "if he is invisible, this speed boost is much stronger."),
 
 	SNIPER("sniper",
 			"_Snipers_ are able to detect weak points in an enemy's armor, "
-					+ "effectively ignoring it when using a missile weapon."), WARDEN(
+					+ "effectively ignoring it when using a missile weapon."),
+	WARDEN(
 			"warden",
 			"Having a strong connection with forces of nature gives _Wardens_ an ability to gather dewdrops and "
 					+ "seeds from plants. Also trampling a high grass grants them a temporary armor buff.");

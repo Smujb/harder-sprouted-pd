@@ -20,10 +20,12 @@ package com.github.dachhack.sprout.plants;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ShaftParticle;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
+import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.Utils;
@@ -42,8 +44,12 @@ public class Sungrass extends Plant {
 	public void activate(Char ch) {
 		super.activate(ch);
 
-		if (ch != null) {
-			Buff.affect(ch, Health.class).level = ch.HT;
+		if (ch == Dungeon.hero) {
+			if (Dungeon.hero.subClass == HeroSubClass.WARDEN) {
+				new PotionOfMending().apply(Dungeon.hero);
+			} else {
+				Buff.affect(ch, Health.class).level = ch.HT;
+			}
 		}
 
 		if (Dungeon.visible[pos]) {

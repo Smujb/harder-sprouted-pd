@@ -68,7 +68,19 @@ public class ForestDart extends MissileWeapon {
 	public void proc(Char attacker, Char defender, int damage) {
 		
 		
-       if (defender instanceof Gnoll || defender instanceof Shaman || defender instanceof Brute || defender instanceof Bat || defender instanceof Rat || defender instanceof Assassin || defender instanceof Thief || defender instanceof GoldThief || defender instanceof PoisonGoo || defender instanceof SpectralRat || defender instanceof Kupua || defender instanceof Zot || defender instanceof Otiluke
+       if (defender instanceof Gnoll ||
+			   defender instanceof Shaman ||
+			   defender instanceof Brute ||
+			   defender instanceof Bat ||
+			   defender instanceof Rat ||
+			   defender instanceof Assassin ||
+			   defender instanceof Thief ||
+			   defender instanceof GoldThief ||
+			   defender instanceof PoisonGoo ||
+			   defender instanceof SpectralRat ||
+			   defender instanceof Kupua ||
+			   defender instanceof Zot ||
+			   defender instanceof Otiluke
     		){
     	   defender.damage(Random.Int(damage*2,damage*5), this);
        } else {

@@ -21,6 +21,9 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.ToxicImbue;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.PoisonParticle;
 import com.github.dachhack.sprout.items.potions.PotionOfToxicGas;
@@ -39,9 +42,11 @@ public class Sorrowmoss extends Plant {
 	public void activate(Char ch) {
 		super.activate(ch);
 
-		if (ch != null) {
+		if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+			Buff.affect(ch, ToxicImbue.class).set(15f);
+		} else if (ch != null) {
 			Buff.affect(ch, Poison.class).set(
-					Poison.durationFactor(ch) * (4 + Dungeon.depth / 2));
+					Poison.durationFactor(ch) * (4 + Dungeon.depth / 2f));
 		}
 
 		if (Dungeon.visible[pos]) {

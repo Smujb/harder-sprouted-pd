@@ -21,11 +21,26 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.blobs.Freezing;
+import com.github.dachhack.sprout.actors.buffs.Barkskin;
+import com.github.dachhack.sprout.actors.buffs.Bleeding;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Cripple;
+import com.github.dachhack.sprout.actors.buffs.Drowsy;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
+import com.github.dachhack.sprout.actors.buffs.Poison;
+import com.github.dachhack.sprout.actors.buffs.Slow;
+import com.github.dachhack.sprout.actors.buffs.Vertigo;
+import com.github.dachhack.sprout.actors.buffs.Weakness;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
+import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.potions.PotionOfFrost;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.BArray;
+import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.PathFinder;
+import com.watabou.utils.Random;
 
 public class Icecap extends Plant {
 
@@ -40,6 +55,40 @@ public class Icecap extends Plant {
 	@Override
 	public void activate(Char ch) {
 		super.activate(ch);
+
+		if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN) {
+			Hero hero = (Hero) ch;
+			switch (Random.Int(5)) {
+				case 0:
+					if (Dungeon.depth != 29) {
+						GLog.i("You see your hands turn invisible!");
+						Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
+					}
+					break;
+				case 1:
+					GLog.i("You feel your skin harden!");
+					Buff.affect(hero, Barkskin.class).level(hero.HT / 4);
+					break;
+				case 2:
+					GLog.i("Refreshing!");
+					Buff.detach(hero, Poison.class);
+					Buff.detach(hero, Cripple.class);
+					Buff.detach(hero, Weakness.class);
+					Buff.detach(hero, Bleeding.class);
+					Buff.detach(hero, Drowsy.class);
+					Buff.detach(hero, Slow.class);
+					Buff.detach(hero, Vertigo.class);
+					break;
+				case 3:
+					GLog.i("You feel better!");
+					if (hero.HP < hero.HT) {
+						hero.HP = Math.min(hero.HP + hero.HT / 4, hero.HT);
+						hero.sprite.emitter()
+								.burst(Speck.factory(Speck.HEALING), 1);
+					}
+					break;
+			}
+		}
 
 		PathFinder
 				.buildDistanceMap(pos, BArray.not(Level.losBlocking, null), 1);

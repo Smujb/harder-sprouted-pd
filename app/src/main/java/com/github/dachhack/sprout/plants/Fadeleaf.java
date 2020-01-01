@@ -19,13 +19,19 @@ package com.github.dachhack.sprout.plants;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
+import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
 import com.github.dachhack.sprout.items.potions.PotionOfMindVision;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfTeleportation;
+import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
+import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.noosa.Game;
 
 public class Fadeleaf extends Plant {
 
@@ -43,8 +49,26 @@ public class Fadeleaf extends Plant {
 
 		if (ch instanceof Hero) {
 
-			ScrollOfTeleportation.teleportHero((Hero) ch);
 			((Hero) ch).curAction = null;
+			if (((Hero) ch).subClass == HeroSubClass.WARDEN){
+
+				if (Dungeon.bossLevel()) {
+					GLog.w( "No teleportation allowed!!!!" );
+					return;
+
+				}
+
+				Buff buff = Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
+				if (buff != null) buff.detach();
+
+				InterlevelScene.mode = InterlevelScene.Mode.RETURN;
+				InterlevelScene.returnDepth = Math.max(1, (Dungeon.depth - 1));
+				InterlevelScene.returnPos = -2;
+				Game.switchScene( InterlevelScene.class );
+
+			} else {
+				ScrollOfTeleportation.teleportHero((Hero) ch);
+			}
 
 		} else if (ch instanceof Mob) {
 

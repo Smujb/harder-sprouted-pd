@@ -22,6 +22,9 @@ import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
+import com.github.dachhack.sprout.actors.buffs.Invisibility;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
@@ -44,12 +47,16 @@ public class Blindweed extends Plant {
 		super.activate(ch);
 
 		if (ch != null) {
-			int len = Random.Int(5, 10);
-			Buff.prolong(ch, Blindness.class, len);
-			Buff.prolong(ch, Cripple.class, len);
-			if (ch instanceof Mob) {
-				((Mob) ch).state = ((Mob) ch).WANDERING;
-				((Mob) ch).beckon(Dungeon.level.randomDestination());
+			if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+				Buff.affect(ch, Invisibility.class, 10f);
+			} else {
+				int len = Random.Int(5, 10);
+				Buff.prolong(ch, Blindness.class, len);
+				Buff.prolong(ch, Cripple.class, len);
+				if (ch instanceof Mob) {
+					if (((Mob) ch).state == ((Mob) ch).HUNTING) ((Mob) ch).state = ((Mob) ch).WANDERING;
+					((Mob) ch).beckon(Dungeon.level.randomDestination());
+				}
 			}
 		}
 

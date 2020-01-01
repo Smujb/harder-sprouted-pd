@@ -19,10 +19,14 @@ package com.github.dachhack.sprout.plants;
 
 
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.Regeneration;
 import com.github.dachhack.sprout.actors.buffs.Strength;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.items.potions.PotionOfExperience;
+import com.github.dachhack.sprout.items.weapon.melee.relic.AresSword;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
@@ -38,11 +42,11 @@ public class Starflower extends Plant {
 	
 	@Override
 	public void activate(Char ch) {
-		if (ch==null){
-			super.activate(ch);
-		}
-		if (ch instanceof Hero) {
-		  Buff.affect(ch, Strength.class);
+		if (ch != null) {
+			Buff.affect(ch, Strength.class);
+			if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+				Buff.affect(ch, BerryRegeneration.class).level(ch.HT/2);
+			}
 		}
 		if (Random.Int(3)==0){super.activate(ch);}
 	}

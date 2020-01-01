@@ -19,6 +19,9 @@ package com.github.dachhack.sprout.plants;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
+import com.github.dachhack.sprout.items.Dewdrop;
 import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.VioletDewdrop;
 import com.github.dachhack.sprout.items.YellowDewdrop;
@@ -30,8 +33,9 @@ import com.watabou.utils.Random;
 public class Dewcatcher extends Plant {
 
 	private static final String TXT_DESC = "Grown from sparkling crystal seeds, Dewcatchers camouflage as grass to avoid attention, " +
-			                                "but their bulges of collected dew give them away. " +
-			                                "Shake them to harvest dew from their leaves. ";
+			"but their bulges of collected dew give them away. " +
+			"Shake them to harvest dew from their leaves. ";
+
 	{
 		image = 12;
 		plantName = "Dewcatcher";
@@ -39,11 +43,13 @@ public class Dewcatcher extends Plant {
 
 	@Override
 	public void activate(Char ch) {
-		
+
 		explodeDew(pos);
-		if (Random.Int(2)==0){super.activate(ch);}	
-		    
-		
+		if (Random.Int(2) == 0) {
+			super.activate(ch);
+		}
+
+
 	}
 
 	@Override
@@ -59,30 +65,43 @@ public class Dewcatcher extends Plant {
 			image = ItemSpriteSheet.SEED_DEWCATCHER;
 
 			plantClass = Dewcatcher.class;
-			alchemyClass = PotionOfOverHealing.class;				
+			alchemyClass = PotionOfOverHealing.class;
 		}
 
 		@Override
 		public String desc() {
 			return TXT_DESC;
 		}
-		
-		
+
+
 	}
-	
-public void explodeDew(int cell) {
-		
-		 for (int n : Level.NEIGHBOURS8) {
-			 int c = cell + n;
-			 if (c >= 0 && c < Level.getLength() && Level.passable[c]) {
-				 
-				if (Random.Int(10)==1){Dungeon.level.drop(new VioletDewdrop(), c).sprite.drop();}		
-			    else if (Random.Int(5)==1){Dungeon.level.drop(new RedDewdrop(), c).sprite.drop();}
-				else if (Random.Int(3)==1){Dungeon.level.drop(new YellowDewdrop(), c).sprite.drop();}
+
+	public static void explodeDew(int cell) {
+
+		for (int n : Level.NEIGHBOURS8) {
+			int VioletChance = 10;
+			int RedChance = 5;
+			int YellowChance = 3;
+
+			if (Dungeon.hero.subClass == HeroSubClass.WARDEN) {
+				VioletChance = 5;
+				RedChance = 2;
+				YellowChance = 1;
 			}
-		  }	
-		
+
+			int c = cell + n;
+			if (c >= 0 && c < Level.getLength() && Level.passable[c]) {
+
+				if (Random.Int(VioletChance) == 1) {
+					Dungeon.level.drop(new VioletDewdrop(), c).sprite.drop();
+				} else if (Random.Int(RedChance) == 1) {
+					Dungeon.level.drop(new RedDewdrop(), c).sprite.drop();
+				} else if (Random.Int(YellowChance) == 1) {
+					Dungeon.level.drop(new YellowDewdrop(), c).sprite.drop();
+				} else {
+					Dungeon.level.drop(new Dewdrop(), c).sprite.drop();
+				}
+			}
+		}
 	}
-		
-	
 }

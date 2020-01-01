@@ -21,6 +21,10 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Fire;
+import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.FireImbue;
+import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.items.potions.PotionOfLiquidFlame;
@@ -39,6 +43,10 @@ public class Firebloom extends Plant {
 	@Override
 	public void activate(Char ch) {
 		super.activate(ch);
+
+		if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+			Buff.affect(ch, FireImbue.class).set(15f);
+		}
 
 		GameScene.add(Blob.seed(pos, 2, Fire.class));
 

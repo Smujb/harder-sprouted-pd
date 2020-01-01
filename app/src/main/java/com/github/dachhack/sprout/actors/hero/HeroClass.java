@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.items.Amulet;
+import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Bomb;
 import com.github.dachhack.sprout.items.BookOfDead;
 import com.github.dachhack.sprout.items.BookOfLife;
@@ -32,6 +33,7 @@ import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.EasterEgg;
 import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Generator;
+import com.github.dachhack.sprout.items.Generator.Category;
 import com.github.dachhack.sprout.items.OrbOfZot;
 import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.Palantir;
@@ -99,8 +101,11 @@ import com.github.dachhack.sprout.items.weapon.missiles.Dart;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.items.weapon.missiles.Tamahawk;
 import com.github.dachhack.sprout.plants.Phaseshift;
+import com.github.dachhack.sprout.plants.Plant;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
+
+import static com.github.dachhack.sprout.items.Generator.Category.SEED;
 
 public enum HeroClass {
 
@@ -113,6 +118,7 @@ public enum HeroClass {
 	}
 
 	public static final String[] WAR_PERKS = {
+			"Warriors start with an Ankh",
 			"Warriors start with 11 points of Strength.",
 			"Warriors start with a unique short sword. This sword can be later \"reforged\" to upgrade another melee weapon.",
 			"Warriors are less proficient with missile weapons.",
@@ -133,14 +139,14 @@ public enum HeroClass {
 			"Rogues are proficient with light armor, dodging better while wearing one.",
 			"Rogues are proficient in detecting hidden doors and traps.",
 			"Rogues can go without food longer.",
+			"Rogues are able to make special bombs.",
 			"Scrolls of Magic Mapping are identified from the beginning." };
 
 	public static final String[] HUN_PERKS = {
-			"TBA",
+			"Huntresses do bonus damage with missile weapons.",
 			"Huntresses start with a unique upgradeable boomerang.",
 			"Huntresses are proficient with missile weapons, getting bonus damage from excess strength.",
-			"Huntresses are able to recover a single used missile weapon from each enemy.",
-			"Huntresses gain more health from dewdrops.",
+			"Huntresses have a chance to regain multiple used missile weapons from an enemy.",
 			"Huntresses sense neighbouring monsters even if they are hidden behind obstacles.",
 			"Potions of Mind Vision are identified from the beginning." };
 
@@ -225,6 +231,7 @@ public enum HeroClass {
 		
 		KeyRing keyring = new KeyRing(); keyring.collect();
 
+		new Ankh().collect();
 		new PotionOfStrength().setKnown();
 		
 		//playtest(hero);
@@ -297,9 +304,7 @@ public enum HeroClass {
 
 			new SeedPouch().collect();
 
-			new Phaseshift.Seed().quantity(100).collect();
-
-			RelicMeleeWeapon wep = (RelicMeleeWeapon) Generator.random(Generator.Category.RELIC_WEAPON);
+			RelicMeleeWeapon wep = (RelicMeleeWeapon) Generator.random(Category.RELIC_WEAPON);
 			if (wep != null) {
 				wep.collect();
 				wep.identify().setTesting();
@@ -456,6 +461,13 @@ public enum HeroClass {
 				scroll4.identify().collect();
 				Scroll scroll5 = new ScrollOfPsionicBlast();
 				scroll5.identify().collect();
+
+				Plant.Seed seed = (Plant.Seed) Generator.random(SEED);
+				if (seed != null) {
+					seed.collect();
+				} else {
+					new Phaseshift.Seed().collect();
+				}
 
 			}
 				

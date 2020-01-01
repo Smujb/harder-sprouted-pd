@@ -22,12 +22,14 @@ import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
 import com.github.dachhack.sprout.actors.buffs.Drowsy;
+import com.github.dachhack.sprout.actors.buffs.GasesImmunity;
 import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
 import com.github.dachhack.sprout.actors.buffs.Poison;
 import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.buffs.Vertigo;
 import com.github.dachhack.sprout.actors.buffs.Weakness;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.potions.PotionOfPurity;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -60,6 +62,9 @@ public class Dreamfoil extends Plant {
 				Buff.detach(ch, Drowsy.class);
 				Buff.detach(ch, Slow.class);
 				Buff.detach(ch, Vertigo.class);
+				if (((Hero) ch).subClass == HeroSubClass.WARDEN){
+					Buff.affect(ch, GasesImmunity.class, 10f);
+				}
 			}
 		}
 	}
