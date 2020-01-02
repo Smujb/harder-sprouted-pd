@@ -403,8 +403,8 @@ public abstract class Wand extends KindOfWeapon {
 
 	private void calculateDamage() {
 		int tier = 2;
-		MIN = tier;
-		MAX = (tier * tier - tier + 10) / 2 + level;
+		MIN = tier + level;
+		MAX = (tier * tier - tier + 10) + level*tier;
 	}
 
 	protected void fx(int cell, Callback callback) {

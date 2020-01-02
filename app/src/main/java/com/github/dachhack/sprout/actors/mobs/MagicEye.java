@@ -47,6 +47,8 @@ public class MagicEye extends Mob {
 	private static final String TXT_DEATHGAZE_KILLED = "%s's deathgaze killed you...";
 	protected static final float SPAWN_DELAY = 2f;
 
+	public static final int RANGE = 4;
+
 	{
 		name = "enchanted evil eye";
 		spriteClass = MagicEyeSprite.class;
@@ -77,7 +79,7 @@ public class MagicEye extends Mob {
 		hitCell = Ballistica.cast(pos, enemy.pos, true, false);
 
 		for (int i = 1; i < Ballistica.distance; i++) {
-			if (Ballistica.trace[i] == enemy.pos) {
+			if (Ballistica.trace[i] == enemy.pos & Level.distance(enemy.pos, pos) < RANGE) {
 				return true;
 			}
 		}
