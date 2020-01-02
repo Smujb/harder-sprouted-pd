@@ -166,6 +166,7 @@ public class Zot extends Mob {
 
 	@Override
 	protected boolean getCloser(int target) {
+		checkJump();
 		if (canJump && Level.fieldOfView[target]) {
 			jump();
 			return true;
@@ -179,12 +180,16 @@ public class Zot extends Mob {
 		return Ballistica.cast(pos, enemy.pos, false, true) == enemy.pos;
 	}
 
-	@Override
-	protected boolean doAttack(Char enemy) {
-		if (HPAtLastJump - HP > 5000) {
+	private void checkJump() {
+		if (HPAtLastJump - HP > Random.NormalIntRange(2500, 7500)) {
 			canJump = true;
 		}
+	}
 
+	@Override
+	protected boolean doAttack(Char enemy) {
+
+		checkJump();
 		if (enemy.invisible > 0) {
 			GLog.n("Zot: Fool. I can still see you!");
 		}

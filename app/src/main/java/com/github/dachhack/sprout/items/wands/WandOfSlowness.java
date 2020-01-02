@@ -21,12 +21,15 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
+import com.github.dachhack.sprout.actors.buffs.FlavourBuff;
+import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.MagicMissile;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
+import com.watabou.utils.Random;
 
 public class WandOfSlowness extends Wand {
 
@@ -53,7 +56,12 @@ public class WandOfSlowness extends Wand {
 	@Override
 	public void onHit(Wand wand, Hero attacker, Char defender, int damage) {
 		super.onHit(wand, attacker, defender, damage);
-		Buff.affect(defender, Slow.class, (float) (1f+ Math.pow((float)wand.level(), (float)wand.level())));
+		new FlavourBuff(){
+			public boolean act() {
+				Buff.affect(target, Frost.class, Frost.duration(target) * Random.Float(1f, 2f));
+				return super.act();
+			}
+		}.attachTo(defender);
 	}
 
 	@Override
