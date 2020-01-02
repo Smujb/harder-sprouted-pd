@@ -393,7 +393,7 @@ public abstract class Mob extends Char {
 
 	@Override
 	public int defenseProc(Char enemy, int damage) {
-		if (!enemySeen && enemy == Dungeon.hero) {
+		if (!(enemySeen && enemy == Dungeon.hero)) {
 			if (((Hero) enemy).subClass == HeroSubClass.ASSASSIN) {
 				damage *= 1.5f;
 				Wound.hit(this);
@@ -404,7 +404,7 @@ public abstract class Mob extends Char {
 		if (buff(SoulMark.class) != null) {
 			int restoration = Math.min(damage, HP);
 			Buff.affect(Dungeon.hero, Hunger.class).satisfy(restoration);
-			Dungeon.hero.HP = (int)Math.ceil(Math.min(Dungeon.hero.HT, Dungeon.hero.HP+(restoration*0.2f)));
+			Dungeon.hero.HP = (int)Math.ceil(Math.min(Dungeon.hero.HT, Dungeon.hero.HP+(restoration*0.15f)));
 			Dungeon.hero.sprite.emitter().burst( Speck.factory(Speck.HEALING), 1 );
 		}
 		return damage;

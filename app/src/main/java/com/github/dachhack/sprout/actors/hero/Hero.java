@@ -394,7 +394,7 @@ public class Hero extends Char {
 	public int damageRoll() {
 		KindOfWeapon wep = rangedWeapon != null ? rangedWeapon
 				: belongings.weapon;
-		int dmg;
+		float dmg;
 		int bonus = 0;
 		for (Buff buff : buffs(RingOfForce.Force.class)) {
 			bonus += ((RingOfForce.Force) buff).level;
@@ -415,8 +415,23 @@ public class Hero extends Char {
 		if (buff(Fury.class) != null){ dmg *= 1.5f; }
 		
 		if (buff(Strength.class) != null){ dmg *= 4f; Buff.detach(this, Strength.class);}
+
+		if (subClass == HeroSubClass.BERSERKER) {
+			float multiplier = 1f;
+			int numEnemies = 0;
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+				if (Level.distance(pos, mob.pos) < Dungeon.level.viewDistance & Dungeon.visible[mob.pos]) {//Could just use visibleEnemies, but then Mind Vision would be pretty OP
+					numEnemies++;
+				}
+			}
+			if (numEnemies > 1) {
+				multiplier *= Math.pow(1.15f, numEnemies);
+				dmg *= multiplier;
+				GLog.p("Berserker draws extra damage from nearby mobs!");
+			}
+		}
 		
-		return (int) dmg;
+		return Math.round(dmg);
 		
 	}
 	

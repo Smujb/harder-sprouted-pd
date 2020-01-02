@@ -198,9 +198,6 @@ public class Zot extends Mob {
 	}
 
 	private void jump() {
-		canJump = false;
-
-		HPAtLastJump = HP;
 		
 		if (!checkPhases()){
 			ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
@@ -232,12 +229,16 @@ public class Zot extends Mob {
 		sprite.move(pos, newPos);
 		move(newPos);
 
-		if (Dungeon.visible[newPos]) {
+		if (Dungeon.visible[newPos] && Level.distance(pos, enemy.pos) < 8) {
 			CellEmitter.get(newPos).burst(Speck.factory(Speck.WOOL), 10);
 			Sample.INSTANCE.play(Assets.SND_PUFF);
+		} else {
+			canJump = false;
+
+			HPAtLastJump = HP;
 		}
 		if (enemy != null) {
-			MagicEye.spawnAroundChance(enemy.pos);
+			MagicEye.spawnAroundChance(this.pos);
 		}
 
 		spend(TIME_TO_TELEPORT);

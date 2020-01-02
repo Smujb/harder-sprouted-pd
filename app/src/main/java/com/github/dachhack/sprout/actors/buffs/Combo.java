@@ -47,12 +47,12 @@ public class Combo extends Buff {
 			Badges.validateMasteryCombo(count);
 
 			GLog.p(TXT_COMBO, count);
-			postpone(1.41f - count / 10f);
-			return (int) (damage * (count - 2) / 5f);
+			postpone(2f);
+			return (int) Math.min(damage, damage * (count - 2) / 5f);
 
 		} else {
 
-			postpone(1.1f);
+			postpone(3f);
 			return 0;
 
 		}

@@ -54,40 +54,36 @@ public class NeptuneShock extends Weapon.Enchantment {
 		// lvl 0 - 25%
 		// lvl 1 - 40%
 		// lvl 2 - 50%
-		 
-		
-		if (weapon.charge>=cost){
-			weapon.charge-=cost;
-		} else {
-			return false;
-		}
 		
 		int level = Math.max(0, weapon.level);
 		boolean procced = false;
 		int distance = 5 + level;
-		
-		for (Mob mob : Dungeon.level.mobs) {
+		try {
 
-			if (Level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() &&  Random.Int(10) < 5) {
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 
-				// int dmg = 20;
-				points[0] = attacker.pos;
-				points[1] = mob.pos;
-				attacker.sprite.parent.add(new Lightning(points, 2, null));
+				if (Level.distance(attacker.pos, mob.pos) < distance && mob.isAlive() && Random.Int(10) < 5) {
 
-				mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
-				mob.sprite.flash();
+					// int dmg = 20;
+					points[0] = attacker.pos;
+					points[1] = mob.pos;
+					attacker.sprite.parent.add(new Lightning(points, 2, null));
 
-				if (mob.isAlive() | mob != defender) {
-					mob.damage( Level.water[mob.pos] ? damage/2 : damage/4, weapon);
+					mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
+					mob.sprite.flash();
+
+					if (mob.isAlive() | mob != defender) {
+						mob.damage(Level.water[mob.pos] ? damage / 2 : damage / 4, weapon);
+					}
+
+					Camera.main.shake(2, 0.3f);
+					procced = true;
 				}
-
-				Camera.main.shake(2, 0.3f);
-				procced = true;
 			}
+
+		} catch (Exception e) {
+			return false;
 		}
-	     
-		
 		return procced;
 	}
 	

@@ -530,7 +530,7 @@ public class InterlevelScene extends PixelScene {
 		   
 		} else if (branch==0 && !first){
 			   Dungeon.depth=50;
-			   level = Dungeon.loadLevel(Dungeon.hero.heroClass);	
+			   level = Dungeon.loadLevel(Dungeon.hero.heroClass);
 			   
 		} else {
 		   level=Dungeon.newJournalLevel(branch, first);			

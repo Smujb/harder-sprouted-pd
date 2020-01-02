@@ -150,6 +150,7 @@ public class MagicEye extends Mob {
 			int cell = pos + n;
 			if (Level.passable[cell] && Actor.findChar(cell) == null && Random.Float()<0.50f) {
 				spawnAt(cell);
+				return;
 			}
 		}
 	}
