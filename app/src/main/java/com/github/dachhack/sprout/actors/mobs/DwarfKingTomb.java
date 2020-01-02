@@ -79,7 +79,7 @@ public class DwarfKingTomb extends Mob  {
 		
 		int kingAlive=0;
 		if(Dungeon.level.mobs!=null){
-       for (Mob mob : Dungeon.level.mobs) {
+       for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if (mob instanceof King){
 				kingAlive++;
 			   }

@@ -82,7 +82,7 @@ public class ShadowYog extends Mob  {
 	@Override
 	public void damage(int dmg, Object src) {
 
-			//for (Mob mob : Dungeon.level.mobs) {
+			//for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			 //	mob.beckon(pos);
 			//	}
 			
@@ -129,7 +129,7 @@ public class ShadowYog extends Mob  {
 
 		Statistics.shadowYogsKilled++;
 		yogsAlive = 0;
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 
 			if (mob instanceof ShadowYog) {
 				yogsAlive++;

@@ -68,7 +68,7 @@ public class CountDown extends Buff {
 				GLog.w("countdown up!");
 				target.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 				target.damage(Math.round(target.HT / 4), this);
-				for (Mob mob : Dungeon.level.mobs) {
+				for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 					if (mob instanceof BanditKing) {
 						mob.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 						mob.HP = Math.min(mob.HP + (Math.round(target.HT/8)),mob.HT);

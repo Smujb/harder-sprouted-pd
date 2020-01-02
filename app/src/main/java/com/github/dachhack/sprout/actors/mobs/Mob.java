@@ -721,7 +721,7 @@ public void explodeDewHigh(int cell) {
 				target = enemy.pos;
 
 				if (Dungeon.isChallenged(Challenges.SWARM_INTELLIGENCE)) {
-					for (Mob mob : Dungeon.level.mobs) {
+					for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 						if (mob != Mob.this) {
 							mob.beckon(target);
 						}

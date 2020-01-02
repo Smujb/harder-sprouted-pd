@@ -125,7 +125,7 @@ public class Rice extends Item {
 		if (super.doPickUp(hero)) {
 
 			if (Dungeon.level != null && Dungeon.depth==32) {
-				for (Mob mob : Dungeon.level.mobs) {
+				for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 					mob.beckon(Dungeon.hero.pos);
 				}
 

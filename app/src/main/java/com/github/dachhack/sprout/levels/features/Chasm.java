@@ -81,7 +81,7 @@ public class Chasm {
 				mob.destroy();
 		
 		if(Dungeon.depth==33){
-		  for (Mob mob : Dungeon.level.mobs) {
+		  for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if(mob instanceof PET) {				 
 				Dungeon.hero.haspet=false;
 				Dungeon.hero.petCount++;

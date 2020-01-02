@@ -96,7 +96,7 @@ public class Otiluke extends Mob implements Callback {
 		
 		if(state==HUNTING){
 			
-			for (Mob mob : Dungeon.level.mobs) {
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				if (mob instanceof MineSentinel && Random.Int(20) < 2) {
 					if (mob.state==PASSIVE){
 						mob.damage(1, this);

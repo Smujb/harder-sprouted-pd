@@ -367,7 +367,7 @@ public class Wandmaker extends NPC {
 				if (super.doPickUp(hero)) {
 
 					if (Dungeon.level != null) {
-						for (Mob mob : Dungeon.level.mobs) {
+						for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 							mob.beckon(Dungeon.hero.pos);
 						}
 

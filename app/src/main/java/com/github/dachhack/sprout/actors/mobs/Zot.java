@@ -58,7 +58,7 @@ public class Zot extends Mob {
 
 	private static final int JUMP_DELAY = 5;
 
-	public static final float TIME_TO_TELEPORT = 1f;
+	public static final float TIME_TO_TELEPORT = 3f;
 
 	private boolean canJump = false;
 	{
@@ -244,10 +244,10 @@ public class Zot extends Mob {
 		spend(TIME_TO_TELEPORT);
 	}
 	
-	private boolean checkPhases(){
+	private boolean checkPhases() {
 		boolean check = false;
 		int phases = 0;
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if (mob instanceof ZotPhase) {
 				phases++;
 				if (Dungeon.hero.heroClass != HeroClass.HUNTRESS && phases > 6) {
@@ -260,10 +260,10 @@ public class Zot extends Mob {
 		return check;
 	}
 	
-	private boolean checkEyes(){
+	private boolean checkEyes() {
 		boolean check = false;
 		int phases = 0;
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if (mob instanceof MagicEye) {
 				phases++;
 				if (Dungeon.hero.heroClass != HeroClass.HUNTRESS && phases > 20) {

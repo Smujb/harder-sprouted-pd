@@ -159,7 +159,7 @@ public class King extends Mob {
 		int findTomb=Dungeon.hero.pos;
 		yell("You cannot kill me, " + Dungeon.hero.givenName()
 				+ "... I am... immortal...");
-		 for (Mob mob : Dungeon.level.mobs) {
+		 for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				if (mob instanceof DwarfKingTomb){findTomb=mob.pos;}
 		 }
 		 

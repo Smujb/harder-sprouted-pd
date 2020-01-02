@@ -84,7 +84,7 @@ public class Tower extends Mob implements Callback {
 	@Override
 	public void damage(int dmg, Object src) {
 
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			mob.beckon(Dungeon.hero.pos);
 		}
 
@@ -111,7 +111,7 @@ public class Tower extends Mob implements Callback {
 		
 		switch (Random.Int(4)) {
 		case 1:
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if (mob instanceof Tower && mob != this) {
 				mob.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
 				mob.sprite.flash();
@@ -203,7 +203,7 @@ public class Tower extends Mob implements Callback {
 		
 		explode(pos);
 
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			
 			if (mob instanceof Tower || mob instanceof DM300){
 				   bossAlive++;

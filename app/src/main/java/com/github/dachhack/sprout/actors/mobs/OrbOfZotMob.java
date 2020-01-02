@@ -89,7 +89,7 @@ public class OrbOfZotMob extends Mob {
 
 		if (enemy == null || !enemy.isAlive()) {
 			HashSet<Mob> enemies = new HashSet<Mob>();
-			for (Mob mob : Dungeon.level.mobs) {
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				if (mob.hostile && Level.fieldOfView[mob.pos]) {
 					enemies.add(mob);
 				}

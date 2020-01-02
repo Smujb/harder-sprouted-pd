@@ -176,7 +176,7 @@ public class GameScene extends PixelScene {
 		mobs = new Group();
 		add(mobs);
 
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			addMobSprite(mob);
 			if (Statistics.amuletObtained) {
 				mob.beckon(Dungeon.hero.pos);
@@ -632,7 +632,7 @@ public class GameScene extends PixelScene {
 			scene.fog.updateVisibility(Dungeon.visible, Dungeon.level.visited,
 					Dungeon.level.mapped);
 
-			for (Mob mob : Dungeon.level.mobs) {
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				if (mob != null && mob.sprite != null) {
 					mob.sprite.visible = Dungeon.visible[mob.pos];
 				}

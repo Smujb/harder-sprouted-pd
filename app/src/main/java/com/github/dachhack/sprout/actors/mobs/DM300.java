@@ -206,7 +206,7 @@ public class DM300 extends Mob implements Callback {
 
 		super.die(cause);
 
-           for (Mob mob : Dungeon.level.mobs) {
+           for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			
 			  if (mob instanceof Tower){
 				   bossAlive++;

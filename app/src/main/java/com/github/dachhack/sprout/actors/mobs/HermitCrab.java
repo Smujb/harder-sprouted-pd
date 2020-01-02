@@ -82,14 +82,13 @@ public class HermitCrab extends Mob implements Callback {
 	public void damage(int dmg, Object src) {
 		
 		if (dmg>HT/4 && src != LightningTrap.LIGHTNING){
-            for (Mob mob : Dungeon.level.mobs) {
-			if (mob instanceof Shell && mob.isAlive()){
-				Dungeon.shellCharge+=dmg;
-				GLog.n(TXT_SHELL_ABSORB);
-				GLog.n(TXT_SHELL_CHARGE, dmg);
-				dmg=1;
-				
-			    }			
+            for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+				if (mob instanceof Shell && mob.isAlive()) {
+					Dungeon.shellCharge += dmg;
+					GLog.n(TXT_SHELL_ABSORB);
+					GLog.n(TXT_SHELL_CHARGE, dmg);
+					dmg = 1;
+				}
 			}
 		}			
 		super.damage(dmg, src);

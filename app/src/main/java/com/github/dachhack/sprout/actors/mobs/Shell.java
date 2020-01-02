@@ -165,7 +165,7 @@ public class Shell extends Mob implements Callback {
 		int heroDmg=0;
 		int mobDmg=Random.Int(1, 2+Math.round(dmg/4));
 		
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				
 			
 		  if (Level.distance(pos, mob.pos) > 1 && mob.isAlive()){

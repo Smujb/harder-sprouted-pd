@@ -149,7 +149,7 @@ public class BookOfLife extends Item {
 	
 
 	private PET checkpet(){
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if(mob instanceof PET) {
 				return (PET) mob;
 			}
@@ -188,7 +188,7 @@ public class BookOfLife extends Item {
 	}
 	private void removePet(){
 		if (Dungeon.hero.haspet && !Dungeon.hero.petfollow){
-		 for (Mob mob : Dungeon.level.mobs) {
+		 for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				if(mob instanceof PET) {				 
 					Dungeon.hero.haspet=false;
 					Dungeon.hero.petCount++;

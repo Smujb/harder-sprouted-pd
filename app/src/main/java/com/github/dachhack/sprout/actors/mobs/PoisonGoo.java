@@ -141,7 +141,7 @@ private static final String GOOGENERATION = "gooGeneration";
 	@Override
 	public int defenseProc(Char enemy, int damage) {
 		gooSplit = false;   
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if (mob instanceof Goo) {
 				gooSplit = true;
 			}
@@ -204,7 +204,7 @@ private static final String GOOGENERATION = "gooGeneration";
 
 		super.die(cause);
 		   
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 		
 		if (mob instanceof Goo || mob instanceof PoisonGoo){
 			   goosAlive++;

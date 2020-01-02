@@ -32,7 +32,7 @@ public class AlarmTrap {
 
 	public static void trigger(int pos, Char ch) {
 
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if (mob != ch) {
 				mob.beckon(pos);
 			}

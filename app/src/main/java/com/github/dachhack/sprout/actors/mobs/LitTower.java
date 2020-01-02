@@ -113,7 +113,7 @@ public class LitTower extends Mob implements Callback {
 	protected boolean checkOtiluke(){
       boolean check = false;
 		
-		for (Mob mob : Dungeon.level.mobs) {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 			if (mob instanceof Otiluke) {
 			check=true;	
 			}
