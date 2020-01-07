@@ -12,6 +12,7 @@ import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.watabou.utils.Random;
 
 public class Elastic extends Weapon.Enchantment {
+    private static final String TXT_ELASTIC = "Elastic %s";
     private static ItemSprite.Glowing PINK = new ItemSprite.Glowing( 0xFF00FF );
 
     @Override
@@ -56,6 +57,11 @@ public class Elastic extends Weapon.Enchantment {
     @Override
     public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
         return false;
+    }
+
+    @Override
+    public String name(String weaponName) {
+        return String.format(TXT_ELASTIC, weaponName);
     }
 
     @Override
