@@ -30,6 +30,7 @@ import com.github.dachhack.sprout.items.weapon.enchantments.AresLeech;
 import com.github.dachhack.sprout.items.weapon.enchantments.BuzzSaw;
 import com.github.dachhack.sprout.items.weapon.enchantments.CromLuck;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
+import com.github.dachhack.sprout.items.weapon.enchantments.Elastic;
 import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
 import com.github.dachhack.sprout.items.weapon.enchantments.Horror;
 import com.github.dachhack.sprout.items.weapon.enchantments.Instability;
@@ -336,27 +337,27 @@ public class Weapon extends KindOfWeapon {
 				Poison.class, Death.class, Paralysis.class, Leech.class,
 				Slow.class, Shock.class, Instability.class, Horror.class,
 				Luck.class, Nomnom.class, BuzzSaw.class, NeptuneShock.class,
-				CromLuck.class, AresLeech.class};
+				CromLuck.class, AresLeech.class, Elastic.class};
 		private static final float[] chances = new float[] { 10, 10, 1, 2, 1,
-				2, 6, 3, 2, 2, 0, 0, 0, 0, 0 };
+				2, 6, 3, 2, 2, 0, 0, 0, 0, 0, 4 };
 		
 		private static final float[] chancesLow = new float[] { 10, 10, 0, 0, 1,
-			2, 6, 0, 0, 2, 0, 0, 0, 0, 0 };
+			2, 6, 0, 0, 2, 0, 0, 0, 0, 0, 0 };
 		
 		private static final float[] chancesAdv = new float[] { 2, 2, 2, 2, 2,
-			2, 2, 2, 2, 2, 0, 0,0, 0, 0 };
+			2, 2, 2, 2, 2, 0, 0,0, 0, 0, 0 };
 		
 		private static final float[] chancesNom = new float[] { 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 1, 0,0, 0, 0 };
+			0, 0, 0, 0, 0, 1, 0,0, 0, 0, 0 };
 		
 		private static final float[] chancesBuzz = new float[] { 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 1,0, 0, 0 };
+			0, 0, 0, 0, 0, 0, 1,0, 0, 0, 0 };
 		
 		private static final float[] chancesNeptune = new float[] { 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
+			0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 };
 		
 		private static final float[] chancesLuck = new float[] { 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 1, 0 };
+			0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 };
 		
 		private static final Class<?>[] relicenchants = new Class<?>[] {  NeptuneShock.class,
 			CromLuck.class, AresLeech.class, JupitersHorror.class, LokisPoison.class};

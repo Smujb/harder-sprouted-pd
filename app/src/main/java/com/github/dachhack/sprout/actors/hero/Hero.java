@@ -372,7 +372,7 @@ public class Hero extends Char {
 		} else {
 
 			if (heroClass == HeroClass.ROGUE) {
-				return (int) ((defenseSkill - aEnc) * evasion);
+				return (int) ((defenseSkill - Math.max(aEnc, -17)) * evasion);
 			} else {
 				return (int) (defenseSkill * evasion);
 			}
