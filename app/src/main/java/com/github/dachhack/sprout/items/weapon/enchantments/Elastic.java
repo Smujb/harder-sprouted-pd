@@ -22,25 +22,25 @@ public class Elastic extends Weapon.Enchantment {
         // lvl 2 - 43%
         int level = Math.max(0, weapon.level);
 
-        if (Level.adjacent(attacker.pos, defender.pos)
+        if (Level.adjacent(defender.pos, attacker.pos)
                 && Random.Int(level + 5) >= 4) {
 
             for (int i = 0; i < Level.NEIGHBOURS8.length; i++) {
                 int ofs = Level.NEIGHBOURS8[i];
-                if (attacker.pos - defender.pos == ofs) {
-                    int newPos = attacker.pos + ofs;
+                if (defender.pos - attacker.pos == ofs) {
+                    int newPos = defender.pos + ofs;
                     if ((Level.passable[newPos] || Level.avoid[newPos])
                             && Actor.findChar(newPos) == null) {
 
-                        Actor.addDelayed(new Pushing(attacker, attacker.pos,
+                        Actor.addDelayed(new Pushing(defender, defender.pos,
                                 newPos), -1);
 
-                        attacker.pos = newPos;
+                        defender.pos = newPos;
                         // FIXME
-                        if (attacker instanceof Mob) {
-                            Dungeon.level.mobPress((Mob) attacker);
+                        if (defender instanceof Mob) {
+                            Dungeon.level.mobPress((Mob) defender);
                         } else {
-                            Dungeon.level.press(newPos, attacker);
+                            Dungeon.level.press(newPos, defender);
                         }
 
                     }

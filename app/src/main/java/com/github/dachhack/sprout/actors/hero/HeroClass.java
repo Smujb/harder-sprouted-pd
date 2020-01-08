@@ -304,11 +304,11 @@ public enum HeroClass {
 		if (!Dungeon.playtest) {
 			//Playtest
 			//TomeOfMastery tome = new TomeOfMastery(); tome.collect();
-			new WandOfDisintegration().identify().reinforce().upgrade(300).collect();
-			new WandOfFirebolt().identify().reinforce().upgrade(300).collect();
-			new WandOfLightning().identify().reinforce().upgrade(300).collect();
-			new WandOfAvalanche().identify().reinforce().upgrade(300).collect();
-			new WandOfTelekinesis().identify().reinforce().upgrade(300).collect();
+			new WandOfDisintegration().identify().reinforce().upgrade(15).collect();
+			new WandOfFirebolt().identify().reinforce().upgrade(15).collect();
+			new WandOfLightning().identify().reinforce().upgrade(15).collect();
+			new WandOfAvalanche().identify().reinforce().upgrade(15).collect();
+			new WandOfTelekinesis().identify().reinforce().upgrade(15).collect();
 			new WandHolster().collect();
 
 			new Tamahawk().quantity(40).collect();
@@ -318,19 +318,13 @@ public enum HeroClass {
 
 			new SeedPouch().collect();
 
-			RelicMeleeWeapon wep = (RelicMeleeWeapon) Generator.random(Category.RELIC_WEAPON);
-			if (wep != null) {
-				wep.collect();
-				wep.identify().setTesting();
-			}
-
 			new PotionBandolier().collect();
 
 			new DewVial().fill().collect();
 
-			//new BookOfDead().collect();
-			//new BookOfLife().collect();
-			//new BookOfTranscendence().collect();
+			new BookOfDead().collect();
+			new BookOfLife().collect();
+			new BookOfTranscendence().collect();
 			new Amulet().collect();
 
 			(hero.belongings.misc2 = new RingOfWealth()).identify().upgrade(28);
@@ -340,30 +334,24 @@ public enum HeroClass {
 			//hero.HT=hero.HP=999;
 			hero.STR = hero.STR + 10;
 			PlateArmor armor1 = new PlateArmor();
-			armor1.reinforce().upgrade(100).identify().collect();
+			armor1.reinforce().upgrade(15).identify().collect();
 			// PlateArmor armor2 = new PlateArmor();
 			// armor2.upgrade(14).identify().collect();
 
-			new Palantir().collect();
-
 			WarHammer hammer = new WarHammer();
-			hammer.reinforce().upgrade(300).identify().collect();
+			hammer.reinforce().upgrade(15).identify().collect();
 
 			Glaive glaive = new Glaive();
-			glaive.reinforce().upgrade(300).identify().collect();
+			glaive.reinforce().upgrade(15).identify().collect();
 
 			Spork spork = new Spork();
-			spork.reinforce().upgrade(300).identify().collect();
+			spork.reinforce().upgrade(15).identify().collect();
 
 			Towel towel = new Towel();
 			towel.identify().collect();
 
 			Spectacles specs = new Spectacles();
 			specs.collect();
-
-			Whistle whistle = new Whistle();
-			whistle.collect();
-
 			//Dewcatcher.Seed seed3 = new Dewcatcher.Seed(); seed3.collect();
 			//Flytrap.Seed seed1 = new Flytrap.Seed(); seed1.collect();
 			//Phaseshift.Seed seed2 = new Phaseshift.Seed(); seed2.collect();
@@ -465,7 +453,7 @@ public enum HeroClass {
 			GLog.i("Playtest Activated");
 
 
-			for (int i = 0; i < 250; i++) {
+			for (int i = 0; i < 50; i++) {
 				//Scroll scroll = new ScrollOfMagicalInfusion();
 				//scroll.identify().collect();
 				Scroll scroll2 = new ScrollOfMagicMapping();
