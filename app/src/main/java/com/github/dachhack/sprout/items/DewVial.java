@@ -103,8 +103,8 @@ public class DewVial extends Item {
 		volume=vol;		
 	}
 
-	public int upgradeLimit() {
-		int levelLimit = 2+(int)(Statistics.deepestFloor/2f);
+	public static int upgradeLimit() {
+		int levelLimit = 2+Math.round(Statistics.deepestFloor/2f);
 		if (Dungeon.hero.heroClass == HeroClass.MAGE){levelLimit++;}
 		levelLimit = Math.min(15,levelLimit);
 		return levelLimit;
@@ -324,10 +324,7 @@ public class DewVial extends Item {
 	public static boolean uncurse(Hero hero, Item... items) {
 
 
-		int levelLimit = 0;
-		if (Dungeon.dewVial != null) {
-			levelLimit = Dungeon.dewVial.upgradeLimit();
-		}
+		int levelLimit = DewVial.upgradeLimit();
         
         float lvlchance = 0.50f;
         if (hero.heroClass == HeroClass.MAGE){lvlchance = 0.55f;}

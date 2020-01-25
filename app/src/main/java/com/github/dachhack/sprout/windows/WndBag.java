@@ -28,6 +28,7 @@ import com.github.dachhack.sprout.items.AdamantArmor;
 import com.github.dachhack.sprout.items.AdamantRing;
 import com.github.dachhack.sprout.items.AdamantWand;
 import com.github.dachhack.sprout.items.AdamantWeapon;
+import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.EquipableItem;
 import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.Item;
@@ -47,6 +48,7 @@ import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
+import com.github.dachhack.sprout.plants.Dewcatcher;
 import com.github.dachhack.sprout.plants.Plant.Seed;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
@@ -372,47 +374,28 @@ public class WndBag extends WndTabbed {
 					enable(false);
 				} else {
 
-					int levelLimit = 0;
-					if (Dungeon.dewVial != null) {
-						levelLimit = Dungeon.dewVial.upgradeLimit();
-					}
+					int levelLimit = DewVial.upgradeLimit();
 
-					enable(mode == Mode.FOR_SALE
-							&& (item.price() > 0)
-							&& (!item.isEquipped(Dungeon.hero) || !item.cursed)
-							
-							|| mode == Mode.UPGRADEABLE
-							&& ((item.isUpgradable() && item.level<15 && !item.isReinforced())
-									||  item.isUpgradable() && item.isReinforced())		
-							|| mode == Mode.UPGRADEDEW
-							&& (item.isUpgradable() && item.level <= levelLimit)
-							|| mode == Mode.UPGRADEABLESIMPLE
-							&& item.isUpgradable()			
-							|| mode == Mode.ADAMANT
-							&& (item instanceof AdamantArmor || item instanceof AdamantRing || item instanceof AdamantWand || item instanceof AdamantWeapon)
-							|| mode == Mode.REINFORCED
-							&& item.isReinforced()
-							|| mode == Mode.NOTREINFORCED
-							&& (!item.isReinforced() && item.isUpgradable())
-							|| mode == Mode.UNIDENTIFED
-							&& !item.isIdentified()
-							|| mode == Mode.QUICKSLOT
-							&& (item.defaultAction != null)
-							|| mode == Mode.WEAPON
-							&& (item instanceof MeleeWeapon || item instanceof Boomerang || item instanceof JupitersWrath)
-							|| mode == Mode.ARMOR
-							&& (item instanceof Armor)
-							|| mode == Mode.ENCHANTABLE
-							&& (item instanceof MeleeWeapon	|| item instanceof Boomerang || item instanceof Armor)
-							|| mode == Mode.JOURNALPAGES
-							&& (item instanceof JournalPage)
+					enable(mode == Mode.FOR_SALE && (item.price() > 0) && (!item.isEquipped(Dungeon.hero) || !item.cursed)
+							|| mode == Mode.UPGRADEABLE && ((item.isUpgradable() && item.level<15 && !item.isReinforced())
+									||  item.isUpgradable() && item.isReinforced())
+							|| mode == Mode.UPGRADEDEW && (item.isUpgradable() && item.level <= levelLimit)
+							|| mode == Mode.UPGRADEABLESIMPLE && item.isUpgradable()
+							|| mode == Mode.ADAMANT && (item instanceof AdamantArmor || item instanceof AdamantRing || item instanceof AdamantWand || item instanceof AdamantWeapon)
+							|| mode == Mode.REINFORCED && item.isReinforced()
+							|| mode == Mode.NOTREINFORCED && (!item.isReinforced() && item.isUpgradable())
+							|| mode == Mode.UNIDENTIFED && !item.isIdentified()
+							|| mode == Mode.QUICKSLOT && (item.defaultAction != null)
+							|| mode == Mode.WEAPON && (item instanceof MeleeWeapon || item instanceof Boomerang || item instanceof JupitersWrath)
+							|| mode == Mode.ARMOR && (item instanceof Armor)
+							|| mode == Mode.ENCHANTABLE && (item instanceof MeleeWeapon	|| item instanceof Boomerang || item instanceof Armor)
+							|| mode == Mode.JOURNALPAGES && (item instanceof JournalPage)
 							|| mode == Mode.WAND && (item instanceof Wand)
 							|| mode == Mode.SEED && (item instanceof Seed)
 							|| mode == Mode.FOOD && (item instanceof Food)
 							|| mode == Mode.POTION && (item instanceof Potion)
 							|| mode == Mode.SCROLL && (item instanceof Scroll)
-							|| mode == Mode.EQUIPMENT
-							&& (item instanceof EquipableItem)
+							|| mode == Mode.EQUIPMENT && (item instanceof EquipableItem)
 							|| mode == Mode.ALL);
 				}
 			} else {

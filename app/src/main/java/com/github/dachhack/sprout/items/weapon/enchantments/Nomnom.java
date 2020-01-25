@@ -38,19 +38,19 @@ public class Nomnom extends Weapon.Enchantment {
 	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {
 		return false;
 	}
-	
+
 	@Override
 	public boolean proc(Weapon weapon, Char attacker, Char defender, int damage) {
 		// lvl 0 - 8%
 		// lvl 1 ~ 9%
 		// lvl 2 ~ 10%
 		int level = Math.max(0, weapon.level*3);
-				
+
 		if (Random.Int(level + 100) >= 75) {
 
 			defender.damage(defender.HP, this);
-		
-			
+
+
 			int maxValue = damage * (level + 2) / (level + 3);
 			int effValue = Math.min(Random.IntRange(0, maxValue), attacker.HT-attacker.HP);
 
@@ -60,11 +60,11 @@ public class Nomnom extends Weapon.Enchantment {
 				attacker.sprite.emitter().start(Speck.factory(Speck.HEALING), 0.4f,	1);
 				attacker.sprite.showStatus(CharSprite.POSITIVE,	Integer.toString(effValue));
 			}
-			
+
 			attacker.buff(Hunger.class).satisfy(maxValue);
 			SpellSprite.show(attacker, SpellSprite.FOOD);
-		
-		
+
+
 			return true;
 
 		} else {

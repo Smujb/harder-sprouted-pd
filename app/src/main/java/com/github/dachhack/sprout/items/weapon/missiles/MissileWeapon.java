@@ -142,7 +142,7 @@ public class MissileWeapon extends Weapon {
 				detach(null);
 			}
 		}
-		if (defender.buff(PinCushion.class) == null || Random.Int(Dungeon.hero.heroClass == HeroClass.HUNTRESS ? 2 : 5) == 0) {
+		if ((defender.buff(PinCushion.class) == null || Random.Int(Dungeon.hero.heroClass == HeroClass.HUNTRESS ? 2 : 5) == 0) && !(this instanceof Boomerang | this instanceof JupitersWrath)) {
 			Buff.affect(defender, PinCushion.class).stick(this);
 		}
 	}

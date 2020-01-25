@@ -131,7 +131,7 @@ public class Eye extends Mob {
 			}
 
 			if (hit(this, ch, true)) {
-				ch.damage(Random.NormalIntRange(14, 20+ adjustForDepth(0)), this);
+				ch.damage(Random.NormalIntRange(14, 45), this);
 
 				if (Dungeon.visible[pos]) {
 					ch.sprite.flash();
