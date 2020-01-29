@@ -29,6 +29,7 @@ import android.view.View;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.scenes.TitleScene;
+import com.rohitss.uceh.UCEHandler;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
@@ -69,6 +70,9 @@ public class ShatteredPixelDungeon extends Game {
 		 * View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN
 		 * | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY ); }
 		 */
+
+
+		new UCEHandler.Builder(this).build();
 
 		updateImmersiveMode();
 

@@ -394,7 +394,7 @@ public abstract class Mob extends Char {
 	@Override
 	public int defenseProc(Char enemy, int damage) {
 		if (!(enemySeen && enemy == Dungeon.hero)) {
-			if (((Hero) enemy).subClass == HeroSubClass.ASSASSIN) {
+			if (enemy instanceof Hero && ((Hero) enemy).subClass == HeroSubClass.ASSASSIN) {
 				damage *= 1.5f;
 				Wound.hit(this);
 			} else {

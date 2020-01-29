@@ -153,7 +153,7 @@ public class LitTower extends Mob implements Callback {
 		
 		Char hero=Dungeon.hero;
 				
-	    int mobDmg=Random.Int(300, 600);
+	    int mobDmg=Random.Int(100, 600);
 		
 		
 		 boolean visible = Level.fieldOfView[pos] || Level.fieldOfView[loc];
@@ -169,7 +169,8 @@ public class LitTower extends Mob implements Callback {
 			  hero.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
 			  hero.sprite.flash();
 			
-			  Camera.main.shake(2, 0.3f);			
+			  Camera.main.shake(2, 1f);
+			  GLog.n("The lightning towers are too strong. Perhaps you can disable them by going to the right?");
 	}
 	
 	@Override

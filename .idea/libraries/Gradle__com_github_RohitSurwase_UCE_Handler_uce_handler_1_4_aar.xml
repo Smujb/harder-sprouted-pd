@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.RohitSurwase.UCE-Handler:uce_handler:1.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d20cdc3922786a3d9d9a5eefe0523eca/uce_handler-1.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d20cdc3922786a3d9d9a5eefe0523eca/uce_handler-1.4/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.RohitSurwase.UCE-Handler/uce_handler/1.4/d01cc4a68ca472c0236f391b80df2ac67813a3f0/uce_handler-1.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

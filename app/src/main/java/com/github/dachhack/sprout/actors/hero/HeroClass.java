@@ -75,6 +75,7 @@ import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfIdentify;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
+import com.github.dachhack.sprout.items.scrolls.ScrollOfMirrorImage;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRemoveCurse;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
@@ -351,6 +352,8 @@ public enum HeroClass {
 			if (hero.heroClass == HeroClass.HUNTRESS) {
 				new Boomerang().enchant(new Slashing()).identify().collect();
 			}
+
+			new ScrollOfMirrorImage().collect();
 
 			//spork.reinforce().upgrade(15).identify().collect();
 

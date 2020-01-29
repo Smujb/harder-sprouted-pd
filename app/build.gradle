@@ -16,3 +16,6 @@ android {
         }
     }
 }
+dependencies {
+    implementation 'com.github.RohitSurwase.UCE-Handler:uce_handler:1.4'
+}

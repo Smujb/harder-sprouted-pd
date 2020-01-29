@@ -7,58 +7,84 @@
 7
 8    <uses-sdk
 9        android:minSdkVersion="14"
-9-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml
+9-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml
 10        android:targetSdkVersion="29" />
-10-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml
+10-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml
 11
 12    <uses-permission android:name="android.permission.VIBRATE" />
-12-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:8:5-65
-12-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:8:22-63
+12-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:8:5-65
+12-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:8:22-63
 13
 14    <uses-feature android:glEsVersion="0x00020000" />
-14-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:10:2-11:40
-14-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:11:6-38
+14-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:10:2-11:40
+14-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:11:6-38
 15
 16    <supports-screens
-16-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:13:2-16:35
+16-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:13:2-16:35
 17        android:largeScreens="true"
-17-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:16:6-33
+17-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:16:6-33
 18        android:normalScreens="true"
-18-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:15:6-34
+18-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:15:6-34
 19        android:smallScreens="false" />
-19-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:14:6-34
+19-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:14:6-34
 20
 21    <!-- android:xlargeScreens="true" -->
 22    <application
-22-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:19:2-34:16
+22-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:19:2-34:16
 23        android:allowBackup="false"
-23-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:23:3-30
-24        android:debuggable="true"
-25        android:icon="@drawable/ic_launcher"
-25-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:20:3-39
-26        android:label="@string/app_name"
-26-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:21:3-35
-27        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
-27-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:22:3-67
-28        <activity
-28-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:24:3-32:14
-29            android:name="com.github.dachhack.sprout.ShatteredPixelDungeon"
-29-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:26:4-41
-30            android:label="@string/app_name"
-30-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:25:4-36
-31            android:screenOrientation="portrait" >
-31-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:27:4-40
-32            <intent-filter>
-32-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:28:4-31:20
-33                <action android:name="android.intent.action.MAIN" />
-33-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:29:5-57
-33-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:29:13-54
-34
-35                <category android:name="android.intent.category.LAUNCHER" />
-35-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:30:5-65
-35-->F:\SproutedPixelDungeon-Gradle-master\app\src\main\AndroidManifest.xml:30:15-62
-36            </intent-filter>
-37        </activity>
-38    </application>
-39
-40</manifest>
+23-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:23:3-30
+24        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+24-->[com.android.support:support-compat:28.0.0] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\f14724208b5bfeeef0d6bdefe649bca7\support-compat-28.0.0\AndroidManifest.xml:22:18-91
+25        android:debuggable="true"
+26        android:icon="@drawable/ic_launcher"
+26-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:20:3-39
+27        android:label="@string/app_name"
+27-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:21:3-35
+28        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+28-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:22:3-67
+29        <activity
+29-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:24:3-32:14
+30            android:name="com.github.dachhack.sprout.ShatteredPixelDungeon"
+30-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:26:4-41
+31            android:label="@string/app_name"
+31-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:25:4-36
+32            android:screenOrientation="portrait" >
+32-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:27:4-40
+33            <intent-filter>
+33-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:28:4-31:20
+34                <action android:name="android.intent.action.MAIN" />
+34-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:29:5-57
+34-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:29:13-54
+35
+36                <category android:name="android.intent.category.LAUNCHER" />
+36-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:30:5-65
+36-->F:\harder-sprouted-pd\app\src\main\AndroidManifest.xml:30:15-62
+37            </intent-filter>
+38        </activity>
+39        <activity
+39-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:12:9-14:49
+40            android:name="com.rohitss.uceh.UCEDefaultActivity"
+40-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:13:13-63
+41            android:process=":error_activity" />
+41-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:14:13-46
+42
+43        <provider
+43-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:16:9-24:20
+44            android:name="com.rohitss.uceh.UCEFileProvider"
+44-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:17:13-60
+45            android:authorities="com.github.smujamesb.hardersprouted.provider"
+45-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:18:13-60
+46            android:exported="false"
+46-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:19:13-37
+47            android:grantUriPermissions="true" >
+47-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:20:13-47
+48            <meta-data
+48-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:21:13-23:58
+49                android:name="android.support.FILE_PROVIDER_PATHS"
+49-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:22:17-67
+50                android:resource="@xml/provider_paths" />
+50-->[com.github.RohitSurwase.UCE-Handler:uce_handler:1.4] C:\Users\samue\.gradle\caches\transforms-2\files-2.1\d20cdc3922786a3d9d9a5eefe0523eca\uce_handler-1.4\AndroidManifest.xml:23:17-55
+51        </provider>
+52    </application>
+53
+54</manifest>
